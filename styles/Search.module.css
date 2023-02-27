@@ -1,0 +1,11 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cardsContainer {
+  display: flex;
+  flex-direction: column;
+}
