@@ -5,12 +5,12 @@ import { Input, Button } from "@mui/material";
 import Image from "next/image";
 import { DatePicker, Space } from "antd";
 
-const onChange = (date, dateString) => {
-  console.log(date, dateString);
-};
-
 function Home() {
   const matches = useMediaQuery("(min-width:768px)");
+
+  const onChange = (date, dateString) => {
+    console.log(date, dateString);
+  };
 
   return (
     <div className={styles.content}>
@@ -40,7 +40,9 @@ function Home() {
           <DatePicker onChange={onChange} />
         </Space>
       </div>
-      <Button className={styles.button}>Réserver</Button>
+      <a href="/search">
+        <Button className={styles.button}>Réserver</Button>
+      </a>      
     </div>
   );
 }

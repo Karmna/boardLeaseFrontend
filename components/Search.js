@@ -1,11 +1,8 @@
 import * as React from "react";
 import styles from "../styles/Search.module.css";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Input, Button } from "@mui/material";
-import Image from "next/image";
-import { DownOutlined, SmileOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Checkbox, Rate } from "antd";
 import Surf from "./Surf";
 
@@ -13,9 +10,24 @@ function Search() {
   const matches = useMediaQuery("(min-width:768px)");
   const [value, setValue] = useState(3);
   const [open, setOpen] = useState(false);
-  const [surfsData, setSurfsData] = useState([]);
+  // const [surfsData, setSurfsData] = useState([]);
 
   console.log("rating", value);
+
+  const surfsData = [
+    {
+      owner: "Kevin",
+      type: "Shortboard",
+      level: "Confirmé",
+      name: "Torc ShortBoard",
+      dayPrice: 20,
+      pictures: "/th.webp",
+      place: "Biarritz",
+      availabilities: "du 10/08/2023 au 30/08/2023",
+      rating: 4,
+      deposit: 300,
+    },
+  ];
 
   //   useEffect(() => {
   //     fetch('http://localhost:3000/surfs/surfs')
