@@ -1,0 +1,50 @@
+
+.header {
+	border-bottom: 2px rgb(89, 161, 233) solid;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.logoContainer {
+	width: 100vw;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0px 30px 0px 30px;
+   
+}
+.logo {
+    width: 100vw;
+    height: 10vw;
+}
+
+.userSection {
+	font-size: 22px;
+	cursor: pointer;
+}
+
+.userSection:hover {
+	opacity: 0.8;
+}
+
+
+.registerContainer {
+	display: flex;
+	margin-bottom: 10px;
+	border-top: 0.5px lightgray solid;
+}
+
+.registerSection {
+	width: 250px;
+	margin: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.dropDownContainer {
+
+    align-items: center;
+}
