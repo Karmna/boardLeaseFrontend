@@ -59,6 +59,20 @@ function Header() {
   };
 
   const handleLogin = (credentialResponse) => {
+    console.log(jwtDecode(credentialResponse.credential));
+
+    fetch("http://localhost:3000/users/gverify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        token: credentialResponse.credential,
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+
     setUserGoogle(jwtDecode(credentialResponse.credential));
   };
 
@@ -120,7 +134,6 @@ function Header() {
     onClick: handleMenuClick,
   };
 
-
   const handleRegister = () => {
     fetch("http://localhost:3000/users/signup", {
       method: "POST",
@@ -155,8 +168,8 @@ function Header() {
           setIsModalVisibleInscription(false);
         } else {
           error = data.error;
-          console.log(data.error)
-          //definir error, error existe pas 
+          console.log(data.error);
+          //definir error, error existe pas
         }
       });
   };
@@ -307,7 +320,6 @@ function Header() {
       </div>
     );
   }
-
 
   return (
     <header className={styles.header}>
