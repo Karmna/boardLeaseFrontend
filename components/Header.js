@@ -62,14 +62,26 @@ function Header() {
 
   const items = [
     {
-      label: "Inscription",
-      key: "1",
-      icon: <UserOutlined onClick={showModalInscription} />,
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={showModalInscription}
+        >
+          Inscription
+        </a>
+      ),
     },
     {
-      label: "Connection",
-      key: "2",
-      icon: <UserOutlined onClick={showModalConnection} />,
+      label: (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={showModalConnection}
+        >
+          Connection
+        </a>
+      ),
     },
   ];
 
@@ -283,7 +295,7 @@ function Header() {
               closable={false}
               footer={null}
             >
-              <p>{modalContentConnection}</p>
+              <div>{modalContentConnection}</div>
             </Modal>
           </div>
         </Dropdown.Button>
