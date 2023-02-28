@@ -1,15 +1,52 @@
 import * as React from "react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import styles from "../styles/Home.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Input, Button } from "@mui/material";
 import Image from "next/image";
 import { DatePicker, Space } from "antd";
+import { addSurfByPlace } from "../reducers/search";
 
 function Home() {
+  const dispatch = useDispatch();
   const matches = useMediaQuery("(min-width:768px)");
+  const [searchPlace, setSearchPlace] = useState("");
+  const [searchStartDate, setSearchStartDate] = useState("");
+  const [searchEndDate, setSearchEndDate] = useState("");
 
-  const onChange = (date, dateString) => {
-    console.log(date, dateString);
+  console.log(
+    "placeName",
+    searchPlace,
+    "startDate",
+    searchStartDate,
+    "endDate",
+    searchEndDate
+  );
+
+  const handleStartDate = (date, dateString) => {
+    setSearchStartDate(dateString);
+  };
+
+  const handleEndDate = (date, dateString) => {
+    setSearchEndDate(dateString);
+  };
+
+  const handleSearch = () => {
+    fetch("http://localhost:3000/surfs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        placeName: searchPlace,
+        availabilities: { startDate: searchStartDate, endDate: searchEndDate },
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.result) {
+          dispatch(addSurfByPlace(data));
+        }
+      });
   };
 
   return (
@@ -29,20 +66,24 @@ function Home() {
       <Input
         className={styles.input}
         type="text"
-        placeholder="Rechercher"
-        id="destination"
+        placeholder="searchPlace"
+        id="searchPlace"
+        onChange={(e) => setSearchPlace(e.target.value)}
+        value={searchPlace}
       />
       <div className={styles.dateContainer}>
         <Space direction="vertical">
-          <DatePicker onChange={onChange} />
+          <DatePicker onChange={handleStartDate} />
         </Space>
         <Space direction="vertical">
-          <DatePicker onChange={onChange} />
+          <DatePicker onChange={handleEndDate} />
         </Space>
       </div>
       <a href="/search">
-        <Button className={styles.button}>Réserver</Button>
-      </a>      
+        <Button className={styles.button} onClick={() => handleSearch()}>
+          Rechercher
+        </Button>
+      </a>
     </div>
   );
 }
