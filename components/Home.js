@@ -61,6 +61,7 @@ function Home() {
           layout="fill"
           objectFit="contain"
           alt="Slide image 1"
+          priority={true}
         />
       </div>
       <Input

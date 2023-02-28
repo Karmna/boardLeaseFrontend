@@ -1,17 +1,39 @@
 .card {
+  width: 100%;
   display: flex;
   flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 3%;
+  margin-top: 2%;
+  padding: 1%;
+}
+
+.image {
+  border-radius: 10px;
+  margin-left: 2px;
+}
+
+.descriptionContent {
+  display: flex;
+  flex-direction: column;
+  margin-left: 5%;
 }
 
 .description {
+  margin: 2px;
 }
 
 .rating {
+  margin-top: 2px;
 }
 
 .detailsContent {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10%;
 }
 
 .detail {
+  margin: 5px;
 }
-

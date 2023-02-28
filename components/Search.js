@@ -2,11 +2,8 @@ import { useSelector } from "react-redux";
 import styles from "../styles/Search.module.css";
 import Surf from "./Surf";
 import Filter from "./Filter";
-import dynamic from "next/dynamic";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { surfsData } from "../data/surfsData";
-
-const Map = dynamic(() => import("./Map"), { ssr: false });
 
 function Search() {
   const matches = useMediaQuery("(min-width:768px)");
@@ -20,8 +17,7 @@ function Search() {
   return (
     <div className={styles.content}>
       <Filter />
-      <div className={styles.cardsContainer}>{surfs}</div>
-      <Map />      
+      <div className={styles.cardsContainer}>{surfs}</div>     
     </div>
   );
 }

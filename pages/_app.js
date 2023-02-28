@@ -15,7 +15,7 @@ import search from "../reducers/search";
 
 const reducers = combineReducers({ user, filter, search });
 
-const persistConfig = { key: "applicationName", storage };
+const persistConfig = { key: "boardLease", storage };
 
 const store = configureStore({
   reducer: persistReducer(persistConfig, reducers),
@@ -33,7 +33,7 @@ function App({ Component, pageProps }) {
           <title>BoardLease</title>
         </Head>
         <Header />
-        <Component {...pageProps} />
+        <Component {...pageProps} />       
       </PersistGate>
     </Provider>
   );

@@ -3,9 +3,12 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 590px;
 }
 
 .cardsContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }

@@ -8,7 +8,13 @@ function Surf(props) {
 
   const surfDisplay = !matches ? (
     <div className={styles.card}>
-      <Image src={props.pictures} alt={props.name} width={100} height={100} />
+      <Image
+        className={styles.image}
+        src={props.pictures}
+        alt={props.name}
+        width={100}
+        height={100}
+      />
       <div className={styles.description}>
         <h3 className={styles.name}>{props.name}</h3>
         <p className={styles.level}>Niveau: {props.level}</p>
@@ -19,20 +25,45 @@ function Surf(props) {
     </div>
   ) : (
     <div className={styles.card}>
-      <Image src={props.pictures} alt={props.name} width={100} height={100} />
-      <div className={styles.description}>
-        <h3 className={styles.name}>{props.name}</h3>
-        <p className={styles.level}>Niveau: {props.level}</p>
-        <p className={styles.availabilities}>{props.availabilities}</p>
+      <Image src={props.pictures} alt={props.name} width={120} height={120} />
+      <div className={styles.descriptionContent}>
+        <h3 className={styles.description}>{props.name}</h3>
+        <p className={styles.description}>
+          <u>
+            <strong>Niveau:</strong>
+          </u>
+          &nbsp; {props.level}
+        </p>
+        <p className={styles.description}>{props.availabilities}</p>
         <span className={styles.rating}>
           <Rate value={props.rating} />
         </span>
       </div>
       <div className={styles.detailsContent}>
-        <p className={styles.detail}>{props.owner}</p>
-        <p className={styles.detail}>{props.place}</p>
-        <p className={styles.detail}>{props.dayPrice}</p>
-        <p className={styles.detail}>{props.deposit}</p>
+        <p className={styles.detail}>
+          <u>
+            <strong>Loué par:</strong>
+          </u>
+          &nbsp; {props.owner}
+        </p>
+        <p className={styles.detail}>
+          <u>
+            <strong>De:</strong>
+          </u>
+          &nbsp; {props.place}
+        </p>
+        <p className={styles.detail}>
+          <u>
+            <strong>Prix:</strong>
+          </u>
+          &nbsp; {props.dayPrice} € / jour
+        </p>
+        <p className={styles.detail}>
+          <u>
+            <strong>Caution:</strong>
+          </u>
+          &nbsp; {props.deposit} €
+        </p>
       </div>
     </div>
   );
