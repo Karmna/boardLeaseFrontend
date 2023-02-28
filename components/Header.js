@@ -141,7 +141,7 @@ function Header() {
           <div className={styles.container}>
             {userGoogle ? (
               <div className={styles.content}>
-                <div className={styles.divider}></div>
+                {/* <div className={styles.divider}></div> */}
                 <p>Email: {userGoogle.email}</p>
               </div>
             ) : (
@@ -272,7 +272,7 @@ function Header() {
               closable={false}
               footer={null}
             >
-              <p>{modalContentInscription}</p>
+              <div>{modalContentInscription}</div>
             </Modal>
           </div>
           <div id="react-modals">
