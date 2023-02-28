@@ -7,6 +7,7 @@ const initialState = {
     lastname: null,
     username: null,
     email: null,
+    favorites: [],
   },
 };
 
@@ -20,6 +21,7 @@ export const userSlice = createSlice({
       state.value.lastname = action.payload.lastname;
       state.value.username = action.payload.username;
       state.value.email = action.payload.email;
+      state.value.favorites = action.payload.favorites;
     },
     logout: (state) => {
       state.value.token = null;
@@ -27,6 +29,7 @@ export const userSlice = createSlice({
       state.value.firstname = null;
       state.value.lastname = null;
       state.value.email = null;
+      state.value.favorites = null;
     },
   },
 });

@@ -18,6 +18,8 @@
 .logo {
     width: 100vw;
     height: 10vw;
+    
+    
 }
 
 .userSection {
@@ -44,7 +46,29 @@
 	align-items: center;
 }
 
-.dropDownContainer {
-
+.dropDown {
     align-items: center;
+    margin-right: 10%;
+    color: white;
 }
+
+.dropDownMenu {
+    align-items: center;
+    margin-left: 10%;
+    color: white;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #060c5c;
+    
+  }
+
+  .logoutSection {
+    display: flex;
+	align-items: center;
+	justify-content: center;
+    background-color: blueviolet;
+  }

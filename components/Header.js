@@ -26,9 +26,9 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import jwtDecode from "jwt-decode";
 
 function Header() {
-  const matches = useMediaQuery("(min-width:468px)");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+
   const [isModalVisibleInscription, setIsModalVisibleInscription] =
     useState(false);
   const [isModalVisibleConnection, setIsModalVisibleConnection] =
@@ -38,7 +38,6 @@ function Header() {
   const [signUpLastname, setSignUpLastname] = useState("");
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpMail, setSignUpMail] = useState("");
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [userGoogle, setUserGoogle] = useState(null);
 
   const clientId =
@@ -46,8 +45,6 @@ function Header() {
 
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
-
-  const error = null;
 
   const showModalInscription = () => {
     setIsModalVisibleInscription(!isModalVisibleInscription);
@@ -60,8 +57,9 @@ function Header() {
     setUserGoogle(jwtDecode(credentialResponse.credential));
   };
 
-  const items = [
+  const menuPropsNotConnected = [
     {
+      key: "1",
       label: (
         <a
           target="_blank"
@@ -73,6 +71,7 @@ function Header() {
       ),
     },
     {
+      key: "2",
       label: (
         <a
           target="_blank"
@@ -85,14 +84,38 @@ function Header() {
     },
   ];
 
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+  const menuPropsConnected = [
+    {
+      key: "1",
+      label: (
+        <a target="_blank" rel="noopener noreferrer">
+          Profile
+        </a>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <a target="_blank" rel="noopener noreferrer" onClick={handleLogout}>
+          Déconnection
+        </a>
+      ),
+    },
+  ];
+
   const handleMenuClick = (e) => {
     console.log("click", e);
   };
 
   const menuProps = {
-    items,
+    items: user.token ? menuPropsConnected : menuPropsNotConnected,
     onClick: handleMenuClick,
   };
+
+
   const handleRegister = () => {
     fetch("http://localhost:3000/users/signup", {
       method: "POST",
@@ -107,10 +130,18 @@ function Header() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data.result) {
-          console.log(data);
-
-          dispatch(login({ username: signUpUsername, token: data.token }));
+          dispatch(
+            login({
+              firstname: data.firstname,
+              lastname: data.lastname,
+              username: data.username,
+              email: data.email,
+              token: data.token,
+              favorites: data.favorites,
+            })
+          );
           setSignUpUsername("");
           setSignUpPassword("");
           setSignUpMail("");
@@ -119,6 +150,8 @@ function Header() {
           setIsModalVisibleInscription(false);
         } else {
           error = data.error;
+          console.log(data.error)
+          //definir error, error existe pas 
         }
       });
   };
@@ -134,10 +167,18 @@ function Header() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (data.result) {
-          console.log(data);
-
-          dispatch(login({ email: signInUserEmail, token: data.token }));
+          dispatch(
+            login({
+              firstname: data.firstname,
+              lastname: data.lastname,
+              username: data.username,
+              email: data.email,
+              token: data.token,
+              favorites: data.favorites,
+            })
+          );
           setSignInUserEmail("");
           setSignInPassword("");
           setIsModalVisibleConnection(false);
@@ -154,7 +195,7 @@ function Header() {
             {userGoogle ? (
               <div className={styles.content}>
                 {/* <div className={styles.divider}></div> */}
-                <p>Email: {userGoogle.email}</p>
+                <p>Bienvenu {userGoogle.username} chez Board.Lease </p>
               </div>
             ) : (
               <div className={styles.content}>
@@ -223,7 +264,7 @@ function Header() {
             {userGoogle ? (
               <div className={styles.content}>
                 <div className={styles.divider}></div>
-                <p>Email: {userGoogle.email}</p>
+                <p> Bonjour {userGoogle.name}</p>
               </div>
             ) : (
               <div className={styles.registerSection}>
@@ -262,31 +303,51 @@ function Header() {
     );
   }
 
+
   return (
     <header className={styles.header}>
-      <div className={styles.logoContainer}>
-        <img className={styles.logo} src="logo.svg" alt="Logo" />
-      </div>
-
-      <div className={styles.dropDownContainer}>
-        <Dropdown.Button
+      <div className={styles.headerContainer}>
+        <Dropdown
+          className={styles.dropDownMenu}
           menu={menuProps}
           placement="bottomRight"
-          icon={<UserOutlined />}
         >
-          {" "}
-          <FontAwesomeIcon icon={faBars} />
-          <div id="react-modals">
-            <Modal
-              title="Inscription"
-              className={styles.modal}
-              open={isModalVisibleInscription}
-              closable={false}
-              footer={null}
-            >
-              <div>{modalContentInscription}</div>
-            </Modal>
-          </div>
+          <a onClick={(e) => e.preventDefault()}>
+            <FontAwesomeIcon icon={faBars} />
+          </a>
+        </Dropdown>
+
+        <img className={styles.logo} src="logo.svg" alt="Logo" />
+
+        <Dropdown
+          className={styles.dropDown}
+          menu={menuProps}
+          placement="bottomRight"
+        >
+          <a onClick={(e) => e.preventDefault()}>
+            <FontAwesomeIcon icon={faUser} />
+          </a>
+        </Dropdown>
+        {user.token && <p>Bienvenue {user.firstname}</p>}
+      </div>
+      <div>
+        <div id="react-modals">
+          <Modal
+            title="Inscription"
+            className={styles.modal}
+            open={isModalVisibleInscription}
+            closable={false}
+            footer={null}
+          >
+            <FontAwesomeIcon
+              icon={faXmark}
+              onClick={() => setIsModalVisibleInscription(false)}
+            />
+            <div>{modalContentInscription}</div>
+          </Modal>
+        </div>
+
+        <div>
           <div id="react-modals">
             <Modal
               title="Connection"
@@ -295,10 +356,14 @@ function Header() {
               closable={false}
               footer={null}
             >
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => setIsModalVisibleConnection(false)}
+              />
               <div>{modalContentConnection}</div>
             </Modal>
           </div>
-        </Dropdown.Button>
+        </div>
       </div>
     </header>
   );
