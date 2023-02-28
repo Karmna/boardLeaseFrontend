@@ -5,7 +5,12 @@ import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { faUser, faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faXmark,
+  faBars,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   DownOutlined,
@@ -275,7 +280,7 @@ function Header() {
           icon={<UserOutlined />}
         >
           {" "}
-          <FontAwesomeIcon icon={faBars} />
+          {/* <FontAwesomeIcon icon={faBars} /> */}
           <div id="react-modals">
             <Modal
               title="Inscription"
@@ -284,6 +289,10 @@ function Header() {
               closable={false}
               footer={null}
             >
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => setIsModalVisibleInscription(false)}
+              />
               <div>{modalContentInscription}</div>
             </Modal>
           </div>
@@ -295,6 +304,10 @@ function Header() {
               closable={false}
               footer={null}
             >
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => setIsModalVisibleConnection(false)}
+              />
               <div>{modalContentConnection}</div>
             </Modal>
           </div>
