@@ -23,8 +23,9 @@ function Header() {
     const [signUpLastname, setSignUpLastname] = useState('');
     const [signUpFirstname, setSignUpFirstname] = useState('');
     const [signUpMail, setSignUpMail] = useState('');
-    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const [userGoogle, setUserGoogle] = useState(null);
+    const [isOpen, setIsOpen] = useState(false);
 
 
     const clientId = '755080318307-4oa4og0udgb1vt0s4cd95tto75hcmnqo.apps.googleusercontent.com';
@@ -46,19 +47,27 @@ function Header() {
     };
 
     const items = [
+       
+
         {
-            label: 'Inscription',
-            key: '1',
-            icon: <UserOutlined onClick={showModalInscription} />,
+            label: (
+                <a target="_blank" rel="noopener noreferrer" onClick={showModalInscription} >
+                  Inscription
+                </a> )
 
         },
         {
-            label: 'Connection',
-            key: '2',
-            icon: <UserOutlined onClick={showModalConnection} />,
+            label: (
+                <a target="_blank" rel="noopener noreferrer" onClick={showModalConnection} >
+                  Inscription
+                </a> )
         },
 
     ];
+
+    const handleClick = () => {
+        setIsOpen(!isOpen);
+      };
 
     const handleMenuClick = (e) => {
         console.log('click', e);
@@ -68,6 +77,8 @@ function Header() {
         items,
         onClick: handleMenuClick,
     };
+
+
     const handleRegister = () => {
         fetch('http://localhost:3000/users/signup', {
             method: 'POST',
@@ -112,6 +123,10 @@ function Header() {
     if (!user.token) {
         modalContentInscription = (
             <div className={styles.registerContainer}>
+                 <button className="modal-close-button" onClick={handleClick}>
+        <i className="fas fa-times"></i>
+      </button>
+    
                 <GoogleOAuthProvider clientId={clientId}>
                     <div className={styles.container}>
                         {userGoogle ?
@@ -137,7 +152,7 @@ function Header() {
                                 />
                             </div>}
                     </div>
-                </GoogleOAuthProvider>
+                </GoogleOAuthProvider>  
             </div>
         );
     }
@@ -189,11 +204,11 @@ function Header() {
             <div className={styles.dropDownContainer}>
                 <Dropdown.Button menu={menuProps} placement="bottomRight" icon={<UserOutlined />} > <FontAwesomeIcon icon={faBars} />
                     <div id="react-modals">
-
+                    
                         <Modal title="Inscription" className={styles.modal} open={isModalVisibleInscription} closable={false} footer={null} >
                             <p>{modalContentInscription}</p>
 
-                        </Modal>
+                        </Modal>   
 
                     </div>
 
