@@ -5,7 +5,12 @@ import * as React from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { faUser, faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faXmark,
+  faBars,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   DownOutlined,
