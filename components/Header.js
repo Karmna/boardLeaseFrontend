@@ -135,8 +135,10 @@ function Header() {
     onClick: handleMenuClick,
   };
 
-  const handleSignup = (authMethod, googleCredentialResponse) => {
-    if (authMethod !== "classic" || authMethod !== "googleConnect") {
+  const handleSignup = (authMethod, googleCredentialResponse = null) => {
+    console.log(authMethod);
+
+    if (authMethod !== "classic" && authMethod !== "googleConnect") {
       console.error("Unknown auth method");
       return;
     }
@@ -146,7 +148,7 @@ function Header() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
-        googleCredentialResponse, // undefined if classic auth is used
+        googleCredentialResponse, // null if classic auth is used
         firstname: signUpFirstname, // undefined if googleConnect is used
         lastname: signUpLastname, // undefined if googleConnect is used
         username: signUpUsername, // undefined if googleConnect is used
@@ -199,7 +201,7 @@ function Header() {
   };
 
   const handleSignin = (authMethod, googleCredentialResponse) => {
-    if (authMethod !== "classic" || authMethod !== "googleConnect") {
+    if (authMethod !== "classic" && authMethod !== "googleConnect") {
       console.error("Unknown auth method");
       return;
     }
@@ -301,10 +303,7 @@ function Header() {
                     visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                   }
                 />
-                <Button
-                  id="register"
-                  onClick={() => handleSignup("classicMethod")}
-                >
+                <Button id="register" onClick={() => handleSignup("classic")}>
                   S'enregistrer
                 </Button>
                 <h2>Se connecter avec Google</h2>
