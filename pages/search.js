@@ -1,6 +1,5 @@
 import Search from "../components/Search";
 import Map from "../components/Map";
-import styles from "../styles/Search.module.css";
 
 function SearchPage() {
   const DEFAULT_CENTER = [43.488, -1.555];

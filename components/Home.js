@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "../styles/Home.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { Input, Button } from "@mui/material";
 import Image from "next/image";
 import { DatePicker, Space } from "antd";
 import { addSurfByPlace } from "../reducers/search";
@@ -56,34 +55,34 @@ function Home() {
         <h2 className={styles.h2}>Location de surfboard entre particuliers</h2>
       </div>
       <div className={styles.imageContainer}>
-        <Image
+        <Image        
           src="/slide-image-1.webp"
           layout="fill"
           objectFit="contain"
           alt="Slide image 1"
-          priority={true}
+          priority={true}          
         />
       </div>
-      <Input
+      <input
         className={styles.input}
         type="text"
-        placeholder="searchPlace"
+        placeholder="Destination"
         id="searchPlace"
         onChange={(e) => setSearchPlace(e.target.value)}
         value={searchPlace}
       />
       <div className={styles.dateContainer}>
         <Space direction="vertical">
-          <DatePicker onChange={handleStartDate} />
+          <DatePicker onChange={handleStartDate} placeholder="Date de début"/>
         </Space>
         <Space direction="vertical">
-          <DatePicker onChange={handleEndDate} />
+          <DatePicker onChange={handleEndDate} placeholder="Date de fin"/>
         </Space>
       </div>
       <a href="/search">
-        <Button className={styles.button} onClick={() => handleSearch()}>
+        <button className={styles.button} onClick={() => handleSearch()}>
           Rechercher
-        </Button>
+        </button>
       </a>
     </div>
   );
