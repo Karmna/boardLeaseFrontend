@@ -26,9 +26,7 @@ function Header() {
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpMail, setSignUpMail] = useState("");
 
-  // TODO : secret à mettre en variable d'environnement
-  const clientId =
-    "755080318307-4oa4og0udgb1vt0s4cd95tto75hcmnqo.apps.googleusercontent.com";
+  const clientId = process.env.CLIENT_ID;
 
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
