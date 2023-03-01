@@ -194,33 +194,51 @@ function Header() {
   };
 
   const handleSignin = (authMethod, credentialResponse) => {
-    fetch("http://localhost:3000/users/signin", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email: signInUserEmail,
-        password: signInPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.result) {
-          dispatch(
-            login({
-              firstname: data.firstname,
-              lastname: data.lastname,
-              username: data.username,
-              email: data.email,
-              token: data.token,
-              favorites: data.favorites,
-            })
-          );
-          setSignInUserEmail("");
-          setSignInPassword("");
-          setIsModalVisibleConnection(false);
-        }
-      });
+    if (authMethod === "classic") {
+      fetch("http://localhost:3000/users/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: signInUserEmail,
+          password: signInPassword,
+          authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.result) {
+            dispatch(
+              login({
+                firstname: data.firstname,
+                lastname: data.lastname,
+                username: data.username,
+                email: data.email,
+                token: data.token,
+                favorites: data.favorites,
+              })
+            );
+            setSignInUserEmail("");
+            setSignInPassword("");
+            setIsModalVisibleConnection(false);
+          }
+        });
+    } else if (authMethod === "googleConnect") {
+      fetch("http://localhost:3000/users/gverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: credentialResponse.credential,
+          authMethod,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } else {
+      console.error("Unknown auth method");
+    }
   };
 
   let modalContentInscription;
