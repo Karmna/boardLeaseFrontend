@@ -30,6 +30,7 @@ function Header() {
 
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const showModalInscription = () => {
     setIsModalVisibleInscription(!isModalVisibleInscription);
@@ -97,8 +98,27 @@ function Header() {
     onClick: handleMenuClick,
   };
 
+  const resetForms = () => {
+    setSignUpUsername("");
+    setSignUpPassword("");
+    setSignUpMail("");
+    setSignUpFirstname("");
+    setSignUpLastname("");
+
+    setSignInUserEmail("");
+    setSignInPassword("");
+  };
+
+  const handleCloseModal = () => {
+    // TODO : add onCloseModal (errorclear, form reset, modal not visible)
+    resetForms();
+    setErrorMsg("");
+    setIsModalVisibleInscription(false);
+    setIsModalVisibleConnection(false);
+  };
+
   const handleSignup = (authMethod, googleCredentialResponse = null) => {
-    console.log(authMethod);
+    setErrorMsg("");
 
     if (authMethod !== "classic" && authMethod !== "googleConnect") {
       console.error("Unknown auth method");
@@ -123,6 +143,8 @@ function Header() {
         // Cas 1 : backend renvoit une erreur (result: false)
         if (data.result === false) {
           console.log(data); // TODO display error
+          setErrorMsg(data.error);
+          // errorMsg = data.error;
         } else if (data.jwtToken) {
           try {
             console.log(data);
@@ -143,16 +165,21 @@ function Header() {
               );
 
               // Reset on success uniquement (pour ne pas devoir tout retaper en cas d'échec)
-              setIsModalVisibleInscription(false);
-              setSignUpUsername("");
-              setSignUpPassword("");
-              setSignUpMail("");
-              setSignUpFirstname("");
-              setSignUpLastname("");
+              // setIsModalVisibleInscription(false);
+              // setSignUpUsername("");
+              // setSignUpPassword("");
+              // setSignUpMail("");
+              // setSignUpFirstname("");
+              // setSignUpLastname("");
+              handleCloseModal();
             } else {
-              console.error("Problem with JWT : email not found.");
+              setErrorMsg("Problem with JWT : email not found.");
+
+              // console.error("Problem with JWT : email not found.");
             }
           } catch (error) {
+            setErrorMsg(error);
+
             console.error(error); // TODO display error
           }
         }
@@ -165,6 +192,7 @@ function Header() {
   };
 
   const handleSignin = (authMethod, googleCredentialResponse) => {
+    setErrorMsg("");
     if (authMethod !== "classic" && authMethod !== "googleConnect") {
       console.error("Unknown auth method");
       return;
@@ -185,6 +213,7 @@ function Header() {
         // Cas 1 : backend renvoit une erreur (result: false)
         if (data.result === false) {
           console.log(data); // TODO display error
+          setErrorMsg(data.error);
         }
         // cas 2 : backend renvoit le JWT
         else if (data.jwtToken) {
@@ -207,13 +236,16 @@ function Header() {
               );
 
               // Reset on success uniquement (pour ne pas devoir tout retaper en cas d'échec)
-              setIsModalVisibleConnection(false);
-              setSignInUserEmail("");
-              setSignInPassword("");
+              // setIsModalVisibleConnection(false);
+              // setSignInUserEmail("");
+              // setSignInPassword("");
+              handleCloseModal();
             } else {
+              setErrorMsg("Problem with JWT : email not found.");
               console.error("Problem with JWT : email not found.");
             }
           } catch (error) {
+            setErrorMsg(error);
             console.error(error); // TODO display error
           }
         }
@@ -273,8 +305,9 @@ function Header() {
                 onSuccess={(credentialResponse) =>
                   handleSignup("googleConnect", credentialResponse.credential)
                 }
-                onError={(error) => console.error(error)}
+                onError={(error) => setErrorMsg(error)}
               />
+              {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
             </div>
           </div>
         </GoogleOAuthProvider>
@@ -316,6 +349,7 @@ function Header() {
                 }
                 onError={(error) => console.error(error)}
               />
+              {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
             </div>
           </div>
         </GoogleOAuthProvider>
@@ -362,7 +396,7 @@ function Header() {
           >
             <FontAwesomeIcon
               icon={faXmark}
-              onClick={() => setIsModalVisibleInscription(false)}
+              onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
             />
             <div>{modalContentInscription}</div>
           </Modal>
@@ -377,10 +411,7 @@ function Header() {
               closable={false}
               footer={null}
             >
-              <FontAwesomeIcon
-                icon={faXmark}
-                onClick={() => setIsModalVisibleConnection(false)}
-              />
+              <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
               <div>{modalContentConnection}</div>
             </Modal>
           </div>
