@@ -66,6 +66,7 @@ function Header() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         token: credentialResponse.credential,
+        authMethod: "google",
       }),
     })
       .then((response) => response.json())
@@ -134,44 +135,62 @@ function Header() {
     onClick: handleMenuClick,
   };
 
-  const handleRegister = () => {
-    fetch("http://localhost:3000/users/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        firstname: signUpFirstname,
-        lastname: signUpLastname,
-        username: signUpUsername,
-        email: signUpMail,
-        password: signUpPassword,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        if (data.result) {
-          dispatch(
-            login({
-              firstname: data.firstname,
-              lastname: data.lastname,
-              username: data.username,
-              email: data.email,
-              token: data.token,
-              favorites: data.favorites,
-            })
-          );
-          setSignUpUsername("");
-          setSignUpPassword("");
-          setSignUpMail("");
-          setSignUpFirstname("");
-          setSignUpLastname("");
-          setIsModalVisibleInscription(false);
-        } else {
-          error = data.error;
-          console.log(data.error);
-          //definir error, error existe pas
-        }
-      });
+  const handleSignup = (authMethod) => {
+    if (authMethod === "classicMethod") {
+      fetch("http://localhost:3000/users/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstname: signUpFirstname,
+          lastname: signUpLastname,
+          username: signUpUsername,
+          email: signUpMail,
+          password: signUpPassword,
+          authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.result) {
+            dispatch(
+              login({
+                firstname: data.firstname,
+                lastname: data.lastname,
+                username: data.username,
+                email: data.email,
+                token: data.token,
+                favorites: data.favorites,
+              })
+            );
+            setSignUpUsername("");
+            setSignUpPassword("");
+            setSignUpMail("");
+            setSignUpFirstname("");
+            setSignUpLastname("");
+            setIsModalVisibleInscription(false);
+          } else {
+            error = data.error;
+            console.log(data.error);
+            //definir error, error existe pas
+          }
+        });
+    } else if (authMethod === "googleConnect") {
+      fetch("http://localhost:3000/users/gverify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          token: credentialResponse.credential,
+          authMethod,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } else {
+      console.error("Unknown auth method");
+    }
   };
 
   const handleConnection = () => {
@@ -254,7 +273,10 @@ function Header() {
                     visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                   }
                 />
-                <Button id="register" onClick={() => handleRegister()}>
+                <Button
+                  id="register"
+                  onClick={() => handleSignup("classicMethod")}
+                >
                   S'enregistrer
                 </Button>
                 <h2>Se connecter avec Google</h2>
@@ -302,7 +324,10 @@ function Header() {
                     visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                   }
                 />
-                <Button id="connection" onClick={() => handleConnection()}>
+                <Button
+                  id="connection"
+                  onClick={() => handleConnection("classic")}
+                >
                   Se connecter
                 </Button>
                 <h2>Se connecter avec Google</h2>
