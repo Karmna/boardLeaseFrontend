@@ -177,9 +177,7 @@ function Header() {
           setSignUpLastname("");
           setIsModalVisibleInscription(false);
         } else {
-          error = data.error;
-          console.log(data.error);
-          //definir error, error existe pas
+          console.error(data.error);
         }
       });
     // } else if (authMethod === "googleConnect") {
