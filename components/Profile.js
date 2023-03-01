@@ -30,7 +30,7 @@ function Profile() {
         username: newUsername,
         email: newEmail,
       }),
-    })
+    }) 
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
