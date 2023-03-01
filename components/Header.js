@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Button, Dropdown, Input } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import Link from "next/link";
 
 function Header() {
   const dispatch = useDispatch();
@@ -72,19 +73,11 @@ function Header() {
   const menuPropsConnected = [
     {
       key: "1",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="/profile">
-          Profile
-        </a>
-      ),
+      label: <Link href="/profile">Profile</Link>,
     },
     {
       key: "2",
-      label: (
-        <a target="_blank" rel="noopener noreferrer" href="/profile">
-          Bookings
-        </a>
-      ),
+      label: <Link href="/profile">Bookings</Link>,
     },
     {
       key: "3",
@@ -307,7 +300,9 @@ function Header() {
           </a>
         </Dropdown>
 
-        <img className={styles.logo} src="logo.svg" alt="Logo" />
+        <Link href="/">
+          <img className={styles.logo} src="logo.svg" alt="Logo" />
+        </Link>
 
         <Dropdown
           className={styles.dropDown}
