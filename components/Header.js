@@ -2,33 +2,13 @@ import styles from "../styles/Header.module.css";
 import { login, logout } from "../reducers/user";
 import { Modal } from "antd";
 import * as React from "react";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  faUser,
-  faXmark,
-  faBars,
-  faX,
-} from "@fortawesome/free-solid-svg-icons";
+import { faUser, faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  DownOutlined,
-  UserOutlined,
-  EyeInvisibleOutlined,
-  EyeTwoTone,
-} from "@ant-design/icons";
-import {
-  Button,
-  Dropdown,
-  message,
-  Space,
-  Tooltip,
-  Input,
-  Password,
-} from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Button, Dropdown, Input } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import jwtDecode from "jwt-decode";
 
 function Header() {
   const dispatch = useDispatch();
@@ -43,8 +23,8 @@ function Header() {
   const [signUpLastname, setSignUpLastname] = useState("");
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpMail, setSignUpMail] = useState("");
-  const [userGoogle, setUserGoogle] = useState(null);
 
+  // TODO : secret à mettre en variable d'environnement
   const clientId =
     "755080318307-4oa4og0udgb1vt0s4cd95tto75hcmnqo.apps.googleusercontent.com";
 
@@ -56,25 +36,6 @@ function Header() {
   };
   const showModalConnection = () => {
     setIsModalVisibleConnection(!isModalVisibleConnection);
-  };
-
-  const handleLogin = (credentialResponse) => {
-    console.log(jwtDecode(credentialResponse.credential));
-
-    fetch("http://localhost:3000/users/gverify", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        token: credentialResponse.credential,
-        authMethod: "google",
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-      });
-
-    setUserGoogle(jwtDecode(credentialResponse.credential));
   };
 
   const menuPropsNotConnected = [
@@ -104,6 +65,7 @@ function Header() {
     },
   ];
 
+  // TODO : vérifier si googleConnect ne doit pas être déconnecté d'une façon spécifique
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -162,6 +124,7 @@ function Header() {
         if (data.result) {
           dispatch(
             login({
+              authMethod: data.authMethod,
               firstname: data.firstname,
               lastname: data.lastname,
               username: data.username,
@@ -180,22 +143,6 @@ function Header() {
           console.error(data.error);
         }
       });
-    // } else if (authMethod === "googleConnect") {
-    //   fetch("http://localhost:3000/users/gverify", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       token: credentialResponse.credential,
-    //       authMethod,
-    //     }),
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     });
-    // } else {
-    //   console.error("Unknown auth method");
-    // }
   };
 
   const handleSignin = (authMethod, googleCredentialResponse) => {
@@ -220,6 +167,7 @@ function Header() {
         if (data.result) {
           dispatch(
             login({
+              authMethod: data.authMethod,
               firstname: data.firstname,
               lastname: data.lastname,
               username: data.username,
@@ -233,22 +181,6 @@ function Header() {
           setIsModalVisibleConnection(false);
         }
       });
-    // } else if (authMethod === "googleConnect") {
-    //   fetch("http://localhost:3000/users/gverify", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify({
-    //       token: credentialResponse.credential,
-    //       authMethod,
-    //     }),
-    //   })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     });
-    // } else {
-    //   console.error("Unknown auth method");
-    // }
   };
 
   let modalContentInscription;
@@ -257,63 +189,56 @@ function Header() {
       <div className={styles.registerContainer}>
         <GoogleOAuthProvider clientId={clientId}>
           <div className={styles.container}>
-            {userGoogle ? (
-              <div className={styles.content}>
-                {/* <div className={styles.divider}></div> */}
-                <p>Bienvenu {userGoogle.username} chez Board.Lease </p>
-              </div>
-            ) : (
-              <div className={styles.content}>
-                <Input
-                  type="Prénom"
-                  placeholder="Prénom"
-                  id="signUpFirstname"
-                  onChange={(e) => setSignUpFirstname(e.target.value)}
-                  value={signUpFirstname}
-                />
-                <Input
-                  type="Nom"
-                  placeholder="Nom"
-                  id="signUpLastname"
-                  onChange={(e) => setSignUpLastname(e.target.value)}
-                  value={signUpLastname}
-                />
-                <Input
-                  type="Nom d'utilisateur"
-                  placeholder="Nom d'utilisateur"
-                  id="signUpUsername"
-                  onChange={(e) => setSignUpUsername(e.target.value)}
-                  value={signUpUsername}
-                />
-                <Input
-                  type="Email"
-                  placeholder="Email"
-                  id="Email"
-                  onChange={(e) => setSignUpMail(e.target.value)}
-                  value={signUpMail}
-                />
-                <Input.Password
-                  placeholder="Mot de passe"
-                  id="signUpPassword"
-                  onChange={(e) => setSignUpPassword(e.target.value)}
-                  value={signUpPassword}
-                  iconRender={(visible) =>
-                    visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                  }
-                />
-                <Button id="register" onClick={() => handleSignup("classic")}>
-                  S'enregistrer
-                </Button>
-                <h2>Se connecter avec Google</h2>
-                <div className={styles.divider}></div>
-                <GoogleLogin
-                  onSuccess={(credentialResponse) =>
-                    handleSignup("googleConnect", credentialResponse.credential)
-                  }
-                  onError={(error) => console.error(error)}
-                />
-              </div>
-            )}
+            <div className={styles.content}>
+              <Input
+                type="Prénom"
+                placeholder="Prénom"
+                id="signUpFirstname"
+                onChange={(e) => setSignUpFirstname(e.target.value)}
+                value={signUpFirstname}
+              />
+              <Input
+                type="Nom"
+                placeholder="Nom"
+                id="signUpLastname"
+                onChange={(e) => setSignUpLastname(e.target.value)}
+                value={signUpLastname}
+              />
+              <Input
+                type="Nom d'utilisateur"
+                placeholder="Nom d'utilisateur"
+                id="signUpUsername"
+                onChange={(e) => setSignUpUsername(e.target.value)}
+                value={signUpUsername}
+              />
+              <Input
+                type="Email"
+                placeholder="Email"
+                id="Email"
+                onChange={(e) => setSignUpMail(e.target.value)}
+                value={signUpMail}
+              />
+              <Input.Password
+                placeholder="Mot de passe"
+                id="signUpPassword"
+                onChange={(e) => setSignUpPassword(e.target.value)}
+                value={signUpPassword}
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+              />
+              <Button id="register" onClick={() => handleSignup("classic")}>
+                S'enregistrer
+              </Button>
+              <h2>Se connecter avec Google</h2>
+              <div className={styles.divider}></div>
+              <GoogleLogin
+                onSuccess={(credentialResponse) =>
+                  handleSignup("googleConnect", credentialResponse.credential)
+                }
+                onError={(error) => console.error(error)}
+              />
+            </div>
           </div>
         </GoogleOAuthProvider>
       </div>
@@ -326,42 +251,35 @@ function Header() {
       <div className={styles.registerContainer}>
         <GoogleOAuthProvider clientId={clientId}>
           <div className={styles.container}>
-            {userGoogle ? (
-              <div className={styles.content}>
-                <div className={styles.divider}></div>
-                <p> Bonjour {userGoogle.name}</p>
-              </div>
-            ) : (
-              <div className={styles.registerSection}>
-                <Input
-                  type="text"
-                  placeholder="email"
-                  id="signInUserEmail"
-                  onChange={(e) => setSignInUserEmail(e.target.value)}
-                  value={signInUserEmail}
-                />
-                <Input.Password
-                  placeholder="Mot de passe"
-                  id="signInPassword"
-                  onChange={(e) => setSignInPassword(e.target.value)}
-                  value={signInPassword}
-                  iconRender={(visible) =>
-                    visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-                  }
-                />
-                <Button id="connection" onClick={() => handleSignin("classic")}>
-                  Se connecter
-                </Button>
-                <h2>Se connecter avec Google</h2>
-                <div className={styles.divider}></div>
-                <GoogleLogin
-                  onSuccess={(credentialResponse) =>
-                    handleSignin("googleConnect", credentialResponse.credential)
-                  }
-                  onError={(error) => console.error(error)}
-                />
-              </div>
-            )}
+            <div className={styles.registerSection}>
+              <Input
+                type="text"
+                placeholder="email"
+                id="signInUserEmail"
+                onChange={(e) => setSignInUserEmail(e.target.value)}
+                value={signInUserEmail}
+              />
+              <Input.Password
+                placeholder="Mot de passe"
+                id="signInPassword"
+                onChange={(e) => setSignInPassword(e.target.value)}
+                value={signInPassword}
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+              />
+              <Button id="connection" onClick={() => handleSignin("classic")}>
+                Se connecter
+              </Button>
+              <h2>Se connecter avec Google</h2>
+              <div className={styles.divider}></div>
+              <GoogleLogin
+                onSuccess={(credentialResponse) =>
+                  handleSignin("googleConnect", credentialResponse.credential)
+                }
+                onError={(error) => console.error(error)}
+              />
+            </div>
           </div>
         </GoogleOAuthProvider>
       </div>
@@ -392,7 +310,7 @@ function Header() {
             <FontAwesomeIcon icon={faUser} />
           </a>
         </Dropdown>
-        {user.token && <p>Bienvenue {user.firstname}</p>}
+        {user.token && <p>{user.firstname}</p>}
       </div>
       <div>
         <div id="react-modals">
