@@ -120,32 +120,47 @@ function Header() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        const decoded = jwt_decode(data.jwtToken);
-        console.log(decoded);
+        // Cas 1 : backend renvoit une erreur (result: false)
+        if (data.result === false) {
+          console.log(data); // TODO display error
+        } else if (data.jwtToken) {
+          try {
+            console.log(data);
+            const decoded = jwt_decode(data.jwtToken);
+            console.log(decoded);
 
-        if (decoded.email) {
-          dispatch(
-            login({
-              authMethod: decoded.authMethod,
-              firstname: decoded.firstname,
-              lastname: decoded.lastname,
-              username: decoded.username,
-              email: decoded.email,
-              token: data.jwtToken,
-              favorites: decoded.favorites,
-            })
-          );
-          setSignUpUsername("");
-          setSignUpPassword("");
-          setSignUpMail("");
-          setSignUpFirstname("");
-          setSignUpLastname("");
-          setIsModalVisibleInscription(false);
-        } else {
-          console.error(data.error);
+            if (decoded.email) {
+              dispatch(
+                login({
+                  authMethod: decoded.authMethod,
+                  firstname: decoded.firstname,
+                  lastname: decoded.lastname,
+                  username: decoded.username,
+                  email: decoded.email,
+                  token: data.jwtToken,
+                  favorites: decoded.favorites,
+                })
+              );
+            } else {
+              console.error("Problem with JWT : email not found.");
+            }
+          } catch (error) {
+            console.error(error); // TODO display error
+          }
         }
+
+        setSignUpUsername("");
+        setSignUpPassword("");
+        setSignUpMail("");
+        setSignUpFirstname("");
+        setSignUpLastname("");
+        setIsModalVisibleInscription(false);
       });
+
+    //   else {
+    //     console.error(data.error);
+    //   }
+    // });
   };
 
   const handleSignin = (authMethod, googleCredentialResponse) => {
@@ -166,26 +181,39 @@ function Header() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        const decoded = jwt_decode(data.jwtToken);
-        console.log(decoded);
-
-        if (decoded.email) {
-          dispatch(
-            login({
-              authMethod: decoded.authMethod,
-              firstname: decoded.firstname,
-              lastname: decoded.lastname,
-              username: decoded.username,
-              email: decoded.email,
-              token: data.jwtToken,
-              favorites: decoded.favorites,
-            })
-          );
-          setSignInUserEmail("");
-          setSignInPassword("");
-          setIsModalVisibleConnection(false);
+        // Cas 1 : backend renvoit une erreur (result: false)
+        if (data.result === false) {
+          console.log(data); // TODO display error
         }
+        // cas 2 : backend renvoit le JWT
+        else if (data.jwtToken) {
+          try {
+            console.log(data);
+            const decoded = jwt_decode(data.jwtToken);
+            console.log(decoded);
+
+            if (decoded.email) {
+              dispatch(
+                login({
+                  authMethod: decoded.authMethod,
+                  firstname: decoded.firstname,
+                  lastname: decoded.lastname,
+                  username: decoded.username,
+                  email: decoded.email,
+                  token: data.jwtToken,
+                  favorites: decoded.favorites,
+                })
+              );
+            } else {
+              console.error("Problem with JWT : email not found.");
+            }
+          } catch (error) {
+            console.error(error); // TODO display error
+          }
+        }
+        setSignInUserEmail("");
+        setSignInPassword("");
+        setIsModalVisibleConnection(false);
       });
   };
 
