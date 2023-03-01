@@ -1,29 +1,29 @@
 import * as React from "react";
 import styles from "../styles/Search.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import debounce from 'lodash.debounce';
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Checkbox, Rate } from "antd";
 import { addFilter } from "../reducers/filter";
 import { useDispatch } from "react-redux";
 
-function Filter() {
-  const dispatch = useDispatch();
+function Filter() { 
   const [open, setOpen] = useState(false);
   const [type, setType] = useState([]);
   const [level, setLevel] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(0);
-  const [minRating, setMinRating] = useState(3);
+  const [maxPrice, setMaxPrice] = useState(100);
+  const [minRating, setMinRating] = useState(0);
 
-  console.log(
-    "type",
-    type,
-    "level",
-    level,
-    "maxPrice",
-    maxPrice,
-    "rating",
-    minRating
-  );
+  const dispatch = useDispatch();
+
+const action = () => {
+    dispatch(addFilter({type, level, maxPrice, minRating}))
+  };
+
+  const debouncedDispatch = debounce(action, 500);  
+  useEffect (()=> {
+     debouncedDispatch()   
+  },[type, level, maxPrice, minRating])
 
   const handleMenuClick = (e) => {
     if (e.key === "3") {
@@ -36,16 +36,18 @@ function Filter() {
 
   const onChange = (e) => {
     const { checked, value } = e.target;
+    
     if (e.target.description === "type") {
       setType(checked ? [...type, value] : type.filter((t) => t !== value));
-      dispatch(addFilter(type));
+    
     } else if (e.target.description === "level") {
       setLevel(checked ? [...level, value] : level.filter((l) => l !== value));
-      dispatch(addFilter(level));
+      
     } else if (e.target.description === "price") {
       setMaxPrice(checked ? value : 100);
-      dispatch(addFilter(maxPrice));
-    }
+      
+    }   
+
   };
 
   const items = [
@@ -57,7 +59,7 @@ function Filter() {
         {
           key: "1-1",
           label: (
-            <Checkbox onChange={onChange} value="longboard" description="type">
+            <Checkbox onChange={onChange} value="Longboard" description="type">
               Longboard
             </Checkbox>
           ),
@@ -65,7 +67,7 @@ function Filter() {
         {
           key: "1-2",
           label: (
-            <Checkbox onChange={onChange} value="funboard" description="type">
+            <Checkbox onChange={onChange} value="Funboard" description="type">
               Funboard
             </Checkbox>
           ),
@@ -73,7 +75,7 @@ function Filter() {
         {
           key: "1-3",
           label: (
-            <Checkbox onChange={onChange} value="fish" description="type">
+            <Checkbox onChange={onChange} value="Fish" description="type">
               Fish
             </Checkbox>
           ),
@@ -81,7 +83,7 @@ function Filter() {
         {
           key: "1-4",
           label: (
-            <Checkbox onChange={onChange} value="shortboard" description="type">
+            <Checkbox onChange={onChange} value="Shortboard" description="type">
               Shortboard
             </Checkbox>
           ),
@@ -91,7 +93,7 @@ function Filter() {
           label: (
             <Checkbox
               onChange={onChange}
-              value="standup_paddle"
+              value="StandUp Paddle"
               description="type"
             >
               StandUp Paddle
@@ -108,7 +110,7 @@ function Filter() {
         {
           key: "2-1",
           label: (
-            <Checkbox onChange={onChange} value="débutant" description="level">
+            <Checkbox onChange={onChange} value="Débutant" description="level">
               Débutant
             </Checkbox>
           ),
@@ -118,7 +120,7 @@ function Filter() {
           label: (
             <Checkbox
               onChange={onChange}
-              value="intermédiaire"
+              value="Intermédiaire"
               description="level"
             >
               Intermédiaire
@@ -128,7 +130,7 @@ function Filter() {
         {
           key: "2-3",
           label: (
-            <Checkbox onChange={onChange} value="confirmé" description="level">
+            <Checkbox onChange={onChange} value="Confirmé" description="level">
               Confirmé
             </Checkbox>
           ),
@@ -162,7 +164,7 @@ function Filter() {
               <Rate
                 onChange={(minRating) => {
                   setMinRating(minRating);
-                  dispatch(addFilter({ minRating: minRating }));
+                  // dispatch(addFilter({ minRating: minRating }));
                 }}
                 value={minRating}
               />

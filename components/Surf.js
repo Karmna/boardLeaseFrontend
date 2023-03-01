@@ -10,7 +10,7 @@ function Surf(props) {
     <div className={styles.card}>
       <Image
         className={styles.image}
-        src={props.pictures}
+        src={props.pictures[0]}
         alt={props.name}
         width={100}
         height={100}
@@ -25,7 +25,12 @@ function Surf(props) {
     </div>
   ) : (
     <div className={styles.card}>
-      <Image src={props.pictures} alt={props.name} width={120} height={120} />
+      <Image
+        src={props.pictures[0]}
+        alt={props.name}
+        width={120}
+        height={120}
+      />
       <div className={styles.descriptionContent}>
         <h3 className={styles.description}>{props.name}</h3>
         <p className={styles.description}>
@@ -34,7 +39,7 @@ function Surf(props) {
           </u>
           &nbsp; {props.level}
         </p>
-        <p className={styles.description}>{props.availabilities}</p>
+        <p className={styles.description}>{props.availabilities[0]}</p>
         <span className={styles.rating}>
           <Rate value={props.rating} />
         </span>

@@ -1,24 +1,38 @@
 import Search from "../components/Search";
 import Map from "../components/Map";
+import styles from "../styles/Search.module.css";
+import { useSelector, useDispatch } from "react-redux";
 
 function SearchPage() {
+  const surfs = useSelector((state) => state.surfs.value);
+
   const DEFAULT_CENTER = [43.488, -1.555];
 
   return (
-    <div>
+    <div className={styles.searchPageContainer}>
       <Search />
-      <Map width="800" height="600" center={DEFAULT_CENTER} zoom={12}>
+      <Map width="800" height="600" center={DEFAULT_CENTER} zoom={8}>
         {({ TileLayer, Marker, Popup }) => (
           <>
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            <Marker position={DEFAULT_CENTER}>
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
+            {surfs.map((data, i) => { return (
+              <Marker key={i} position={[data.latitude, data.longitude]}>
+                <Popup>
+                  <u>
+                    <strong>{data.type}</strong>
+                  </u>
+                  <br />
+                  <u>
+                    <strong>Prix:</strong>
+                  </u>
+                  &nbsp; {data.dayPrice} € / jour
+                </Popup>
+              </Marker>
+            )
+            })}
           </>
         )}
       </Map>

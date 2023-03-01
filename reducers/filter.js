@@ -4,7 +4,7 @@ const initialState = {
   value: {
     type: [],
     level: [],
-    maxPrice: 100,
+    maxPrice: 0,
     minRating: 0,
   },
 };
@@ -16,8 +16,8 @@ export const filterSlice = createSlice({
     addFilter: (state, action) => {
       state.value.type = action.payload.type;
       state.value.level = action.payload.level;
-      state.value.maxPrice = action.payload.price;
-      state.value.minRating = action.payload.rating;
+      state.value.maxPrice = action.payload.maxPrice;
+      state.value.minRating = action.payload.minRating;
     },
   },
 });

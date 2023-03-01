@@ -12,8 +12,9 @@ import storage from "redux-persist/lib/storage";
 import user from "../reducers/user";
 import filter from "../reducers/filter";
 import search from "../reducers/search";
+import surfs from "../reducers/surfs";
 
-const reducers = combineReducers({ user, filter, search });
+const reducers = combineReducers({ user, filter, search, surfs });
 
 const persistConfig = { key: "boardLease", storage };
 
