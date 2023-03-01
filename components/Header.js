@@ -96,13 +96,21 @@ function Header() {
     {
       key: "1",
       label: (
-        <a target="_blank" rel="noopener noreferrer">
+        <a target="_blank" rel="noopener noreferrer" href="/profile">
           Profile
         </a>
       ),
     },
     {
-      key: "2",
+        key: "2",
+        label: (
+          <a target="_blank" rel="noopener noreferrer" href="/profile">
+            Bookings
+          </a>
+        ),
+      },
+    {
+      key: "3",
       label: (
         <a target="_blank" rel="noopener noreferrer" onClick={handleLogout}>
           Déconnection
@@ -333,7 +341,7 @@ function Header() {
             <FontAwesomeIcon icon={faUser} />
           </a>
         </Dropdown>
-        {user.token && <p>Bienvenue {user.firstname}</p>}
+        {user.token && <p> @{user.firstname}</p>}
       </div>
       <div>
         <div id="react-modals">
