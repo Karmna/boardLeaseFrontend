@@ -135,7 +135,7 @@ function Header() {
     onClick: handleMenuClick,
   };
 
-  const handleSignup = (authMethod, credentialResponse) => {
+  const handleSignup = (authMethod, googleCredentialResponse) => {
     if (authMethod !== "classic" || authMethod !== "googleConnect") {
       console.error("Unknown auth method");
       return;
@@ -146,7 +146,7 @@ function Header() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
-        credentialResponse, // undefined if classic auth is used
+        googleCredentialResponse, // undefined if classic auth is used
         firstname: signUpFirstname, // undefined if googleConnect is used
         lastname: signUpLastname, // undefined if googleConnect is used
         username: signUpUsername, // undefined if googleConnect is used
@@ -198,7 +198,7 @@ function Header() {
     // }
   };
 
-  const handleSignin = (authMethod, credentialResponse) => {
+  const handleSignin = (authMethod, googleCredentialResponse) => {
     if (authMethod !== "classic" || authMethod !== "googleConnect") {
       console.error("Unknown auth method");
       return;
@@ -209,7 +209,7 @@ function Header() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
-        credentialResponse, // undefined if classic auth is used
+        googleCredentialResponse, // undefined if classic auth is used
         email: signInUserEmail, // undefined if googleConnect is used
         password: signInPassword, // undefined if googleConnect is used
       }),
