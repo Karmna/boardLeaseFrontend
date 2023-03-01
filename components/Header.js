@@ -135,7 +135,7 @@ function Header() {
     onClick: handleMenuClick,
   };
 
-  const handleSignup = (authMethod) => {
+  const handleSignup = (authMethod, credentialResponse) => {
     if (authMethod === "classicMethod") {
       fetch("http://localhost:3000/users/signup", {
         method: "POST",
@@ -193,7 +193,7 @@ function Header() {
     }
   };
 
-  const handleConnection = () => {
+  const handleSignin = (authMethod, credentialResponse) => {
     fetch("http://localhost:3000/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -283,7 +283,7 @@ function Header() {
                 <div className={styles.divider}></div>
                 <GoogleLogin
                   onSuccess={(credentialResponse) =>
-                    handleLogin(credentialResponse)
+                    handleSignup("googleConnect", credentialResponse)
                   }
                   onError={(error) => console.error(error)}
                 />
@@ -324,17 +324,14 @@ function Header() {
                     visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                   }
                 />
-                <Button
-                  id="connection"
-                  onClick={() => handleConnection("classic")}
-                >
+                <Button id="connection" onClick={() => handleSignin("classic")}>
                   Se connecter
                 </Button>
                 <h2>Se connecter avec Google</h2>
                 <div className={styles.divider}></div>
                 <GoogleLogin
                   onSuccess={(credentialResponse) =>
-                    handleLogin(credentialResponse)
+                    handleSignin("googleConnect", credentialResponse)
                   }
                   onError={(error) => console.error(error)}
                 />
