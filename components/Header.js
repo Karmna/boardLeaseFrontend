@@ -10,6 +10,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Button, Dropdown, Input } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
+import jwt_decode from "jwt-decode";
 
 function Header() {
   const dispatch = useDispatch();
@@ -165,16 +166,19 @@ function Header() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        if (data.result) {
+        const decoded = jwt_decode(data.jwtToken);
+        console.log(decoded);
+
+        if (decoded.email) {
           dispatch(
             login({
-              authMethod: data.authMethod,
-              firstname: data.firstname,
-              lastname: data.lastname,
-              username: data.username,
-              email: data.email,
-              token: data.token,
-              favorites: data.favorites,
+              authMethod: decoded.authMethod,
+              firstname: decoded.firstname,
+              lastname: decoded.lastname,
+              username: decoded.username,
+              email: decoded.email,
+              token: data.jwtToken,
+              favorites: decoded.favorites,
             })
           );
           setSignInUserEmail("");
