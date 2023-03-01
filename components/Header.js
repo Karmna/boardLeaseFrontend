@@ -308,7 +308,7 @@ function Header() {
                 <div className={styles.divider}></div>
                 <GoogleLogin
                   onSuccess={(credentialResponse) =>
-                    handleSignup("googleConnect", credentialResponse)
+                    handleSignup("googleConnect", credentialResponse.credential)
                   }
                   onError={(error) => console.error(error)}
                 />
@@ -356,7 +356,7 @@ function Header() {
                 <div className={styles.divider}></div>
                 <GoogleLogin
                   onSuccess={(credentialResponse) =>
-                    handleSignin("googleConnect", credentialResponse)
+                    handleSignin("googleConnect", credentialResponse.credential)
                   }
                   onError={(error) => console.error(error)}
                 />
