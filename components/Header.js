@@ -136,109 +136,119 @@ function Header() {
   };
 
   const handleSignup = (authMethod, credentialResponse) => {
-    if (authMethod === "classicMethod") {
-      fetch("http://localhost:3000/users/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstname: signUpFirstname,
-          lastname: signUpLastname,
-          username: signUpUsername,
-          email: signUpMail,
-          password: signUpPassword,
-          authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          if (data.result) {
-            dispatch(
-              login({
-                firstname: data.firstname,
-                lastname: data.lastname,
-                username: data.username,
-                email: data.email,
-                token: data.token,
-                favorites: data.favorites,
-              })
-            );
-            setSignUpUsername("");
-            setSignUpPassword("");
-            setSignUpMail("");
-            setSignUpFirstname("");
-            setSignUpLastname("");
-            setIsModalVisibleInscription(false);
-          } else {
-            error = data.error;
-            console.log(data.error);
-            //definir error, error existe pas
-          }
-        });
-    } else if (authMethod === "googleConnect") {
-      fetch("http://localhost:3000/users/gverify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          token: credentialResponse.credential,
-          authMethod,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
-    } else {
+    if (authMethod !== "classic" || authMethod !== "googleConnect") {
       console.error("Unknown auth method");
+      return;
     }
+
+    fetch("http://localhost:3000/users/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
+        credentialResponse, // undefined if classic auth is used
+        firstname: signUpFirstname, // undefined if googleConnect is used
+        lastname: signUpLastname, // undefined if googleConnect is used
+        username: signUpUsername, // undefined if googleConnect is used
+        email: signUpMail, // undefined if googleConnect is used
+        password: signUpPassword, // undefined if googleConnect is used
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result) {
+          dispatch(
+            login({
+              firstname: data.firstname,
+              lastname: data.lastname,
+              username: data.username,
+              email: data.email,
+              token: data.token,
+              favorites: data.favorites,
+            })
+          );
+          setSignUpUsername("");
+          setSignUpPassword("");
+          setSignUpMail("");
+          setSignUpFirstname("");
+          setSignUpLastname("");
+          setIsModalVisibleInscription(false);
+        } else {
+          error = data.error;
+          console.log(data.error);
+          //definir error, error existe pas
+        }
+      });
+    // } else if (authMethod === "googleConnect") {
+    //   fetch("http://localhost:3000/users/gverify", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       token: credentialResponse.credential,
+    //       authMethod,
+    //     }),
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     });
+    // } else {
+    //   console.error("Unknown auth method");
+    // }
   };
 
   const handleSignin = (authMethod, credentialResponse) => {
-    if (authMethod === "classic") {
-      fetch("http://localhost:3000/users/signin", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: signInUserEmail,
-          password: signInPassword,
-          authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-          if (data.result) {
-            dispatch(
-              login({
-                firstname: data.firstname,
-                lastname: data.lastname,
-                username: data.username,
-                email: data.email,
-                token: data.token,
-                favorites: data.favorites,
-              })
-            );
-            setSignInUserEmail("");
-            setSignInPassword("");
-            setIsModalVisibleConnection(false);
-          }
-        });
-    } else if (authMethod === "googleConnect") {
-      fetch("http://localhost:3000/users/gverify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          token: credentialResponse.credential,
-          authMethod,
-        }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
-        });
-    } else {
+    if (authMethod !== "classic" || authMethod !== "googleConnect") {
       console.error("Unknown auth method");
+      return;
     }
+
+    fetch("http://localhost:3000/users/signin", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        authMethod, // pour que le backend puisse traiter l'auth selon si google ou non
+        credentialResponse, // undefined if classic auth is used
+        email: signInUserEmail, // undefined if googleConnect is used
+        password: signInPassword, // undefined if googleConnect is used
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        if (data.result) {
+          dispatch(
+            login({
+              firstname: data.firstname,
+              lastname: data.lastname,
+              username: data.username,
+              email: data.email,
+              token: data.token,
+              favorites: data.favorites,
+            })
+          );
+          setSignInUserEmail("");
+          setSignInPassword("");
+          setIsModalVisibleConnection(false);
+        }
+      });
+    // } else if (authMethod === "googleConnect") {
+    //   fetch("http://localhost:3000/users/gverify", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({
+    //       token: credentialResponse.credential,
+    //       authMethod,
+    //     }),
+    //   })
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       console.log(data);
+    //     });
+    // } else {
+    //   console.error("Unknown auth method");
+    // }
   };
 
   let modalContentInscription;
