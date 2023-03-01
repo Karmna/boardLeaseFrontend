@@ -141,6 +141,14 @@ function Header() {
                   favorites: decoded.favorites,
                 })
               );
+
+              // Reset on success uniquement (pour ne pas devoir tout retaper en cas d'échec)
+              setIsModalVisibleInscription(false);
+              setSignUpUsername("");
+              setSignUpPassword("");
+              setSignUpMail("");
+              setSignUpFirstname("");
+              setSignUpLastname("");
             } else {
               console.error("Problem with JWT : email not found.");
             }
@@ -148,13 +156,6 @@ function Header() {
             console.error(error); // TODO display error
           }
         }
-
-        setSignUpUsername("");
-        setSignUpPassword("");
-        setSignUpMail("");
-        setSignUpFirstname("");
-        setSignUpLastname("");
-        setIsModalVisibleInscription(false);
       });
 
     //   else {
@@ -204,6 +205,11 @@ function Header() {
                   favorites: decoded.favorites,
                 })
               );
+
+              // Reset on success uniquement (pour ne pas devoir tout retaper en cas d'échec)
+              setIsModalVisibleConnection(false);
+              setSignInUserEmail("");
+              setSignInPassword("");
             } else {
               console.error("Problem with JWT : email not found.");
             }
@@ -211,9 +217,6 @@ function Header() {
             console.error(error); // TODO display error
           }
         }
-        setSignInUserEmail("");
-        setSignInPassword("");
-        setIsModalVisibleConnection(false);
       });
   };
 
