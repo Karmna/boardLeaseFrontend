@@ -36,24 +36,7 @@ function Home() {
   };
 
   const handleSearch = () => {
-    console.log("Recherche par placeName envoyée au serveur")
-    // fetch("http://localhost:3000/surfs/filter", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     type: filter.type,
-    //     level: filter.level,
-    //     maxPrice: filter.maxPrice,
-    //     minRating: filter.minRating, 
-    //     placeName: searchPlace,
-    //     availabilities: [{ startDate: searchStartDate, endDate: searchEndDate }],
-    //   }),
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {     
-        // console.log("réponse du serveur requete home.js", JSON.stringify(data)) 
-          // dispatch(addSurfs(data.data));          
-          // console.log("Ajout des surfs au reducer surfs", JSON.stringify(data.data)); 
+    console.log("Recherche par placeName envoyée au serveur")   
           console.log("Etats", searchPlace, searchStartDate, searchEndDate); 
           dispatch(addFilter({
             type: [],
@@ -61,7 +44,7 @@ function Home() {
             maxPrice: 100,
             minRating: 0,           
             placeName: searchPlace,
-            availabilities: [{ startDate: searchStartDate, endDate: searchEndDate }],
+            availabilities: { startDate: searchStartDate, endDate: searchEndDate },
           }));
           console.log("Ajout des données placeName et availabilities au reducer filter", JSON.stringify(filter));      
       // });

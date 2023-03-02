@@ -7,7 +7,8 @@ const initialState = {
     maxPrice: 100,
     minRating: 0,
     placeName: '',
-    availabilities: []  },
+    availabilities: null
+  },
 };
 
 export const filterSlice = createSlice({
