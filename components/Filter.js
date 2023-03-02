@@ -1,7 +1,6 @@
 import * as React from "react";
 import styles from "../styles/Search.module.css";
-import { useState, useEffect } from "react";
-import debounce from 'lodash.debounce';
+import { useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Checkbox, Rate } from "antd";
 import { addFilter } from "../reducers/filter";
@@ -16,14 +15,9 @@ function Filter() {
 
   const dispatch = useDispatch();
 
-const action = () => {
+const handleFilter = () => {
     dispatch(addFilter({type, level, maxPrice, minRating}))
-  };
-
-  const debouncedDispatch = debounce(action, 500);  
-  useEffect (()=> {
-     debouncedDispatch()   
-  },[type, level, maxPrice, minRating])
+  }; 
 
   const handleMenuClick = (e) => {
     if (e.key === "3") {
@@ -173,6 +167,19 @@ const action = () => {
         },
       ],
     },
+    {
+      key: "5",
+      type: "group",
+      label: "",
+      children: [
+        {
+          key: "5-1",
+          label: (
+            <button className={styles.button} onClick={() => handleFilter()}>Filtrer</button>
+          ),
+        },
+      ],
+    },    
   ];
 
   return (

@@ -20,14 +20,17 @@ function Search() {
         type: filter.type,
         level: filter.level,
         maxPrice: filter.maxPrice,
-        minRating: filter.minRating,
+        minRating: filter.minRating,  
+        placeName: filter.placeName,
+        availabilities: filter.availabilities,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log("réponse du serveur requete search.js", data) 
         dispatch(addSurfs(data.data));
         console.log("filter reducer", filter);
-        console.log("Surf add to reducer", data.data);
+        console.log("Surf add to reducer", surfs);
       });
   }, [filter]);
 

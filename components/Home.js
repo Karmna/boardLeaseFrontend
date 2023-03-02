@@ -1,18 +1,20 @@
 import * as React from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styles from "../styles/Home.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
 import { DatePicker, Space } from "antd";
-import { addSurfByPlace } from "../reducers/search";
+import { addSurfs } from "../reducers/surfs";
+import { addFilter } from "../reducers/filter";
 
 function Home() {
   const dispatch = useDispatch();
   const matches = useMediaQuery("(min-width:768px)");
+  const filter = useSelector((state) => state.filter.value);
   const [searchPlace, setSearchPlace] = useState("");
-  const [searchStartDate, setSearchStartDate] = useState("");
-  const [searchEndDate, setSearchEndDate] = useState("");
+  const [searchStartDate, setSearchStartDate] = useState();
+  const [searchEndDate, setSearchEndDate] = useState();
 
   console.log(
     "placeName",
@@ -32,19 +34,30 @@ function Home() {
   };
 
   const handleSearch = () => {
-    fetch("http://localhost:3000/surfs", {
+    console.log("Recherche par placeName envoyée au serveur")
+    fetch("http://localhost:3000/surfs/filter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        type: filter.type,
+        level: filter.level,
+        maxPrice: filter.maxPrice,
+        minRating: filter.minRating, 
         placeName: searchPlace,
-        availabilities: { startDate: searchStartDate, endDate: searchEndDate },
+        availabilities: [{ startDate: searchStartDate, endDate: searchEndDate }],
       }),
     })
       .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          dispatch(addSurfByPlace(data));
-        }
+      .then((data) => {     
+        console.log("réponse du serveur requete home.js", JSON.stringify(data)) 
+          dispatch(addSurfs(data.data));          
+          console.log("Ajout des surfs au reducer surfs", JSON.stringify(data.data));     
+          dispatch(addFilter({
+          
+            placeName: searchPlace,
+            availabilities: [{ startDate: searchStartDate, endDate: searchEndDate }],
+          }));
+          console.log("Ajout des données placeName et availabilities au reducer filter", JSON.stringify(filter));      
       });
   };
 
