@@ -39,7 +39,12 @@ function Surf(props) {
           </u>
           &nbsp; {props.level}
         </p>
-        <p className={styles.description}>Disponible du {new Date(props.availabilities[0].startDate).toLocaleDateString("fr")} au {new Date(props.availabilities[0].endDate).toLocaleDateString("fr")}</p>
+        <p className={styles.description}>
+          Disponible du{" "}
+          {new Date(props.availabilities[0].startDate).toLocaleDateString("fr")}{" "}
+          au{" "}
+          {new Date(props.availabilities[0].endDate).toLocaleDateString("fr")}
+        </p>
         <span className={styles.rating}>
           <Rate value={props.rating} />
         </span>

@@ -18,21 +18,23 @@ function SearchPage() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            {surfs && surfs.map((data, i) => { return (
-              <Marker key={i} position={[data.latitude, data.longitude]}>
-                <Popup>
-                  <u>
-                    <strong>{data.type}</strong>
-                  </u>
-                  <br />
-                  <u>
-                    <strong>Prix:</strong>
-                  </u>
-                  &nbsp; {data.dayPrice} € / jour
-                </Popup>
-              </Marker>
-            )
-            })}
+            {surfs &&
+              surfs.map((data, i) => {
+                return (
+                  <Marker key={i} position={[data.latitude, data.longitude]}>
+                    <Popup>
+                      <u>
+                        <strong>{data.type}</strong>
+                      </u>
+                      <br />
+                      <u>
+                        <strong>Prix:</strong>
+                      </u>
+                      &nbsp; {data.dayPrice} € / jour
+                    </Popup>
+                  </Marker>
+                );
+              })}
           </>
         )}
       </Map>

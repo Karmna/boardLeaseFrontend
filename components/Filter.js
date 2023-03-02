@@ -6,7 +6,7 @@ import { Dropdown, Space, Checkbox, Rate } from "antd";
 import { addFilter } from "../reducers/filter";
 import { useDispatch, useSelector } from "react-redux";
 
-function Filter() { 
+function Filter() {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState([]);
   const [level, setLevel] = useState([]);
@@ -16,9 +16,18 @@ function Filter() {
 
   const dispatch = useDispatch();
 
-const handleFilter = () => {
-    dispatch(addFilter({type, level, maxPrice, minRating, placeName :filter.placeName, availabilities: filter.availabilities}))
-  }; 
+  const handleFilter = () => {
+    dispatch(
+      addFilter({
+        type,
+        level,
+        maxPrice,
+        minRating,
+        placeName: filter.placeName,
+        availabilities: filter.availabilities,
+      })
+    );
+  };
 
   const handleMenuClick = (e) => {
     if (e.key === "3") {
@@ -31,18 +40,14 @@ const handleFilter = () => {
 
   const onChange = (e) => {
     const { checked, value } = e.target;
-    
+
     if (e.target.description === "type") {
       setType(checked ? [...type, value] : type.filter((t) => t !== value));
-    
     } else if (e.target.description === "level") {
       setLevel(checked ? [...level, value] : level.filter((l) => l !== value));
-      
     } else if (e.target.description === "price") {
       setMaxPrice(checked ? value : 100);
-      
-    }   
-
+    }
   };
 
   const items = [
@@ -176,11 +181,13 @@ const handleFilter = () => {
         {
           key: "5-1",
           label: (
-            <button className={styles.button} onClick={() => handleFilter()}>Filtrer</button>
+            <button className={styles.button} onClick={() => handleFilter()}>
+              Filtrer
+            </button>
           ),
         },
       ],
-    },    
+    },
   ];
 
   return (
