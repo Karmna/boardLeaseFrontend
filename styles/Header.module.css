@@ -1,66 +1,20 @@
-.header {
-  border-bottom: 2px rgb(89, 161, 233) solid;
-  width: 100%;
-  background-color: #060c5c;
-}
 
-.headerContainer {
-  width: 100vw;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 2%;
-  padding-bottom: 2%;
-}
-
-.logo {
+ .logo {
   width: 10%;
 }
 
-.userSection {
-  font-size: 22px;
-  cursor: pointer;
-}
-
-.userSection:hover {
-  opacity: 0.8;
-}
-
-.registerContainer {
-  display: flex;
-  margin-bottom: 10px;
-  border-top: 0.5px lightgray solid;
-}
-
-.registerSection {
-  width: 250px;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .dropDown {
-  align-items: center;
-  padding-right: 5%;
   color: white;
 }
 
-.dropDownMenu {
-  align-items: center;
-  padding-left: 5%;
-  color: white;
-}
+.userName {
+  font-size: 10px;
+} 
 
-.headerContainer {
-  display: flex;
-  justify-content: space-between;
+.headerStyle {
   align-items: center;
-}
-
-.logoutSection {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: blueviolet;
-}
+  width: 100%;
+  background-color: #060c5c;
+  
+};
