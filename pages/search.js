@@ -18,7 +18,7 @@ function SearchPage() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
-            {surfs.map((data, i) => { return (
+            {surfs && surfs.map((data, i) => { return (
               <Marker key={i} position={[data.latitude, data.longitude]}>
                 <Popup>
                   <u>
