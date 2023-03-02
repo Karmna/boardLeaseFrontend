@@ -14,23 +14,37 @@ function Profile() {
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
 
-  const [newUsername, setNewUsername] = useState("");
-  const [newLastname, setNewLastname] = useState("");
   const [newFirstname, setNewFirstname] = useState("");
+  const [newLastname, setNewLastname] = useState("");
+  const [newUsername, setNewUsername] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
   const handleInputChange = () => {
-    fetch("http://localhost:3000/users/modification", {
+    if (!newFirstname && !newLastname && !newUsername && !newEmail) {
+      setErrorMsg(
+        "Veuillez renseigner au moins un champ pour modifier le profil."
+      );
+      return;
+    }
+    // if(!newFirstname) newFirstname = user.firstname;
+    // if(!newLastname) newFirstname = user.firstname;
+    // if(!newUsername) newFirstname = user.firstname;
+    // if(!newEmail) newFirstname = user.firstname;
+    fetch("http://localhost:3000/users", {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${user.token}`,
+      },
       body: JSON.stringify({
-        token: user.token,
-        firstname: newFirstname,
-        lastname: newLastname,
-        username: newUsername,
-        email: newEmail,
+        firstname: newFirstname ? newFirstname : user.firstname,
+        lastname: newLastname ? newLastname : user.lastname,
+        username: newUsername ? newUsername : user.username,
+        email: newEmail ? newEmail : user.email,
       }),
-    }) 
+    })
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -41,15 +55,15 @@ function Profile() {
               lastname: data.newLastname,
               username: data.newUsername,
               email: data.newEmail,
-              favorites: data.favorites,
             })
           );
+          setSuccessMsg("Profil modifié !");
           setNewUsername("");
           setNewEmail("");
           setNewFirstname("");
           setNewLastname("");
         } else {
-          error = data.error;
+          // TODO afficher erreur dans le DOM avec un état
           console.log(data.error);
           //definir error, error existe pas
         }
@@ -91,10 +105,18 @@ function Profile() {
               onChange={(e) => setNewEmail(e.target.value)}
             />
 
-            <Button id="register" onClick={() => handleInputChange()}>
+            <Button
+              id="register"
+              onClick={(e) => {
+                e.preventDefault();
+                handleInputChange();
+              }}
+            >
               Modifier
             </Button>
           </div>
+          {errorMsg && <p>{errorMsg}</p>}
+          {successMsg && <p>{successMsg}</p>}
         </div>
         <Divider />
         <div className={styles.bookingsContainer}>
