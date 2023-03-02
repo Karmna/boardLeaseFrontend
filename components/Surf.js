@@ -4,6 +4,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { Rate } from "antd";
 
 function Surf(props) {
+  // utilisation de useMediaQuery pour détecter les correspondances d'écran
   const matches = useMediaQuery("(min-width:768px)");
 
   const surfDisplay = !matches ? (

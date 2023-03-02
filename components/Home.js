@@ -9,21 +9,14 @@ import { addFilter } from "../reducers/filter";
 import { useRouter } from "next/router";
 
 function Home() {
-  const dispatch = useDispatch();
+  // utilisation de useMediaQuery pour détecter les correspondances d'écran
   const matches = useMediaQuery("(min-width:768px)");
+
+  const dispatch = useDispatch();
   const [searchPlace, setSearchPlace] = useState("");
   const [searchStartDate, setSearchStartDate] = useState();
   const [searchEndDate, setSearchEndDate] = useState();
   const router = useRouter();
-
-  console.log(
-    "placeName",
-    searchPlace,
-    "startDate",
-    searchStartDate,
-    "endDate",
-    searchEndDate
-  );
 
   const handleStartDate = (date, dateString) => {
     setSearchStartDate(dateString);
@@ -33,6 +26,7 @@ function Home() {
     setSearchEndDate(dateString);
   };
 
+  // fonction qui gère la recherche de planches de surf disponibles par filtres
   const handleSearch = () => {
     dispatch(
       addFilter({
@@ -44,6 +38,7 @@ function Home() {
         availabilities: { startDate: searchStartDate, endDate: searchEndDate },
       })
     );
+    // redirige l'utilisateur vers la page de résultats de recherche
     router.push("/search");
   };
 

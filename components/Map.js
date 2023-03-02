@@ -1,9 +1,11 @@
+// Import de la fonction dynamique de Next.js permettant de charger un composant de manière asynchrone
 import dynamic from "next/dynamic";
 
 const DynamicMap = dynamic(() => import("./DynamicMap"), {
-  ssr: false,
+  ssr: false, // Empêche le rendu côté serveur (server-side rendering)
 });
 
+// Définition des dimensions par défaut de la carte
 const DEFAULT_WIDTH = 600;
 const DEFAULT_HEIGHT = 600;
 

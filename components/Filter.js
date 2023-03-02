@@ -16,6 +16,7 @@ function Filter() {
 
   const dispatch = useDispatch();
 
+  // Dispatch de addFilter avec les filtres sélectionnés par l'utilisateur au click sur le bouton filtrer
   const handleFilter = () => {
     dispatch(
       addFilter({
@@ -29,15 +30,19 @@ function Filter() {
     );
   };
 
+  // Fonction qui gère la fermeture du menu lorsque l'utilisateur clique sur un item
   const handleMenuClick = (e) => {
     if (e.key === "3") {
       setOpen(false);
     }
   };
+
+  // Fonction qui gère l'état du menu (ouvert ou fermé)
   const handleOpenChange = (flag) => {
     setOpen(flag);
   };
 
+  // Fonction qui gère le changement des filtres sélectionnés par l'utilisateur (type, level, maxPrice) à travers des checkboxes
   const onChange = (e) => {
     const { checked, value } = e.target;
 
@@ -50,6 +55,7 @@ function Filter() {
     }
   };
 
+  // Items présents dans le dropdown, les checkboxes(type, level, maxPrice), le rating et bouton filtrer.
   const items = [
     {
       key: "1",
