@@ -1,12 +1,11 @@
-import dynamic from 'next/dynamic'
+// Import de la fonction dynamique de Next.js permettant de charger un composant de manière asynchrone
+import dynamic from "next/dynamic";
 
-const DynamicMap = dynamic(() => import('./DynamicMap'), {
-  ssr: false
+const DynamicMap = dynamic(() => import("./DynamicMap"), {
+  ssr: false, // Empêche le rendu côté serveur (server-side rendering)
 });
 
-// Set default sizing to control aspect ratio which will scale responsively
-// but also help avoid layout shift
-
+// Définition des dimensions par défaut de la carte
 const DEFAULT_WIDTH = 600;
 const DEFAULT_HEIGHT = 600;
 
@@ -16,7 +15,7 @@ const Map = (props) => {
     <div style={{ aspectRatio: width / height }}>
       <DynamicMap {...props} />
     </div>
-  )
-}
+  );
+};
 
 export default Map;

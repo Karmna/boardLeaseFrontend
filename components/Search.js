@@ -8,10 +8,13 @@ import { addSurfs } from "../reducers/surfs";
 
 function Search() {
   const dispatch = useDispatch();
-  const matches = useMediaQuery("(min-width:768px)");
   const filter = useSelector((state) => state.filter.value);
   const surfs = useSelector((state) => state.surfs.value);
-console.log("Contenu filter reducer", filter);
+
+  // utilisation de useMediaQuery pour détecter les correspondances d'écran
+  const matches = useMediaQuery("(min-width:768px)");
+
+  // utilisation de useEffect pour requeter au serveur une recherche de surfs selon les critères sélectionnés au changement d'état de filter
   useEffect(() => {
     fetch("http://localhost:3000/surfs/filter", {
       method: "POST",
@@ -20,20 +23,18 @@ console.log("Contenu filter reducer", filter);
         type: filter.type,
         level: filter.level,
         maxPrice: filter.maxPrice,
-        minRating: filter.minRating,  
+        minRating: filter.minRating,
         placeName: filter.placeName,
         availabilities: filter.availabilities,
       }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("réponse du serveur requete search.js", data) 
         dispatch(addSurfs(data.data));
-        
-        console.log("Surf add to reducer", surfs);
       });
   }, [filter]);
 
+  // création du composant Surf en fonction des données surfs récupérées
   const surf = (surf =
     surfs && surfs.length > 0 ? (
       surfs.map((data, i) => {

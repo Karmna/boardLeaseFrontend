@@ -1,8 +1,7 @@
 import "../styles/globals.css";
 import Head from "next/head";
 import Header from "../components/Header";
-
-
+import Footer from "../components/Footer";
 
 import { Provider } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
@@ -36,7 +35,8 @@ function App({ Component, pageProps }) {
           <title>BoardLease</title>
         </Head>
         <Header />
-        <Component {...pageProps} />       
+        <Component {...pageProps} />      
+        <Footer/> 
       </PersistGate>
     </Provider>
   );

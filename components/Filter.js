@@ -6,7 +6,7 @@ import { Dropdown, Space, Checkbox, Rate } from "antd";
 import { addFilter } from "../reducers/filter";
 import { useDispatch, useSelector } from "react-redux";
 
-function Filter() { 
+function Filter() {
   const [open, setOpen] = useState(false);
   const [type, setType] = useState([]);
   const [level, setLevel] = useState([]);
@@ -16,35 +16,46 @@ function Filter() {
 
   const dispatch = useDispatch();
 
-const handleFilter = () => {
-    dispatch(addFilter({type, level, maxPrice, minRating, placeName :filter.placeName, availabilities: filter.availabilities}))
-  }; 
+  // Dispatch de addFilter avec les filtres sélectionnés par l'utilisateur au click sur le bouton filtrer
+  const handleFilter = () => {
+    dispatch(
+      addFilter({
+        type,
+        level,
+        maxPrice,
+        minRating,
+        placeName: filter.placeName,
+        availabilities: filter.availabilities,
+      })
+    );
+  };
 
+  // Fonction qui gère la fermeture du menu lorsque l'utilisateur clique sur un item
   const handleMenuClick = (e) => {
     if (e.key === "3") {
       setOpen(false);
     }
   };
+
+  // Fonction qui gère l'état du menu (ouvert ou fermé)
   const handleOpenChange = (flag) => {
     setOpen(flag);
   };
 
+  // Fonction qui gère le changement des filtres sélectionnés par l'utilisateur (type, level, maxPrice) à travers des checkboxes
   const onChange = (e) => {
     const { checked, value } = e.target;
-    
+
     if (e.target.description === "type") {
       setType(checked ? [...type, value] : type.filter((t) => t !== value));
-    
     } else if (e.target.description === "level") {
       setLevel(checked ? [...level, value] : level.filter((l) => l !== value));
-      
     } else if (e.target.description === "price") {
       setMaxPrice(checked ? value : 100);
-      
-    }   
-
+    }
   };
 
+  // Items présents dans le dropdown, les checkboxes(type, level, maxPrice), le rating et bouton filtrer.
   const items = [
     {
       key: "1",
@@ -176,11 +187,13 @@ const handleFilter = () => {
         {
           key: "5-1",
           label: (
-            <button className={styles.button} onClick={() => handleFilter()}>Filtrer</button>
+            <button className={styles.button} onClick={() => handleFilter()}>
+              Filtrer
+            </button>
           ),
         },
       ],
-    },    
+    },
   ];
 
   return (

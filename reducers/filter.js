@@ -6,21 +6,22 @@ const initialState = {
     level: [],
     maxPrice: 100,
     minRating: 0,
-    placeName: '',
-    availabilities: []  },
+    placeName: "",
+    availabilities: null,
+  },
 };
 
 export const filterSlice = createSlice({
-  name: 'filter',
+  name: "filter",
   initialState,
   reducers: {
     addFilter: (state, action) => {
       state.value.type = action.payload.type;
       state.value.level = action.payload.level;
       state.value.maxPrice = action.payload.maxPrice;
-      state.value.minRating = action.payload.minRating;   
-      state.value.placeName = action.payload.placeName; 
-      state.value.availabilities = action.payload.availabilities; 
+      state.value.minRating = action.payload.minRating;
+      state.value.placeName = action.payload.placeName;
+      state.value.availabilities = action.payload.availabilities;
     },
   },
 });
