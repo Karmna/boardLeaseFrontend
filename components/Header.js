@@ -10,6 +10,7 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Button, Dropdown, Input } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
+import jwt_decode from "jwt-decode";
 
 function Header() {
   const dispatch = useDispatch();
@@ -25,12 +26,11 @@ function Header() {
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpMail, setSignUpMail] = useState("");
 
-  // TODO : secret à mettre en variable d'environnement
-  const clientId =
-    "755080318307-4oa4og0udgb1vt0s4cd95tto75hcmnqo.apps.googleusercontent.com";
+  const clientId = process.env.CLIENT_ID;
 
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const showModalInscription = () => {
     setIsModalVisibleInscription(!isModalVisibleInscription);
@@ -98,8 +98,27 @@ function Header() {
     onClick: handleMenuClick,
   };
 
+  const resetForms = () => {
+    setSignUpUsername("");
+    setSignUpPassword("");
+    setSignUpMail("");
+    setSignUpFirstname("");
+    setSignUpLastname("");
+
+    setSignInUserEmail("");
+    setSignInPassword("");
+  };
+
+  const handleCloseModal = () => {
+    // TODO : add onCloseModal (errorclear, form reset, modal not visible)
+    resetForms();
+    setErrorMsg("");
+    setIsModalVisibleInscription(false);
+    setIsModalVisibleConnection(false);
+  };
+
   const handleSignup = (authMethod, googleCredentialResponse = null) => {
-    console.log(authMethod);
+    setErrorMsg("");
 
     if (authMethod !== "classic" && authMethod !== "googleConnect") {
       console.error("Unknown auth method");
@@ -121,32 +140,59 @@ function Header() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        if (data.result) {
-          dispatch(
-            login({
-              authMethod: data.authMethod,
-              firstname: data.firstname,
-              lastname: data.lastname,
-              username: data.username,
-              email: data.email,
-              token: data.token,
-              favorites: data.favorites,
-            })
-          );
-          setSignUpUsername("");
-          setSignUpPassword("");
-          setSignUpMail("");
-          setSignUpFirstname("");
-          setSignUpLastname("");
-          setIsModalVisibleInscription(false);
-        } else {
-          console.error(data.error);
+        // Cas 1 : backend renvoit une erreur (result: false)
+        if (data.result === false) {
+          console.log(data); // TODO display error
+          setErrorMsg(data.error);
+          // errorMsg = data.error;
+        } else if (data.jwtToken) {
+          try {
+            console.log(data);
+            const decoded = jwt_decode(data.jwtToken);
+            console.log(decoded);
+
+            if (decoded.email) {
+              dispatch(
+                login({
+                  authMethod: decoded.authMethod,
+                  firstname: decoded.firstname,
+                  lastname: decoded.lastname,
+                  username: decoded.username,
+                  email: decoded.email,
+                  token: data.jwtToken,
+                  favorites: decoded.favorites,
+                })
+              );
+
+              // Reset on success uniquement (pour ne pas devoir tout retaper en cas d'échec)
+              // setIsModalVisibleInscription(false);
+              // setSignUpUsername("");
+              // setSignUpPassword("");
+              // setSignUpMail("");
+              // setSignUpFirstname("");
+              // setSignUpLastname("");
+              handleCloseModal();
+            } else {
+              setErrorMsg("Problem with JWT : email not found.");
+
+              // console.error("Problem with JWT : email not found.");
+            }
+          } catch (error) {
+            setErrorMsg(error);
+
+            console.error(error); // TODO display error
+          }
         }
       });
+
+    //   else {
+    //     console.error(data.error);
+    //   }
+    // });
   };
 
   const handleSignin = (authMethod, googleCredentialResponse) => {
+    setErrorMsg("");
     if (authMethod !== "classic" && authMethod !== "googleConnect") {
       console.error("Unknown auth method");
       return;
@@ -164,22 +210,44 @@ function Header() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        if (data.result) {
-          dispatch(
-            login({
-              authMethod: data.authMethod,
-              firstname: data.firstname,
-              lastname: data.lastname,
-              username: data.username,
-              email: data.email,
-              token: data.token,
-              favorites: data.favorites,
-            })
-          );
-          setSignInUserEmail("");
-          setSignInPassword("");
-          setIsModalVisibleConnection(false);
+        // Cas 1 : backend renvoit une erreur (result: false)
+        if (data.result === false) {
+          console.log(data); // TODO display error
+          setErrorMsg(data.error);
+        }
+        // cas 2 : backend renvoit le JWT
+        else if (data.jwtToken) {
+          try {
+            console.log(data);
+            const decoded = jwt_decode(data.jwtToken);
+            console.log(decoded);
+
+            if (decoded.email) {
+              dispatch(
+                login({
+                  authMethod: decoded.authMethod,
+                  firstname: decoded.firstname,
+                  lastname: decoded.lastname,
+                  username: decoded.username,
+                  email: decoded.email,
+                  token: data.jwtToken,
+                  favorites: decoded.favorites,
+                })
+              );
+
+              // Reset on success uniquement (pour ne pas devoir tout retaper en cas d'échec)
+              // setIsModalVisibleConnection(false);
+              // setSignInUserEmail("");
+              // setSignInPassword("");
+              handleCloseModal();
+            } else {
+              setErrorMsg("Problem with JWT : email not found.");
+              console.error("Problem with JWT : email not found.");
+            }
+          } catch (error) {
+            setErrorMsg(error);
+            console.error(error); // TODO display error
+          }
         }
       });
   };
@@ -237,8 +305,9 @@ function Header() {
                 onSuccess={(credentialResponse) =>
                   handleSignup("googleConnect", credentialResponse.credential)
                 }
-                onError={(error) => console.error(error)}
+                onError={(error) => setErrorMsg(error)}
               />
+              {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
             </div>
           </div>
         </GoogleOAuthProvider>
@@ -280,6 +349,7 @@ function Header() {
                 }
                 onError={(error) => console.error(error)}
               />
+              {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
             </div>
           </div>
         </GoogleOAuthProvider>
@@ -326,7 +396,7 @@ function Header() {
           >
             <FontAwesomeIcon
               icon={faXmark}
-              onClick={() => setIsModalVisibleInscription(false)}
+              onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
             />
             <div>{modalContentInscription}</div>
           </Modal>
@@ -341,10 +411,7 @@ function Header() {
               closable={false}
               footer={null}
             >
-              <FontAwesomeIcon
-                icon={faXmark}
-                onClick={() => setIsModalVisibleConnection(false)}
-              />
+              <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
               <div>{modalContentConnection}</div>
             </Modal>
           </div>
