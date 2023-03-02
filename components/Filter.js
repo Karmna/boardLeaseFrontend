@@ -4,7 +4,7 @@ import { useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Checkbox, Rate } from "antd";
 import { addFilter } from "../reducers/filter";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function Filter() { 
   const [open, setOpen] = useState(false);
@@ -12,11 +12,12 @@ function Filter() {
   const [level, setLevel] = useState([]);
   const [maxPrice, setMaxPrice] = useState(100);
   const [minRating, setMinRating] = useState(0);
+  const filter = useSelector((state) => state.filter.value);
 
   const dispatch = useDispatch();
 
 const handleFilter = () => {
-    dispatch(addFilter({type, level, maxPrice, minRating}))
+    dispatch(addFilter({type, level, maxPrice, minRating, placeName :filter.placeName, availabilities: filter.availabilities}))
   }; 
 
   const handleMenuClick = (e) => {
