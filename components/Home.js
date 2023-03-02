@@ -7,6 +7,7 @@ import Image from "next/image";
 import { DatePicker, Space } from "antd";
 import { addSurfs } from "../reducers/surfs";
 import { addFilter } from "../reducers/filter";
+import { useRouter } from 'next/router'
 
 function Home() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Home() {
   const [searchPlace, setSearchPlace] = useState("");
   const [searchStartDate, setSearchStartDate] = useState();
   const [searchEndDate, setSearchEndDate] = useState();
+  const router = useRouter()
 
   console.log(
     "placeName",
@@ -34,40 +36,36 @@ function Home() {
   };
 
   const handleSearch = () => {
-    console.log("Recherche par placeName envoyée au serveur");
-    fetch("http://localhost:3000/surfs/filter", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-      
-        placeName: searchPlace,
-        availabilities: [
-          { startDate: searchStartDate, endDate: searchEndDate },
-        ],
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("réponse du serveur requete home.js", JSON.stringify(data));
-        dispatch(addSurfs(data.data));
-        console.log(
-          "Ajout des surfs au reducer surfs",
-          JSON.stringify(data.data)
-        );
-        dispatch(
-          addFilter({
-          
+    console.log("Recherche par placeName envoyée au serveur")
+    // fetch("http://localhost:3000/surfs/filter", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({
+    //     type: filter.type,
+    //     level: filter.level,
+    //     maxPrice: filter.maxPrice,
+    //     minRating: filter.minRating, 
+    //     placeName: searchPlace,
+    //     availabilities: [{ startDate: searchStartDate, endDate: searchEndDate }],
+    //   }),
+    // })
+    //   .then((response) => response.json())
+    //   .then((data) => {     
+        // console.log("réponse du serveur requete home.js", JSON.stringify(data)) 
+          // dispatch(addSurfs(data.data));          
+          // console.log("Ajout des surfs au reducer surfs", JSON.stringify(data.data)); 
+          console.log("Etats", searchPlace, searchStartDate, searchEndDate); 
+          dispatch(addFilter({
+            type: [],
+            level: [],
+            maxPrice: 100,
+            minRating: 0,           
             placeName: searchPlace,
-            availabilities: [
-              { startDate: searchStartDate, endDate: searchEndDate },
-            ],
-          })
-        );
-        console.log(
-          "Ajout des données placeName et availabilities au reducer filter",
-          JSON.stringify(filter)
-        );
-      });
+            availabilities: [{ startDate: searchStartDate, endDate: searchEndDate }],
+          }));
+          console.log("Ajout des données placeName et availabilities au reducer filter", JSON.stringify(filter));      
+      // });
+      router.push("/search")
   };
 
   return (
@@ -100,12 +98,10 @@ function Home() {
         <Space direction="vertical">
           <DatePicker onChange={handleEndDate} placeholder="Date de fin" />
         </Space>
-      </div>
-      <a href="/search">
+      </div>     
         <button className={styles.button} onClick={() => handleSearch()}>
           Rechercher
-        </button>
-      </a>
+        </button>    
     </div>
   );
 }
