@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import Head from "next/head";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 
 
@@ -36,7 +37,8 @@ function App({ Component, pageProps }) {
           <title>BoardLease</title>
         </Head>
         <Header />
-        <Component {...pageProps} />       
+        <Component {...pageProps} />      
+        <Footer/> 
       </PersistGate>
     </Provider>
   );

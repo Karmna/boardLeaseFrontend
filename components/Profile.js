@@ -2,10 +2,10 @@ import styles from "../styles/Profile.module.css";
 import { login, logout } from "../reducers/user";
 import { Button, Input, Divider } from "antd";
 import useMediaQuery from "@mui/material/useMediaQuery";
-
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+
+import { Layout} from "antd";
 const { Header, Content, Footer } = Layout;
 
 function Profile() {

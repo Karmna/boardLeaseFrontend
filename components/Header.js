@@ -10,8 +10,10 @@ import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { Button, Dropdown, Input } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
+import { Layout} from "antd";
+const { Header, Content, Footer } = Layout;
 
-function Header() {
+function HeaderF() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
 
@@ -88,6 +90,26 @@ function Header() {
       ),
     },
   ];
+
+  const menuBar = [
+    {
+        key: '2',
+        label: <Link href="/">Menu</Link>,
+      },
+    {
+      key: '1',
+      label: <Link href="/about">A propos</Link>,
+    },
+    {
+        key: '2',
+        label: <Link href="/search">Réserver</Link>,
+      },
+
+  ]
+  const menuPropsBar = {
+    items: menuBar,
+    onClick: handleMenuClick,
+  };
 
   const handleMenuClick = (e) => {
     console.log("click", e);
@@ -288,34 +310,30 @@ function Header() {
   }
 
   return (
-    <header className={styles.header}>
-      <div className={styles.headerContainer}>
-        <Dropdown
-          className={styles.dropDownMenu}
-          menu={menuProps}
+   
+    <Header className={styles.headerStyle}>
+      <Dropdown
+          className={styles.dropDown}
+          menu={menuPropsBar}
           placement="bottomRight"
-        >
+        > 
           <a onClick={(e) => e.preventDefault()}>
-            <FontAwesomeIcon icon={faBars} />
+            <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
           </a>
         </Dropdown>
-
         <Link href="/">
           <img className={styles.logo} src="logo.svg" alt="Logo" />
         </Link>
-
         <Dropdown
           className={styles.dropDown}
           menu={menuProps}
           placement="bottomRight"
-        >
+        > 
           <a onClick={(e) => e.preventDefault()}>
-            <FontAwesomeIcon icon={faUser} />
+            <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
+            {user.token && <p className={styles.userName}> {user.firstname}</p>}
           </a>
         </Dropdown>
-        {user.token && <p> @{user.firstname}</p>}
-      </div>
-      <div>
         <div id="react-modals">
           <Modal
             title="Inscription"
@@ -349,9 +367,11 @@ function Header() {
             </Modal>
           </div>
         </div>
-      </div>
-    </header>
+     
+      </Header>
+     
   );
 }
 
-export default Header;
+export default HeaderF;
+
