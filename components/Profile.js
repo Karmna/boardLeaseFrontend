@@ -1,5 +1,5 @@
 import styles from "../styles/Profile.module.css";
-import { login, logout } from "../reducers/user";
+import { login, logout, updateUserProfile } from "../reducers/user";
 import { Button, Input, Divider } from "antd";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
@@ -50,7 +50,7 @@ function Profile() {
         console.log(data);
         if (data.result) {
           dispatch(
-            login({
+            updateUserProfile({
               firstname: data.newFirstname,
               lastname: data.newLastname,
               username: data.newUsername,
