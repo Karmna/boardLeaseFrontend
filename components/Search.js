@@ -12,27 +12,27 @@ function Search() {
   const filter = useSelector((state) => state.filter.value);
   const surfs = useSelector((state) => state.surfs.value);
 
-  useEffect(() => {
-    fetch("http://localhost:3000/surfs/filter", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        type: filter.type,
-        level: filter.level,
-        maxPrice: filter.maxPrice,
-        minRating: filter.minRating,  
-        placeName: filter.placeName,
-        availabilities: filter.availabilities,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("réponse du serveur requete search.js", data) 
-        dispatch(addSurfs(data.data));
-        console.log("filter reducer", filter);
-        console.log("Surf add to reducer", surfs);
-      });
-  }, [filter]);
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/surfs/filter", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({
+  //       type: filter.type,
+  //       level: filter.level,
+  //       maxPrice: filter.maxPrice,
+  //       minRating: filter.minRating,  
+  //       placeName: filter.placeName,
+  //       availabilities: filter.availabilities,
+  //     }),
+  //   })
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log("réponse du serveur requete search.js", data) 
+  //       dispatch(addSurfs(data.data));
+  //       console.log("filter reducer", filter);
+  //       console.log("Surf add to reducer", surfs);
+  //     });
+  // }, [filter]);
 
   const surf = (surf =
     surfs && surfs.length > 0 ? (

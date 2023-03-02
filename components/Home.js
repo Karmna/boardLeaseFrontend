@@ -34,30 +34,39 @@ function Home() {
   };
 
   const handleSearch = () => {
-    console.log("Recherche par placeName envoyée au serveur")
+    console.log("Recherche par placeName envoyée au serveur");
     fetch("http://localhost:3000/surfs/filter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        type: filter.type,
-        level: filter.level,
-        maxPrice: filter.maxPrice,
-        minRating: filter.minRating, 
+      
         placeName: searchPlace,
-        availabilities: [{ startDate: searchStartDate, endDate: searchEndDate }],
+        availabilities: [
+          { startDate: searchStartDate, endDate: searchEndDate },
+        ],
       }),
     })
       .then((response) => response.json())
-      .then((data) => {     
-        console.log("réponse du serveur requete home.js", JSON.stringify(data)) 
-          dispatch(addSurfs(data.data));          
-          console.log("Ajout des surfs au reducer surfs", JSON.stringify(data.data));     
-          dispatch(addFilter({
+      .then((data) => {
+        console.log("réponse du serveur requete home.js", JSON.stringify(data));
+        dispatch(addSurfs(data.data));
+        console.log(
+          "Ajout des surfs au reducer surfs",
+          JSON.stringify(data.data)
+        );
+        dispatch(
+          addFilter({
           
             placeName: searchPlace,
-            availabilities: [{ startDate: searchStartDate, endDate: searchEndDate }],
-          }));
-          console.log("Ajout des données placeName et availabilities au reducer filter", JSON.stringify(filter));      
+            availabilities: [
+              { startDate: searchStartDate, endDate: searchEndDate },
+            ],
+          })
+        );
+        console.log(
+          "Ajout des données placeName et availabilities au reducer filter",
+          JSON.stringify(filter)
+        );
       });
   };
 
@@ -68,12 +77,12 @@ function Home() {
         <h2 className={styles.h2}>Location de surfboard entre particuliers</h2>
       </div>
       <div className={styles.imageContainer}>
-        <Image        
+        <Image
           src="/slide-image-1.webp"
           layout="fill"
           objectFit="contain"
           alt="Slide image 1"
-          priority={true}          
+          priority={true}
         />
       </div>
       <input
@@ -86,10 +95,10 @@ function Home() {
       />
       <div className={styles.dateContainer}>
         <Space direction="vertical">
-          <DatePicker onChange={handleStartDate} placeholder="Date de début"/>
+          <DatePicker onChange={handleStartDate} placeholder="Date de début" />
         </Space>
         <Space direction="vertical">
-          <DatePicker onChange={handleEndDate} placeholder="Date de fin"/>
+          <DatePicker onChange={handleEndDate} placeholder="Date de fin" />
         </Space>
       </div>
       <a href="/search">

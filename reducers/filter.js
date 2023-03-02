@@ -2,10 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: {
-    type: [],
-    level: [],
-    maxPrice: 0,
-    minRating: 0,   
+    
   },
 };
 
@@ -17,7 +14,9 @@ export const filterSlice = createSlice({
       state.value.type = action.payload.type;
       state.value.level = action.payload.level;
       state.value.maxPrice = action.payload.maxPrice;
-      state.value.minRating = action.payload.minRating;   
+      state.value.minRating = action.payload.minRating;
+      state.value.placeName = action.payload.placeName;
+      state.value.availabilities = action.payload.availabilities;
     },
   },
 });
