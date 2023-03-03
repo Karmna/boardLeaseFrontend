@@ -54,7 +54,7 @@ function Surf(props) {
   }
 
   const surfDisplay = !matches ? (
-    <div className={styles.card} >
+    <div className={styles.card} onClick= {() => handleRedirectPost()}>
       <Image
         className={styles.image}
         src={props.pictures[0]}
@@ -71,11 +71,10 @@ function Surf(props) {
         <span className={styles.rating}>
           <Rate value={props.rating} />
         </span>
-      </div>
-      <button onClick= {() => handleRedirectPost()}/>
+      </div>      
     </div>
   ) : (
-    <div className={styles.card}>
+    <div className={styles.card} onClick= {() => handleRedirectPost()}> 
       <Image
         src={props.pictures[0]}
         alt={props.name}
@@ -134,7 +133,6 @@ function Surf(props) {
           &nbsp; {props.deposit} €
         </p>
       </div>
-      <button onClick= {() => handleRedirectPost()}/>
     </div>
   );
 
