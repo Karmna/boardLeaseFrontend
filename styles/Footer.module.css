@@ -1,14 +1,18 @@
-.footerStyle{
-    background-color: #060c5c;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+.footerStyle {
+  width: 100%;
+  background-color: #060c5c;
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .useSelector {
-    font-size: 10px;
-    color: white;
-    flex-direction: column;
-  }
+  font-size: 20px;
+  color: white;
+}
+
+.p {
+  color: white;
+  font-size: 10px;
+}

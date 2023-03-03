@@ -11,7 +11,8 @@ import { Button, Dropdown, Input } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import jwt_decode from "jwt-decode";
-import { Layout} from "antd";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { Layout } from "antd";
 const { Header, Content, Footer } = Layout;
 
 function HeaderF() {
@@ -29,7 +30,7 @@ function HeaderF() {
   const [signUpMail, setSignUpMail] = useState("");
 
   const clientId = process.env.CLIENT_ID;
-
+  const matches = useMediaQuery("(min-width:768px)");
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -93,19 +94,18 @@ function HeaderF() {
 
   const menuBar = [
     {
-        key: '2',
-        label: <Link href="/">Menu</Link>,
-      },
+      key: "2",
+      label: <Link href="/">Menu</Link>,
+    },
     {
-      key: '1',
+      key: "1",
       label: <Link href="/about">A propos</Link>,
     },
     {
-        key: '2',
-        label: <Link href="/search">Réserver</Link>,
-      },
-
-  ]
+      key: "2",
+      label: <Link href="/search">Réserver</Link>,
+    },
+  ];
   const menuPropsBar = {
     items: menuBar,
     onClick: handleMenuClick,
@@ -378,19 +378,19 @@ function HeaderF() {
       </div>
     );
   }
-
-  return (
-   
+  const footerDisplay = !matches ? (
+    <Layout>
     <Header className={styles.headerStyle}>
-      <Dropdown
+        <Dropdown
           className={styles.dropDown}
           menu={menuPropsBar}
           placement="bottomRight"
-        > 
+        >
           <a onClick={(e) => e.preventDefault()}>
             <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
           </a>
         </Dropdown>
+
         <Link href="/">
           <img className={styles.logo} src="logo.svg" alt="Logo" />
         </Link>
@@ -398,47 +398,108 @@ function HeaderF() {
           className={styles.dropDown}
           menu={menuProps}
           placement="bottomRight"
-        > 
+        >
           <a onClick={(e) => e.preventDefault()}>
             <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
             {user.token && <p className={styles.userName}> {user.firstname}</p>}
           </a>
         </Dropdown>
+      
+      <div id="react-modals">
+        <Modal
+          title="Inscription"
+          className={styles.modal}
+          open={isModalVisibleInscription}
+          closable={false}
+          footer={null}
+        >
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
+          />
+          <div>{modalContentInscription}</div>
+        </Modal>
+      </div>
+
+      <div>
         <div id="react-modals">
           <Modal
-            title="Inscription"
+            title="Connection"
             className={styles.modal}
-            open={isModalVisibleInscription}
+            open={isModalVisibleConnection}
             closable={false}
             footer={null}
           >
-            <FontAwesomeIcon
-              icon={faXmark}
-              onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
-            />
-            <div>{modalContentInscription}</div>
+            <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
+            <div>{modalContentConnection}</div>
           </Modal>
         </div>
+      </div>
+    </Header>
+    </Layout>
+   ) : (
+    <Layout>
+    <Header className={styles.headerStyle}>
+        <Dropdown
+          className={styles.dropDown}
+          menu={menuPropsBar}
+          placement="bottomRight"
+        >
+          <a onClick={(e) => e.preventDefault()}>
+            <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
+          </a>
+        </Dropdown>
 
-        <div>
-          <div id="react-modals">
-            <Modal
-              title="Connection"
-              className={styles.modal}
-              open={isModalVisibleConnection}
-              closable={false}
-              footer={null}
-            >
-              <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
-              <div>{modalContentConnection}</div>
-            </Modal>
-          </div>
+        <Link href="/">
+          <img className={styles.logo} src="logo.svg" alt="Logo" />
+        </Link>
+        <Dropdown
+          className={styles.dropDown}
+          menu={menuProps}
+          placement="bottomRight"
+        >
+          <a onClick={(e) => e.preventDefault()}>
+            <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
+            {user.token && <p className={styles.userName}> {user.firstname}</p>}
+          </a>
+        </Dropdown>
+      
+      <div id="react-modals">
+        <Modal
+          title="Inscription"
+          className={styles.modal}
+          open={isModalVisibleInscription}
+          closable={false}
+          footer={null}
+        >
+          <FontAwesomeIcon
+            icon={faXmark}
+            onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
+          />
+          <div>{modalContentInscription}</div>
+        </Modal>
+      </div>
+
+      <div>
+        <div id="react-modals">
+          <Modal
+            title="Connection"
+            className={styles.modal}
+            open={isModalVisibleConnection}
+            closable={false}
+            footer={null}
+          >
+            <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
+            <div>{modalContentConnection}</div>
+          </Modal>
         </div>
-     
-      </Header>
-     
-  );
+      </div>
+    </Header>
+  </Layout>
+);
+
+return <div>{footerDisplay}</div>;
 }
 
-export default HeaderF;
 
+export default HeaderF;
