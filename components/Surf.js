@@ -7,7 +7,8 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { updateFavorites, removeFromFavorites } from "../reducers/favorites";
-import jwt_decode from "jwt-decode";
+import { selectedSurf } from "../reducers/post";
+import { useRouter } from "next/router";
 
 function Surf(props) {
   // utilisation de useMediaQuery pour détecter les correspondances d'écran
@@ -16,7 +17,7 @@ function Surf(props) {
   const user = useSelector((state) => state.user.value);
   const favorites = useSelector((state) => state.favorites.value);
   const [isFavorite, setIsFavorite] = useState(false);
-  console.log(isFavorite);
+  const router = useRouter();
 
   useEffect(() => {
     if (favorites.find((favorite) => favorite._id === props._id)) {
@@ -42,7 +43,10 @@ function Surf(props) {
       });
   };
 
-  console.log("value reducer favorites", favorites);
+  const handleRedirectPost = () => {
+    dispatch(selectedSurf(props))
+    router.push("/posts");
+  }
 
   let iconStyle = { color: "#eeeee4" };
   if (isFavorite) {
@@ -50,7 +54,7 @@ function Surf(props) {
   }
 
   const surfDisplay = !matches ? (
-    <div className={styles.card}>
+    <div className={styles.card} >
       <Image
         className={styles.image}
         src={props.pictures[0]}
@@ -61,13 +65,14 @@ function Surf(props) {
       <div className={styles.description}>
         <div className={styles.title}>
           <h3 className={styles.name}>{props.name}</h3>
-          <FontAwesomeIcon className={styles.favoriteIcon} icon={faStar} />
+          <FontAwesomeIcon className={styles.favoriteIcon} icon={faStar} style={iconStyle} onClick={() => handleFavorite()} />
         </div>
         <p className={styles.level}>Niveau: {props.level}</p>
         <span className={styles.rating}>
           <Rate value={props.rating} />
         </span>
       </div>
+      <button onClick= {() => handleRedirectPost()}/>
     </div>
   ) : (
     <div className={styles.card}>
@@ -129,6 +134,7 @@ function Surf(props) {
           &nbsp; {props.deposit} €
         </p>
       </div>
+      <button onClick= {() => handleRedirectPost()}/>
     </div>
   );
 
