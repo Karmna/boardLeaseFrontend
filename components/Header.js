@@ -147,7 +147,7 @@ function HeaderF() {
       return;
     }
 
-    fetch("http://localhost:3000/users/signup", {
+    fetch("https://board-lease-backend.vercel.app/users/signup", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -220,7 +220,7 @@ function HeaderF() {
       return;
     }
 
-    fetch("http://localhost:3000/users/signin", {
+    fetch("https://board-lease-backend.vercel.app/users/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

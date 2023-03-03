@@ -15,7 +15,7 @@ function Favorites() {
   const [favoriteDisplay, setFavoriteDisplay] = useState()
 
   useEffect(() => {
-    fetch(`http://localhost:3000/surfs/favorites`, {
+    fetch(`https://board-lease-backend.vercel.app/surfs/favorites`, {
       method: "GET",
       headers: { 
         Authorization: `Bearer ${user.token}`,

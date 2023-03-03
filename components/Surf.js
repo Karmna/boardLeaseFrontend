@@ -7,7 +7,7 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { updateFavorites, removeFromFavorites } from "../reducers/favorites";
-import { selectedSurf } from "../reducers/post";
+// import { selectedSurf } from "../reducers/post";
 import { useRouter } from "next/router";
 
 function Surf(props) {
@@ -28,7 +28,7 @@ function Surf(props) {
   }, [favorites]);
 
   const handleFavorite = () => {
-    fetch(`http://localhost:3000/surfs/addFavorite/${props._id}`, {
+    fetch(`https://board-lease-backend.vercel.app/surfs/addFavorite/${props._id}`, {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${user.token}`,
@@ -44,7 +44,7 @@ function Surf(props) {
   };
 
   const handleRedirectPost = () => {
-    dispatch(selectedSurf(props))
+    // dispatch(selectedSurf(props))
     router.push("/posts");
   }
 
