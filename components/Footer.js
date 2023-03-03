@@ -14,18 +14,24 @@ function FooterFunction() {
   const footerDisplay = !matches ? (
     <Layout>
       <Footer className={styles.footerStyle}>
+        <div>
           <Link href="/search">
             <FontAwesomeIcon
               className={styles.useSelector}
               icon={faMagnifyingGlass}
             />
           </Link>
-          <Link href="/search">
+          <p>Explorer</p>
+          </div>
+          <div>
+          <Link href="/Favorites">
             <FontAwesomeIcon
               className={styles.useSelector}
               icon={faHeart}
             />
           </Link>
+          <p>Favoris</p>
+          </div>
       </Footer>
     </Layout>
   ) : (
