@@ -16,7 +16,7 @@ function Search() {
 
   // utilisation de useEffect pour requeter au serveur une recherche de surfs selon les critères sélectionnés au changement d'état de filter
   useEffect(() => {
-    fetch("https://board-lease-backend.vercel.app/surfs/filter", {
+    fetch("http://board-lease-backend.vercel.app/surfs/filter", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
