@@ -23,6 +23,16 @@
   margin: 2px;
 }
 
+.title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.name {
+  margin-right: 2%;
+}
+
 .rating {
   margin-top: 2px;
 }

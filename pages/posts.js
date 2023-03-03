@@ -1,8 +1,8 @@
 import Posts from '../components/Posts';
 
 
-function postsPage() {
+function PostsPage() {
   return <Posts />;
 }
 
-export default postsPage;
+export default PostsPage;

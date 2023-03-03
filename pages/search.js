@@ -1,5 +1,6 @@
 import Search from "../components/Search";
 import Map from "../components/Map";
+import Rating from "../components/Rating";
 import styles from "../styles/Search.module.css";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -11,6 +12,7 @@ function SearchPage() {
   return (
     <div className={styles.searchPageContainer}>
       <Search />
+      <Rating />
       <Map width="800" height="600" center={DEFAULT_CENTER} zoom={8}>
         {({ TileLayer, Marker, Popup }) => (
           <>

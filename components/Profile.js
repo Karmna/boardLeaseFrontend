@@ -32,7 +32,7 @@ function Profile() {
     // if(!newLastname) newFirstname = user.firstname;
     // if(!newUsername) newFirstname = user.firstname;
     // if(!newEmail) newFirstname = user.firstname;
-    fetch("http://localhost:3000/users", {
+    fetch("https://board-lease-backend.vercel.app/users", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
