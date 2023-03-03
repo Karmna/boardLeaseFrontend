@@ -1,8 +1,8 @@
-import BookingRecap from '../components/BookingRecap';
+import BookingsRecap from '../components/BookingsRecap';
 
 
-function BookingRecapPage() {
-  return <BookingRecap />;
+function BookingsRecapPage() {
+  return <BookingsRecap />;
 }
 
-export default BookingRecapPage;
+export default BookingsRecapPage;
