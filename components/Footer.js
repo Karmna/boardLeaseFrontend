@@ -24,7 +24,7 @@ function FooterFunction() {
           <p>Explorer</p>
           </div>
           <div>
-          <Link href="/Favorites">
+          <Link href="/favorites">
             <FontAwesomeIcon
               className={styles.useSelector}
               icon={faHeart}
