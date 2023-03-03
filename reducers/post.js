@@ -16,7 +16,7 @@ export const postSlice = createSlice({
     selectedSurf: (state, action) => {
       state.value.type = action.payload.type;
       state.value.level = action.payload.level;
-      state.value.name = action.payload.level;
+      state.value.name = action.payload.name;
       state.value.placeName = action.payload.placeName;
    
     },
