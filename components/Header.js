@@ -393,7 +393,7 @@ function HeaderF() {
         </Dropdown>
 
         <Link href="/">
-          <img className={styles.logo} src="logo.svg" alt="Logo" />
+          <img className={styles.logo} src="logo.png" alt="Logo" />
         </Link>
         <Dropdown
           className={styles.dropDown}
@@ -453,7 +453,7 @@ function HeaderF() {
           </a>
         </Dropdown>
         <Link href="/">
-          <img className={styles.logo} src="logo.svg" alt="Logo" />
+          <img className={styles.logo} src="logo.png" alt="Logo" />
         </Link>
         <Dropdown
           className={styles.dropDown}
