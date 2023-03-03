@@ -51,6 +51,7 @@ function HeaderF() {
           rel="noopener noreferrer"
           onClick={showModalInscription}
         >
+          {" "}
           Inscription
         </a>
       ),
@@ -110,7 +111,7 @@ function HeaderF() {
     items: menuBar,
     onClick: handleMenuClick,
   };
-
+ 
   const handleMenuClick = (e) => {
     console.log("click", e);
   };
@@ -380,7 +381,7 @@ function HeaderF() {
   }
   const footerDisplay = !matches ? (
     <Layout>
-    <Header className={styles.headerStyle}>
+      <Header className={styles.headerStyle}>
         <Dropdown
           className={styles.dropDown}
           menu={menuPropsBar}
@@ -399,47 +400,49 @@ function HeaderF() {
           menu={menuProps}
           placement="bottomRight"
         >
-          <a onClick={(e) => e.preventDefault()}>
-            <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
-            {user.token && <p className={styles.userName}> {user.firstname}</p>}
-          </a>
+          <div>
+            <div>
+              <a onClick={(e) => e.preventDefault()}>
+                <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
+                {user.token && (
+                  <p className={styles.userName}> {user.firstname}</p>
+                )}
+              </a>
+            </div>
+            <div>
+              <div id="react-modals">
+                <Modal
+                  title="Inscription"
+                  className={styles.modal}
+                  open={isModalVisibleInscription}
+                  closable={false}
+                  footer={null}
+                >
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
+                  />
+                  <div>{modalContentInscription}</div>
+                </Modal>
+                <Modal
+                  title="Connection"
+                  className={styles.modal}
+                  open={isModalVisibleConnection}
+                  closable={false}
+                  footer={null}
+                >
+                  <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
+                  <div>{modalContentConnection}</div>
+                </Modal>
+              </div>
+            </div>
+          </div>
         </Dropdown>
-      
-      <div id="react-modals">
-        <Modal
-          title="Inscription"
-          className={styles.modal}
-          open={isModalVisibleInscription}
-          closable={false}
-          footer={null}
-        >
-          <FontAwesomeIcon
-            icon={faXmark}
-            onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
-          />
-          <div>{modalContentInscription}</div>
-        </Modal>
-      </div>
-
-      <div>
-        <div id="react-modals">
-          <Modal
-            title="Connection"
-            className={styles.modal}
-            open={isModalVisibleConnection}
-            closable={false}
-            footer={null}
-          >
-            <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
-            <div>{modalContentConnection}</div>
-          </Modal>
-        </div>
-      </div>
-    </Header>
+      </Header>
     </Layout>
-   ) : (
+  ) : (
     <Layout>
-    <Header className={styles.headerStyle}>
+      <Header className={styles.headerStyleDesktop}>
         <Dropdown
           className={styles.dropDown}
           menu={menuPropsBar}
@@ -449,7 +452,6 @@ function HeaderF() {
             <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
           </a>
         </Dropdown>
-
         <Link href="/">
           <img className={styles.logo} src="logo.svg" alt="Logo" />
         </Link>
@@ -458,48 +460,49 @@ function HeaderF() {
           menu={menuProps}
           placement="bottomRight"
         >
-          <a onClick={(e) => e.preventDefault()}>
-            <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
-            {user.token && <p className={styles.userName}> {user.firstname}</p>}
-          </a>
+          <div>
+            <div>
+              <a onClick={(e) => e.preventDefault()}>
+                <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
+                {user.token && (
+                  <p className={styles.userName}> {user.firstname}</p>
+                )}
+              </a>
+            </div>
+            <div>
+              <div id="react-modals">
+                <Modal
+                  title="Inscription"
+                  className={styles.modal}
+                  open={isModalVisibleInscription}
+                  closable={false}
+                  footer={null}
+                >
+                  <FontAwesomeIcon
+                    icon={faXmark}
+                    onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
+                  />
+                  <div>{modalContentInscription}</div>
+                </Modal>
+                <Modal
+                  title="Connection"
+                  className={styles.modal}
+                  open={isModalVisibleConnection}
+                  closable={false}
+                  footer={null}
+                >
+                  <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
+                  <div>{modalContentConnection}</div>
+                </Modal>
+              </div>
+            </div>
+          </div>
         </Dropdown>
-      
-      <div id="react-modals">
-        <Modal
-          title="Inscription"
-          className={styles.modal}
-          open={isModalVisibleInscription}
-          closable={false}
-          footer={null}
-        >
-          <FontAwesomeIcon
-            icon={faXmark}
-            onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
-          />
-          <div>{modalContentInscription}</div>
-        </Modal>
-      </div>
+      </Header>
+    </Layout>
+  );
 
-      <div>
-        <div id="react-modals">
-          <Modal
-            title="Connection"
-            className={styles.modal}
-            open={isModalVisibleConnection}
-            closable={false}
-            footer={null}
-          >
-            <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
-            <div>{modalContentConnection}</div>
-          </Modal>
-        </div>
-      </div>
-    </Header>
-  </Layout>
-);
-
-return <div>{footerDisplay}</div>;
+  return <div>{footerDisplay}</div>;
 }
-
 
 export default HeaderF;
