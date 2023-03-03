@@ -9,12 +9,10 @@ const { Footer, Content, Header } = Layout;
 function FooterFunction() {
   const matches = useMediaQuery("(min-width:768px)");
 
- 
-
   const footerDisplay = !matches ? (
     <Layout>
       <Footer className={styles.footerStyle}>
-        <div>
+        <div className={styles.footerlogoExplore}>
           <Link href="/search">
             <FontAwesomeIcon
               className={styles.useSelector}
@@ -22,21 +20,31 @@ function FooterFunction() {
             />
           </Link>
           <p>Explorer</p>
-          </div>
-          <div>
+        </div>
+        <div className={styles.footerlogoCoeur}>
           <Link href="/favorites">
-            <FontAwesomeIcon
-              className={styles.useSelector}
-              icon={faHeart}
-            />
+            <FontAwesomeIcon className={styles.useSelector} icon={faHeart} />
           </Link>
           <p>Favoris</p>
-          </div>
+        </div>
       </Footer>
     </Layout>
   ) : (
     <Layout>
-      <Footer className={styles.footerStyle}>Footer</Footer>
+      <Footer className={styles.footerStyleDesktop}>
+        <div>
+        <p>Merci de noter qu'une caution sera exigée pour toute location de
+        matériel, qui sera utilisée en cas de casse. Consultez nos conditions
+        générales de location pour plus de détails</p>
+        </div>
+        <div className={styles.footerDesktopLink}>
+        <p>Mentions Légales</p>
+        <p>CGV</p>
+        <p>Politique de confidentialité</p>
+        <p> Gestion des cookies</p>
+        <p> Nous contacter</p>
+        </div>
+      </Footer>
     </Layout>
   );
 
