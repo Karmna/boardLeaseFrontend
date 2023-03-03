@@ -28,13 +28,16 @@ function Surf(props) {
   }, [favorites]);
 
   const handleFavorite = () => {
-    fetch(`https://board-lease-backend.vercel.app/surfs/addFavorite/${props._id}`, {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(
+      `https://board-lease-backend.vercel.app/surfs/addFavorite/${props._id}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${user.token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
@@ -44,9 +47,9 @@ function Surf(props) {
   };
 
   const handleRedirectPost = () => {
-    dispatch(selectedSurf(props))
+    dispatch(selectedSurf(props));
     router.push("/posts");
-  }
+  };
 
   let iconStyle = { color: "#eeeee4" };
   if (isFavorite) {
@@ -54,7 +57,7 @@ function Surf(props) {
   }
 
   const surfDisplay = !matches ? (
-    <div className={styles.card} >
+    <div className={styles.card}>
       <Image
         className={styles.image}
         src={props.pictures[0]}
@@ -65,14 +68,19 @@ function Surf(props) {
       <div className={styles.description}>
         <div className={styles.title}>
           <h3 className={styles.name}>{props.name}</h3>
-          <FontAwesomeIcon className={styles.favoriteIcon} icon={faStar} style={iconStyle} onClick={() => handleFavorite()} />
+          <FontAwesomeIcon
+            className={styles.favoriteIcon}
+            icon={faStar}
+            style={iconStyle}
+            onClick={() => handleFavorite()}
+          />
         </div>
         <p className={styles.level}>Niveau: {props.level}</p>
         <span className={styles.rating}>
           <Rate value={props.rating} />
         </span>
       </div>
-      <button onClick= {() => handleRedirectPost()}/>
+      <button onClick={() => handleRedirectPost()} />
     </div>
   ) : (
     <div className={styles.card}>
@@ -134,7 +142,7 @@ function Surf(props) {
           &nbsp; {props.deposit} €
         </p>
       </div>
-      <button onClick= {() => handleRedirectPost()}/>
+      <button onClick={() => handleRedirectPost()} />
     </div>
   );
 

@@ -6,6 +6,7 @@ const initialState = {
     level: [],
     placeName: "",
     name: "",
+    pictures:[],
 },
 };
 
@@ -18,6 +19,7 @@ export const postSlice = createSlice({
       state.value.level = action.payload.level;
       state.value.name = action.payload.name;
       state.value.placeName = action.payload.placeName;
+      state.value.pictures = action.payload.pictures;
    
     },
   },
