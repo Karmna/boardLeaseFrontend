@@ -30,6 +30,7 @@ function HeaderF() {
   const [signUpMail, setSignUpMail] = useState(""); 
 
   const clientId = process.env.CLIENT_ID;
+  console.log(clientId);
   const matches = useMediaQuery("(min-width:768px)");
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
