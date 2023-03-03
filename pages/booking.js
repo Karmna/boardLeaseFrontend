@@ -1,8 +1,8 @@
 import Booking from '../components/Booking';
 
 
-function Booking() {
+function BookingPage() {
   return <Booking />;
 }
 
-export default Booking;
+export default BookingPage;

@@ -1,8 +1,8 @@
 import Payments from '../components/Payments';
 
 
-function Payments() {
+function PaymentsPage() {
   return <Payments />;
 }
 
-export default Payments;
+export default PaymentsPage;

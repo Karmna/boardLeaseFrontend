@@ -30,6 +30,7 @@ function Search() {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         dispatch(addSurfs(data.data));
       });
   }, [filter]);

@@ -1,8 +1,8 @@
 import Recap from '../components/Recap';
 
 
-function Recap() {
+function RecapPage() {
   return <Recap />;
 }
 
-export default Recap;
+export default RecapPage;

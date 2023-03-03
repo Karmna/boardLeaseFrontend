@@ -1,8 +1,8 @@
 import Favorites from '../components/Favorites';
 
 
-function Favorites() {
+function FavoritesPage() {
   return <Favorites />;
 }
 
-export default Favorites;
+export default FavoritesPage;
