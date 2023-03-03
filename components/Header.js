@@ -2,7 +2,7 @@ import styles from "../styles/Header.module.css";
 import { login, logout } from "../reducers/user";
 import { Modal } from "antd";
 import * as React from "react";
-import { useState } from "react";
+import { useState } from "react"; 
 import { useDispatch, useSelector } from "react-redux";
 import { faUser, faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,7 +27,7 @@ function HeaderF() {
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpLastname, setSignUpLastname] = useState("");
   const [signUpFirstname, setSignUpFirstname] = useState("");
-  const [signUpMail, setSignUpMail] = useState("");
+  const [signUpMail, setSignUpMail] = useState(""); 
 
   const clientId = process.env.CLIENT_ID;
   const matches = useMediaQuery("(min-width:768px)");
