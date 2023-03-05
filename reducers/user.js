@@ -8,7 +8,8 @@ const initialState = {
     lastname: null,
     username: null,
     email: null,
-    favorites: [],
+    pendingBooking: null, // object
+    fulfilledBooking: null, // object
   },
 };
 
@@ -38,6 +39,15 @@ export const userSlice = createSlice({
       state.value.lastname = action.payload.lastname;
       state.value.username = action.payload.username;
       state.value.email = action.payload.email;
+    },
+    storePendingBooking: (state, action) => {
+      state.value.pendingBooking = action.payload;
+    },
+    storeFulfilledgBooking: (state, action) => {
+      state.value.fulfilledBooking = {
+        ...state.value.pendingBooking,
+        ...action.payload,
+      };
     },
   },
 });
