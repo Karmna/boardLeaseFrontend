@@ -2,9 +2,7 @@ import Image from "next/image";
 import styles from "../styles/Surf.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Rate } from "antd";
-
 import { useRouter } from "next/router";
-import FavoritesManagement from "./FavoritesManagement";
 
 function Surf(props) {
   // utilisation de useMediaQuery pour détecter les correspondances d'écran

@@ -1,20 +1,19 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import * as React from "react";
-
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { updateFavorites } from "../reducers/favorites";
 
-function FavoritesManagement(surf_Id) {
+function FavoritesManagement({ surf_Id }) {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const favorites = useSelector((state) => state.favorites.value);
   const [isFavorite, setIsFavorite] = useState(false);
   const router = useRouter();
   const [surf, setSurf] = useState();
-  console.log(surf);
+  console.log("surf_Id", surf_Id);
 
   useEffect(() => {
     if (router.query.surfProps) {
@@ -24,7 +23,7 @@ function FavoritesManagement(surf_Id) {
   }, [router.query.surfProps]);
 
   useEffect(() => {
-    if (surf && favorites.find((favorite) => favorite._id === surf._id)) {
+    if (surf && favorites.some((favorite) => favorite._id === surf_Id)) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);
@@ -33,7 +32,7 @@ function FavoritesManagement(surf_Id) {
 
   const handleFavorite = () => {
     fetch(
-      `https://board-lease-backend.vercel.app/surfs/addFavorite/${surf._id}`,
+      `https://board-lease-backend.vercel.app/surfs/addFavorite/${surf_Id}`,
       {
         method: "PUT",
         headers: {

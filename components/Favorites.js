@@ -37,7 +37,7 @@ function Favorites() {
         return (
           <div className={styles.card}>
             <Surf key={i} {...data} isFavorite={isFavorite} />
-            <FavoritesManagement key={i} surf_Id={isFavorite._id} />
+            <FavoritesManagement surf_Id={data._id} />
           </div>
         );
       })
