@@ -17,7 +17,6 @@ import user from "../reducers/user";
 import filter from "../reducers/filter";
 import search from "../reducers/search";
 import surfs from "../reducers/surfs";
-import post from "../reducers/post";
 import favorites from "../reducers/favorites";
 
 const reducers = combineReducers({
@@ -26,7 +25,6 @@ const reducers = combineReducers({
   search,
   surfs,
   favorites,
-  post,
 });
 
 const persistConfig = { key: "boardLease", storage };

@@ -1,25 +1,44 @@
 import styles from "../styles/Posts.module.css";
-import { selectedSurf } from "../reducers/post";
-import {  useSelector } from "react-redux";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import * as React from "react";
 import { Button, Image } from "antd";
+import { useRouter } from "next/router";
+import FavoritesManagement from "./FavoritesManagement";
 
 function Posts() {
+  // utilisation de useMediaQuery pour détecter les correspondances d'écran
+  const matches = useMediaQuery("(min-width:768px)");
 
-const post = useSelector((state) => state.post.value);
+  const router = useRouter();
+  const [surfDetails, setSurfDetails] = useState();
+  console.log(surfDetails)
 
-  if (!selectedSurf) {
-    return <div>Loading...</div>;
-  }
+  useEffect(() => {
+    if (router.query.surfProps) {
+      const propsJSON = JSON.parse(router.query.surfProps);
+      setSurfDetails(propsJSON);
+    }
+  }, [router.query.surfProps]);
 
   return (
     <div>
-      <Image src={post.pictures} alt={post.name}  />
-      <h1>{post.name}</h1>
-      <p>{post.placeName}</p>
-      <p>{post.type}</p>
-      <p>{post.rating}</p>
-      <Button> Réserver </Button>
+      {surfDetails ? (
+        <>
+          <Image src={surfDetails.pictures} alt={surfDetails.name} />
+          <div className={styles.title}>
+            <h1>{surfDetails.name}</h1>
+            <FavoritesManagement />
+          </div>
+          <p>{surfDetails.placeName}</p>
+          <p>{surfDetails.type}</p>
+          <p>{surfDetails.rating}</p>
+          <Button> Réserver </Button>
+        </>
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   );
 }

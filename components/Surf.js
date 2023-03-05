@@ -2,62 +2,26 @@ import Image from "next/image";
 import styles from "../styles/Surf.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Rate } from "antd";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { updateFavorites, removeFromFavorites } from "../reducers/favorites";
-import { selectedSurf } from "../reducers/post";
+
 import { useRouter } from "next/router";
+import FavoritesManagement from "./FavoritesManagement";
 
 function Surf(props) {
   // utilisation de useMediaQuery pour détecter les correspondances d'écran
   const matches = useMediaQuery("(min-width:768px)");
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
-  const favorites = useSelector((state) => state.favorites.value);
-  const [isFavorite, setIsFavorite] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (favorites.find((favorite) => favorite._id === props._id)) {
-      setIsFavorite(true);
-    } else {
-      setIsFavorite(false);
-    }
-  }, [favorites]);
-
-  const handleFavorite = () => {
-    fetch(
-      `https://board-lease-backend.vercel.app/surfs/addFavorite/${props._id}`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-          "Content-Type": "application/json",
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.result) {
-          dispatch(updateFavorites(data.data));
-        }
-      });
-  };
-
   const handleRedirectPost = () => {
-    dispatch(selectedSurf(props));
-    router.push("/posts");
+    router.push({
+      pathname: "/posts",
+      query: {
+        surfProps: JSON.stringify(props),
+      },
+    });
   };
-
-  let iconStyle = { color: "#eeeee4" };
-  if (isFavorite) {
-    iconStyle = { color: "#060c5c" };
-  }
 
   const surfDisplay = !matches ? (
-    <div className={styles.card} onClick= {() => handleRedirectPost()}>
+    <div className={styles.card} onClick={() => handleRedirectPost()}>
       <Image
         className={styles.image}
         src={props.pictures[0]}
@@ -66,23 +30,16 @@ function Surf(props) {
         height={100}
       />
       <div className={styles.description}>
-        <div className={styles.title}>
-          <h3 className={styles.name}>{props.name}</h3>
-          <FontAwesomeIcon
-            className={styles.favoriteIcon}
-            icon={faStar}
-            style={iconStyle}
-            onClick={() => handleFavorite()}
-          />
-        </div>
+        <h3 className={styles.name}>{props.name}</h3>
+
         <p className={styles.level}>Niveau: {props.level}</p>
         <span className={styles.rating}>
           <Rate value={props.rating} />
         </span>
-      </div>      
+      </div>
     </div>
   ) : (
-    <div className={styles.card} onClick= {() => handleRedirectPost()}> 
+    <div className={styles.card} onClick={() => handleRedirectPost()}>
       <Image
         src={props.pictures[0]}
         alt={props.name}
@@ -90,15 +47,8 @@ function Surf(props) {
         height={120}
       />
       <div className={styles.descriptionContent}>
-        <div className={styles.title}>
-          <h3 className={styles.name}>{props.name}</h3>
-          <FontAwesomeIcon
-            className={styles.favoriteIcon}
-            icon={faStar}
-            style={iconStyle}
-            onClick={() => handleFavorite()}
-          />
-        </div>
+        <h3 className={styles.name}>{props.name}</h3>
+
         <p className={styles.description}>
           <u>
             <strong>Niveau:</strong>
