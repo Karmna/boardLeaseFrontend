@@ -8,8 +8,13 @@ const initialState = {
     lastname: null,
     username: null,
     email: null,
-    pendingBooking: null, // object
-    fulfilledBooking: null, // object
+    surfId: null,
+    startDate: null,
+    endDate: null,
+    totalPrice: 0,
+    isPaid: false,
+    transactionId: null,
+    paymentMode: null,
   },
 };
 
@@ -40,8 +45,9 @@ export const userSlice = createSlice({
       state.value.username = action.payload.username;
       state.value.email = action.payload.email;
     },
-    storePendingBooking: (state, action) => {
-      state.value.pendingBooking = action.payload;
+    storeTenantDateRange: (state, action) => {
+      state.value.startDate = action.payload.startDate;
+      state.value.endDate = action.payload.endDate;
     },
     storeFulfilledgBooking: (state, action) => {
       state.value.fulfilledBooking = {
@@ -52,5 +58,11 @@ export const userSlice = createSlice({
   },
 });
 
-export const { login, logout, updateUserProfile } = userSlice.actions;
+export const {
+  login,
+  logout,
+  updateUserProfile,
+  storeTenantDateRange,
+  storeFulfilledgBooking,
+} = userSlice.actions;
 export default userSlice.reducer;
