@@ -39,7 +39,7 @@ const persistor = persistStore(store);
 
 function App({ Component, pageProps }) {
   // utilisation de useMediaQuery pour détecter les correspondances d'écran
-  const matches = useMediaQuery("(min-width:768px)");
+  const matches = useMediaQuery("(min-width:2000px)");
   const appDisplay = !matches ? (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
