@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Layout} from "antd";
-const { Header, Content, Footer } = Layout;
+const {Content} = Layout;
 
 function Profile() {
   const matches = useMediaQuery("(min-width:768px)");
@@ -71,7 +71,7 @@ function Profile() {
   };
 
   return (
-    <Layout>
+    
       <Content className={styles.profilePage}>
         <div className={styles.profile}>
           <p>Profile</p>
@@ -123,8 +123,8 @@ function Profile() {
           <p>Bookings</p>
         </div>
       </Content>
-      <footer></footer>
-    </Layout>
+     
+   
   );
 }
 

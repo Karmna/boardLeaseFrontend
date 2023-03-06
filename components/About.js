@@ -1,13 +1,13 @@
 import styles from "../styles/Profile.module.css";
-import { Button, Input, Divider } from "antd";
+
 
 
 import { Layout} from "antd";
-const { Header, Content, Footer } = Layout;
+const { Content} = Layout;
 
 function About() {
   return (
-    <Layout>
+   
       <Content className={styles.profilePage}>
     <div>
         <div className={styles.images}>
@@ -49,7 +49,7 @@ function About() {
       spots de surf ou apprendre de nouvelles techniques.</p>
     </div>
     </Content>
-    </Layout>
+    
   );
 }
 
