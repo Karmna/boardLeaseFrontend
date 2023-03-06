@@ -1,0 +1,746 @@
+[
+  {
+    "owner": "63ff7ca8607b38489277d40f",
+    "type": "Shortboard",
+    "level": "Débutant",
+    "name": "Alexandre",
+    "dayPrice": 20,
+    "pictures": ["/th1.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.4832,
+    "longitude": -1.5586,
+    "availabilities": [
+      {
+        "startDate": "2023-05-03T00:00:00.000Z",
+        "endDate": "2023-05-13T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-03T00:00:00.000Z",
+        "endDate": "2023-06-13T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-03T00:00:00.000Z",
+        "endDate": "2023-07-13T00:00:00.000Z"
+      }
+    ],
+    "deposit": 200,
+    "rating": 4
+  },
+  {
+    "owner": "63ffbe7724a356349ced22b5",
+    "type": "Funboard",
+    "level": "Intermédiaire",
+    "name": "Charlotte",
+    "dayPrice": 25,
+    "pictures": ["/th2.jpg"],
+    "placeName": "Hossegor",
+    "latitude": 43.6584,
+    "longitude": -1.4433,
+    "availabilities": [
+      {
+        "startDate": "2023-06-12T00:00:00.000Z",
+        "endDate": "2023-06-22T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-12T00:00:00.000Z",
+        "endDate": "2023-07-22T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-08-12T00:00:00.000Z",
+        "endDate": "2023-08-22T00:00:00.000Z"
+      }
+    ],
+    "deposit": 250,
+    "rating": 3
+  },
+  {
+    "owner": "64007281d1e1269a30821d26",
+    "type": "Fish",
+    "level": "Confirmé",
+    "name": "Hugo",
+    "dayPrice": 30,
+    "pictures": ["/th3.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.4832,
+    "longitude": -1.5586,
+    "availabilities": [
+      {
+        "startDate": "2023-06-05T00:00:00.000Z",
+        "endDate": "2023-06-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-05T00:00:00.000Z",
+        "endDate": "2023-07-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-08-05T00:00:00.000Z",
+        "endDate": "2023-08-31T00:00:00.000Z"
+      }
+    ],
+    "deposit": 400,
+    "rating": 5
+  },
+  {
+    "owner": "6401ab0d4687fb6f0b7fa212",
+    "type": "StandUp Paddle",
+    "level": "Débutant",
+    "name": "Sophie",
+    "dayPrice": 15,
+    "pictures": ["/th4.jpg"],
+    "placeName": "La Baule",
+    "latitude": 47.2864,
+    "longitude": -2.3949,
+    "availabilities": [
+      {
+        "startDate": "2023-05-15T00:00:00.000Z",
+        "endDate": "2023-05-25T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-15T00:00:00.000Z",
+        "endDate": "2023-06-25T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-15T00:00:00.000Z",
+        "endDate": "2023-07-25T00:00:00.000Z"
+      }
+    ],
+    "deposit": 200,
+    "rating": 2
+  },
+  {
+    "owner": "6401e3f35f683fd9ec2e8060",
+    "type": "Longboard",
+    "level": "Intermédiaire",
+    "name": "Arthur",
+    "dayPrice": 20,
+    "pictures": ["/th5.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.4832,
+    "longitude": -1.5586,
+    "availabilities": [
+      {
+        "startDate": "2023-05-08T00:00:00.000Z",
+        "endDate": "2023-05-18T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-08T00:00:00.000Z",
+        "endDate": "2023-06-18T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-08T00:00:00.000Z",
+        "endDate": "2023-07-18T00:00:00.000Z"
+      }
+    ],
+    "deposit": 300,
+    "rating": 4
+  },
+  {
+    "owner": "64020950494dd30d4be306ed",
+    "type": "Shortboard",
+    "level": "Confirmé",
+    "name": "Lucas",
+    "dayPrice": 30,
+    "pictures": ["/th6.jpg"],
+    "placeName": "Hossegor",
+    "latitude": 43.6584,
+    "longitude": -1.4433,
+    "availabilities": [
+      {
+        "startDate": "2023-05-22T00:00:00.000Z",
+        "endDate": "2023-06-01T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-22T00:00:00.000Z",
+        "endDate": "2023-07-02T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-22T00:00:00.000Z",
+        "endDate": "2023-07-30T00:00:00.000Z"
+      }
+    ],
+    "deposit": 150,
+    "rating": 3
+  },
+  {
+    "owner": "640219fc95ea3535d6bed6a8",
+    "type": "Funboard",
+    "level": "Intermédiaire",
+    "name": "Lena",
+    "dayPrice": 20,
+    "pictures": ["/th7.jpg"],
+    "placeName": "Leucate",
+    "latitude": 42.8945,
+    "longitude": 3.0263,
+    "availabilities": [
+      {
+        "startDate": "2023-05-15T00:00:00.000Z",
+        "endDate": "2023-05-25T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-15T00:00:00.000Z",
+        "endDate": "2023-06-25T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-15T00:00:00.000Z",
+        "endDate": "2023-07-25T00:00:00.000Z"
+      }
+    ],
+    "deposit": 250,
+    "rating": 4
+  },
+  {
+    "owner": "6402490e7e0e927b6aa4da81",
+    "type": "Fish",
+    "level": "Débutant",
+    "name": "Enzo",
+    "dayPrice": 15,
+    "pictures": ["/th8.jpg"],
+    "placeName": "Seignosse",
+    "latitude": 43.6913,
+    "longitude": -1.4042,
+    "availabilities": [
+      {
+        "startDate": "2023-05-08T00:00:00.000Z",
+        "endDate": "2023-05-18T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-08T00:00:00.000Z",
+        "endDate": "2023-06-18T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-08T00:00:00.000Z",
+        "endDate": "2023-07-18T00:00:00.000Z"
+      }
+    ],
+    "deposit": 300,
+    "rating": 3
+  },
+  {
+    "owner": "63ff7ca8607b38489277d40f",
+    "type": "Longboard",
+    "level": "Confirmé",
+    "name": "Maxime",
+    "dayPrice": 30,
+    "pictures": ["/th9.jpg"],
+    "placeName": "Saint-Jean-de-Luz",
+    "latitude": 43.3878,
+    "longitude": -1.6761,
+    "availabilities": [
+      {
+        "startDate": "2023-05-22T00:00:00.000Z",
+        "endDate": "2023-06-01T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-22T00:00:00.000Z",
+        "endDate": "2023-07-02T00:00:00.000Z"
+      }
+    ],
+    "deposit": 250,
+    "rating": 4
+  },
+  {
+    "owner": "63ffbe7724a356349ced22b5",
+    "type": "StandUp Paddle",
+    "level": "Débutant",
+    "name": "Chloé",
+    "dayPrice": 20,
+    "pictures": ["/th10.jpg"],
+    "placeName": "Quiberon",
+    "latitude": 47.4843,
+    "longitude": -3.1209,
+    "availabilities": [
+      {
+        "startDate": "2023-05-10T00:00:00.000Z",
+        "endDate": "2023-05-20T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-10T00:00:00.000Z",
+        "endDate": "2023-06-20T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-10T00:00:00.000Z",
+        "endDate": "2023-07-20T00:00:00.000Z"
+      }
+    ],
+    "deposit": 350,
+    "rating": 2
+  },
+  {
+    "owner": "64007281d1e1269a30821d26",
+    "type": "Shortboard",
+    "level": "Intermédiaire",
+    "name": "Arthur",
+    "dayPrice": 20,
+    "pictures": ["/th11.jpg"],
+    "placeName": "Hossegor",
+    "latitude": 43.6809,
+    "longitude": -1.4322,
+    "availabilities": [
+      {
+        "startDate": "2023-05-05T00:00:00.000Z",
+        "endDate": "2023-05-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-05T00:00:00.000Z",
+        "endDate": "2023-06-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-05T00:00:00.000Z",
+        "endDate": "2023-07-15T00:00:00.000Z"
+      }
+    ],
+    "deposit": 300,
+    "rating": 4
+  },
+  {
+    "owner": "6401ab0d4687fb6f0b7fa212",
+    "type": "Funboard",
+    "level": "Débutant",
+    "name": "Jules",
+    "dayPrice": 15,
+    "pictures": ["/th1.jpg"],
+    "placeName": "Lacanau",
+    "latitude": 44.9778,
+    "longitude": -1.1867,
+    "availabilities": [
+      {
+        "startDate": "2023-05-01T00:00:00.000Z",
+        "endDate": "2023-05-11T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-01T00:00:00.000Z",
+        "endDate": "2023-09-30T00:00:00.000Z"
+      }
+    ],
+    "deposit": 200,
+    "rating": 5
+  },
+  {
+    "owner": "6401e3f35f683fd9ec2e8060",
+    "type": "Fish",
+    "level": "Confirmé",
+    "name": "Léo",
+    "dayPrice": 30,
+    "pictures": ["/th5.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.4832,
+    "longitude": -1.5586,
+    "availabilities": [
+      {
+        "startDate": "2023-05-05T00:00:00.000Z",
+        "endDate": "2023-05-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-05T00:00:00.000Z",
+        "endDate": "2023-06-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-05T00:00:00.000Z",
+        "endDate": "2023-07-15T00:00:00.000Z"
+      }
+    ],
+    "deposit": 250,
+    "rating": 3
+  },
+  {
+    "owner": "64020950494dd30d4be306ed",
+    "type": "Funboard",
+    "level": "Intermédiaire",
+    "name": "Alexis",
+    "dayPrice": 15,
+    "pictures": ["/th4.jpg"],
+    "placeName": "Soulac",
+    "latitude": 45.5178,
+    "longitude": -1.1242,
+    "availabilities": [
+      {
+        "startDate": "2023-05-10T00:00:00.000Z",
+        "endDate": "2023-05-20T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-10T00:00:00.000Z",
+        "endDate": "2023-06-20T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-10T00:00:00.000Z",
+        "endDate": "2023-07-20T00:00:00.000Z"
+      }
+    ],
+    "deposit": 400,
+    "rating": 2
+  },
+  {
+    "owner": "640219fc95ea3535d6bed6a8",
+    "type": "Longboard",
+    "level": "Débutant",
+    "name": "Lucas",
+    "dayPrice": 30,
+    "pictures": ["/th6.jpg"],
+    "placeName": "Seignosse",
+    "latitude": 43.6912,
+    "longitude": -1.4162,
+    "availabilities": [
+      {
+        "startDate": "2023-04-01T00:00:00.000Z",
+        "endDate": "2023-04-15T00:00:00.000Z"
+      }
+    ],
+    "deposit": 320,
+    "rating": 3
+  },
+  {
+    "owner": "6402490e7e0e927b6aa4da81",
+    "type": "Shortboard",
+    "level": "Intermédiaire",
+    "name": "Noé",
+    "dayPrice": 20,
+    "pictures": ["/th7.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.4818,
+    "longitude": -1.5595,
+    "availabilities": [
+      {
+        "startDate": "2023-06-05T00:00:00.000Z",
+        "endDate": "2023-06-12T00:00:00.000Z"
+      }
+    ],
+    "deposit": 200,
+    "rating": 4
+  },
+  {
+    "owner": "63ff7ca8607b38489277d40f",
+    "type": "Funboard",
+    "level": "Confirmé",
+    "name": "Emma",
+    "dayPrice": 10,
+    "pictures": ["/th8.jpg"],
+    "placeName": "Hossegor",
+    "latitude": 43.6808,
+    "longitude": -1.4341,
+    "availabilities": [
+      {
+        "startDate": "2023-07-12T00:00:00.000Z",
+        "endDate": "2023-07-24T00:00:00.000Z"
+      }
+    ],
+    "deposit": 300,
+    "rating": 2
+  },
+  {
+    "owner": "63ffbe7724a356349ced22b5",
+    "type": "Fish",
+    "level": "Débutant",
+    "name": "Louis",
+    "dayPrice": 25,
+    "pictures": ["/th9.jpg"],
+    "placeName": "Capbreton",
+    "latitude": 43.6388,
+    "longitude": -1.4411,
+    "availabilities": [
+      {
+        "startDate": "2023-09-01T00:00:00.000Z",
+        "endDate": "2023-09-10T00:00:00.000Z"
+      }
+    ],
+    "deposit": 170,
+    "rating": 3
+  },
+  {
+    "owner": "64007281d1e1269a30821d26",
+    "type": "Longboard",
+    "level": "Confirmé",
+    "name": "Lucas",
+    "dayPrice": 25,
+    "pictures": ["/th10.jpg"],
+    "placeName": "Hossegor",
+    "latitude": 43.694134,
+    "longitude": -1.459342,
+    "availabilities": [
+      {
+        "startDate": "2023-03-07T00:00:00.000Z",
+        "endDate": "2023-03-10T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-15T00:00:00.000Z",
+        "endDate": "2023-03-18T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-21T00:00:00.000Z",
+        "endDate": "2023-03-24T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-28T00:00:00.000Z",
+        "endDate": "2023-03-31T00:00:00.000Z"
+      }
+    ],
+    "deposit": 250,
+    "rating": 4
+  },
+  {
+    "owner": "6401ab0d4687fb6f0b7fa212",
+    "type": "StandUp Paddle",
+    "level": "Débutant",
+    "name": "Noémie",
+    "dayPrice": 20,
+    "pictures": ["/th11.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.471433,
+    "longitude": -1.559736,
+    "availabilities": [
+      {
+        "startDate": "2023-03-09T00:00:00.000Z",
+        "endDate": "2023-03-12T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-16T00:00:00.000Z",
+        "endDate": "2023-03-19T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-23T00:00:00.000Z",
+        "endDate": "2023-03-26T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-30T00:00:00.000Z",
+        "endDate": "2023-04-02T00:00:00.000Z"
+      }
+    ],
+    "deposit": 200,
+    "rating": 2
+  },
+  {
+    "owner": "6401e3f35f683fd9ec2e8060",
+    "type": "Funboard",
+    "level": "Intermédiaire",
+    "name": "Nicolas",
+    "dayPrice": 15,
+    "pictures": ["/th2.jpg"],
+    "placeName": "La Baule",
+    "latitude": 47.280079,
+    "longitude": -2.41022,
+    "availabilities": [
+      {
+        "startDate": "2023-07-10T00:00:00.000Z",
+        "endDate": "2023-07-20T00:00:00.000Z"
+      }
+    ],
+    "deposit": 400,
+    "rating": 2
+  },
+  {
+    "owner": "64020950494dd30d4be306ed",
+    "type": "StandUp Paddle",
+    "level": "Débutant",
+    "name": "Nolan",
+    "dayPrice": 20,
+    "pictures": ["/th8.jpg"],
+    "placeName": "Le Lavandou",
+    "latitude": 43.136418,
+    "longitude": 6.371436,
+    "availabilities": [
+      {
+        "startDate": "2023-03-11T00:00:00.000Z",
+        "endDate": "2023-03-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-21T00:00:00.000Z",
+        "endDate": "2023-03-26T00:00:00.000Z"
+      }
+    ],
+    "deposit": 376,
+    "rating": 4
+  },
+  {
+    "owner": "640219fc95ea3535d6bed6a8",
+    "type": "Shortboard",
+    "level": "Débutant",
+    "name": "Hugo",
+    "dayPrice": 30,
+    "pictures": ["/th9.jpg"],
+    "placeName": "Hossegor",
+    "latitude": 43.665157,
+    "longitude": -1.447981,
+    "availabilities": [
+      {
+        "startDate": "2023-03-02T00:00:00.000Z",
+        "endDate": "2023-03-06T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-12T00:00:00.000Z",
+        "endDate": "2023-03-16T00:00:00.000Z"
+      }
+    ],
+    "deposit": 347,
+    "rating": 2
+  },
+  {
+    "owner": "6402490e7e0e927b6aa4da81",
+    "type": "Fish",
+    "level": "Intermédiaire",
+    "name": "Jade",
+    "dayPrice": 25,
+    "pictures": ["/th10.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.48315,
+    "longitude": -1.56011,
+    "availabilities": [
+      {
+        "startDate": "2023-03-01T00:00:00.000Z",
+        "endDate": "2023-03-05T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-03-16T00:00:00.000Z",
+        "endDate": "2023-03-21T00:00:00.000Z"
+      }
+    ],
+    "deposit": 319,
+    "rating": 3
+  },
+  {
+    "owner": "63ff7ca8607b38489277d40f",
+    "type": "Shortboard",
+    "level": "Intermédiaire",
+    "name": "Romain",
+    "dayPrice": 18,
+    "pictures": ["/th9.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.48315,
+    "longitude": -1.558573,
+    "availabilities": [
+      {
+        "startDate": "2023-05-10T00:00:00.000Z",
+        "endDate": "2023-05-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-05T00:00:00.000Z",
+        "endDate": "2023-06-10T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-01T00:00:00.000Z",
+        "endDate": "2023-07-05T00:00:00.000Z"
+      }
+    ],
+    "deposit": 300,
+    "rating": 4
+  },
+  {
+    "owner": "63ffbe7724a356349ced22b5",
+    "type": "Funboard",
+    "level": "Intermédiaire",
+    "name": "Léa",
+    "dayPrice": 20,
+    "pictures": ["/th10.jpg"],
+    "placeName": "Hossegor",
+    "latitude": 43.658317,
+    "longitude": -1.438229,
+    "availabilities": [
+      {
+        "startDate": "2023-05-20T00:00:00.000Z",
+        "endDate": "2023-05-25T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-10T00:00:00.000Z",
+        "endDate": "2023-06-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-03T00:00:00.000Z",
+        "endDate": "2023-07-08T00:00:00.000Z"
+      }
+    ],
+    "deposit": 250,
+    "rating": 3
+  },
+  {
+    "owner": "64007281d1e1269a30821d26",
+    "type": "Fish",
+    "level": "Intermédiaire",
+    "name": "Nathan",
+    "dayPrice": 15,
+    "pictures": ["/th11.jpg"],
+    "placeName": "Seignosse",
+    "latitude": 43.68845,
+    "longitude": -1.404221,
+    "availabilities": [
+      {
+        "startDate": "2023-05-10T00:00:00.000Z",
+        "endDate": "2023-05-15T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-06-05T00:00:00.000Z",
+        "endDate": "2023-06-10T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-07-01T00:00:00.000Z",
+        "endDate": "2023-07-05T00:00:00.000Z"
+      }
+    ]
+  },
+  {
+    "owner": "63ffbe7724a356349ced22b5",
+    "type": "Longboard",
+    "level": "Avancé",
+    "name": "Lucie",
+    "dayPrice": 40,
+    "pictures": ["/th8.jpg"],
+    "placeName": "Anglet",
+    "latitude": 43.491846,
+    "longitude": -1.51845,
+    "availabilities": [
+      {
+        "startDate": "2023-04-01T00:00:00.000Z",
+        "endDate": "2023-04-07T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-04-18T00:00:00.000Z",
+        "endDate": "2023-04-24T00:00:00.000Z"
+      }
+    ],
+    "deposit": 400,
+    "rating": 5
+  },
+  {
+    "owner": "63ff7ca8607b38489277d40f",
+    "type": "Fish",
+    "level": "Avancé",
+    "name": "Thomas",
+    "dayPrice": 35,
+    "pictures": ["/th12.jpg"],
+    "placeName": "Biarritz",
+    "latitude": 43.480261,
+    "longitude": -1.554283,
+    "availabilities": [
+      {
+        "startDate": "2023-04-05T00:00:00.000Z",
+        "endDate": "2023-04-10T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-04-25T00:00:00.000Z",
+        "endDate": "2023-04-30T00:00:00.000Z"
+      }
+    ],
+    "deposit": 350,
+    "rating": 4
+  },
+  {
+    "owner": "64020950494dd30d4be306ed",
+    "type": "Shortboard",
+    "level": "Débutant",
+    "name": "Emma",
+    "dayPrice": 25,
+    "pictures": ["/th11.jpg"],
+    "placeName": "Capbreton",
+    "latitude": 43.6339,
+    "longitude": -1.43305,
+    "availabilities": [
+      {
+        "startDate": "2023-04-15T00:00:00.000Z",
+        "endDate": "2023-04-20T00:00:00.000Z"
+      },
+      {
+        "startDate": "2023-05-05T00:00:00.000Z",
+        "endDate": "2023-05-10T00:00:00.000Z"
+      }
+    ],
+    "deposit": 300,
+    "rating": 2
+  }
+]

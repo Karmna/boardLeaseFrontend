@@ -1,20 +1,27 @@
-import Search from "../components/Search";
+import styles from "../styles/Explorer.module.css";
 import Map from "../components/Map";
 import Markers from "../components/Markers";
-import Rating from "../components/Rating";
-import styles from "../styles/Search.module.css";
 import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 
-function SearchPage() {
-  const surfs = useSelector((state) => state.surfs.value);
+function ExplorerPage() {
+  const [surfs, setSurfs] = useState();
+  console.log("surfs", surfs)
+
+  useEffect(() => {
+    fetch(`https://board-lease-backend.vercel.app/surfs/`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Réponse BDD get surfs", data);
+        setSurfs(data);
+      });
+  }, []);
 
   const DEFAULT_CENTER = [43.488, -1.555];
 
   return (
-    <div className={styles.searchPageContainer}>
-      <Search />
-      <Rating />
-      <Map width="800" height="600" center={DEFAULT_CENTER} zoom={8}>
+    <div className={styles.mapContainer}>
+      <Map width="800" height="1500" center={DEFAULT_CENTER} zoom={6}>
         {({ TileLayer }) => (
           <>
             <TileLayer
@@ -22,7 +29,7 @@ function SearchPage() {
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             />
             {surfs &&
-              surfs.map((data, i) => {
+              surfs.surfs.map((data, i) => {
                 return (
                   <Markers key={i} markerData={data}/>
                 );
@@ -34,4 +41,4 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default ExplorerPage;

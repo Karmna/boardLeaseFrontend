@@ -13,7 +13,7 @@ function FooterFunction() {
     <Layout>
       <Footer className={styles.footerStyle}>
         <div className={styles.footerlogoExplore}>
-          <Link href="/search">
+          <Link href="/explorer">
             <FontAwesomeIcon
               className={styles.useSelector}
               icon={faMagnifyingGlass}
