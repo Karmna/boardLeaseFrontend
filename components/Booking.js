@@ -1,33 +1,37 @@
 import { useState } from "react";
 import styles from "../styles/Booking.module.css";
 import { Button, Image, DatePicker, Space, Divider } from "antd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { storeFulfilledBooking } from "../reducers/booking";
 import Link from "next/link";
 
 function Booking() {
   const [searchStartDate, setSearchStartDate] = useState();
   const [searchEndDate, setSearchEndDate] = useState();
 
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
-  const filter = useSelector((state) => state.filter.value);
-  console.log(user);
+  const booking = useSelector((state) => state.booking.value);
+  console.log(booking);
 
   // props ou infos à retirer de l'état redux
-  const dayPrice = 25;
-  const name = "Rip Curls Short";
-  const type = "Shortboard";
+  // const dayPrice = 25;
+  // const name = "Rip Curls Short";
+  // const booking.surfType = "Shortboard";
 
   const calculateNumberOfDays = () => {
-    if (!filter.availabilities || !filter.availabilities) return 10;
+    if (!booking.startDate || !booking.endDate) return;
     const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
     return Math.floor(
-      (new Date(filter.availabilities.endDate).getTime() -
-        new Date(filter.availabilities.startDate).getTime()) /
+      (new Date(booking.endDate).getTime() -
+        new Date(booking.startDate).getTime()) /
         DAY_IN_MS
     );
   };
   const recapNumberOfDays = calculateNumberOfDays();
+
+  // const handlePayment = () => {//TODO};
 
   return (
     <div className={styles.container}>
@@ -41,9 +45,7 @@ function Booking() {
               disabled={true}
               onChange={setSearchStartDate}
               placeholder={
-                filter.availabilities
-                  ? filter.availabilities.startDate
-                  : "Date de début"
+                booking.startDate ? booking.startDate : "Date de début"
               }
             />
           </Space>
@@ -51,31 +53,27 @@ function Booking() {
             <DatePicker
               disabled={true}
               onChange={setSearchEndDate}
-              placeholder={
-                filter.availabilities
-                  ? filter.availabilities.endDate
-                  : "Date de fin"
-              }
+              placeholder={booking.startDate ? booking.endDate : "Date de fin"}
             />
           </Space>
         </div>
       </div>
-      {filter.availabilities && filter.availabilities && (
+      {booking.dayPrice && booking.startDate && booking.endDate && (
         <div className="recapPaiment">
           <div className={styles.recapitulatif}>
             <Divider orientation="left">Récapitulatif</Divider>
             <p>
-              Board : {name} (type : {type}).
+              Board : {booking.name} (type : {booking.surfType}).
             </p>
             <p>
               Réservation pour {recapNumberOfDays}{" "}
               {recapNumberOfDays > 1 ? "jours" : "jour"}.
             </p>
-            <p>Prix à la journée : {dayPrice}€</p>
-            <p>Prix hors taxes : {dayPrice * recapNumberOfDays}€</p>
-            <p>Taxes : {dayPrice * recapNumberOfDays * 0.2}€</p>
+            <p>Prix à la journée : {booking.dayPrice}€</p>
+            <p>Prix hors taxes : {booking.dayPrice * recapNumberOfDays}€</p>
+            <p>Taxes : {booking.dayPrice * recapNumberOfDays * 0.2}€</p>
             <Divider className={styles.total} orientation="right">
-              Total : {dayPrice * recapNumberOfDays * 1.2}€
+              Total : {booking.dayPrice * recapNumberOfDays * 1.2}€
             </Divider>
           </div>
           <Link href="/payments">
@@ -83,9 +81,11 @@ function Booking() {
           </Link>
         </div>
       )}
-      {!filter.availabilities && !filter.availabilities && (
+      {!booking.surfName && (
         <Link href="/">
-          <button className={styles.button}>Trouver un surf</button>
+          <button onClick={handlePayment} className={styles.button}>
+            Trouver un surf
+          </button>
         </Link>
       )}
     </div>

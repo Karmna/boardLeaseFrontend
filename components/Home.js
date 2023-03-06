@@ -6,6 +6,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
 import { DatePicker, Space } from "antd";
 import { addFilter } from "../reducers/filter";
+import { storeTenantDateRange } from "../reducers/booking";
 import { useRouter } from "next/router";
 
 function Home() {
@@ -36,6 +37,13 @@ function Home() {
         minRating: 0,
         placeName: searchPlace,
         availabilities: { startDate: searchStartDate, endDate: searchEndDate },
+      })
+    );
+
+    dispatch(
+      storeTenantDateRange({
+        startDate: searchStartDate,
+        endDate: searchEndDate,
       })
     );
     // redirige l'utilisateur vers la page de résultats de recherche
