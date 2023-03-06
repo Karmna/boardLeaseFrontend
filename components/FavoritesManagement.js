@@ -12,18 +12,11 @@ function FavoritesManagement({ surf_Id }) {
   const favorites = useSelector((state) => state.favorites.value);
   const [isFavorite, setIsFavorite] = useState(false);
   const router = useRouter();
-  const [surf, setSurf] = useState();
+
   console.log("surf_Id", surf_Id);
 
   useEffect(() => {
-    if (router.query.surfProps) {
-      const propsJSON = JSON.parse(router.query.surfProps);
-      setSurf(propsJSON);
-    }
-  }, [router.query.surfProps]);
-
-  useEffect(() => {
-    if (surf && favorites.some((favorite) => favorite._id === surf_Id)) {
+    if (favorites.some((favorite) => favorite._id === surf_Id)) {
       setIsFavorite(true);
     } else {
       setIsFavorite(false);

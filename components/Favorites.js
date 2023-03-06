@@ -11,7 +11,7 @@ function Favorites() {
   const user = useSelector((state) => state.user.value);
   const favorites = useSelector((state) => state.favorites.value);
   const [favoriteDisplay, setFavoriteDisplay] = useState();
-
+console.log("favorites",favorites)
   useEffect(() => {
     fetch(`https://board-lease-backend.vercel.app/surfs/favorites`, {
       method: "GET",
@@ -31,13 +31,11 @@ function Favorites() {
   const displayFavorites = (favoriteDisplay =
     favoriteDisplay && favoriteDisplay.length > 0 ? (
       favoriteDisplay.map((data, i) => {
-        const isFavorite = favorites.some(
-          (favorite) => favorite._id === data._id
-        );
+     
         return (
           <div className={styles.card}>
-            <Surf key={i} {...data} isFavorite={isFavorite} />
-            <FavoritesManagement surf_Id={data._id} />
+            <Surf key={i} {...data}  />
+            <FavoritesManagement surf_Id={data._id}/>
           </div>
         );
       })
