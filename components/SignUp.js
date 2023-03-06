@@ -4,7 +4,7 @@ import * as React from "react";
 import { useState } from "react"; 
 import { useDispatch, useSelector } from "react-redux";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Button, Dropdown, Input } from "antd";
+import { Input, Divider, Space } from 'antd'; 
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
@@ -21,6 +21,7 @@ function SignUp() {
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpMail, setSignUpMail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  
   const clientId = process.env.CLIENT_ID;
   const router = useRouter();
 
@@ -96,9 +97,11 @@ function SignUp() {
   return (
     <div className={styles.registerContainer}>
       <h1 className={styles.title}> Inscription </h1>
+      <br />
       <GoogleOAuthProvider clientId={clientId}>
         <div className={styles.container}>
           <div className={styles.content}>
+          <Space direction="vertical" size="middle" style={{ display: "flex" }}>
             <Input
               type="Prénom"
               placeholder="Prénom"
@@ -136,10 +139,13 @@ function SignUp() {
                 visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
               }
             />
-            <Button id="register" onClick={() => handleSignup("classic")}>
+         
+            <button className={styles.button} id="register" onClick={() => handleSignup("classic")}>
               S'enregistrer
-            </Button>
-            <h2>Se connecter avec Google</h2>
+            </button>
+            </Space>
+            <Divider>S'inscrire avec :</Divider>
+            <br />
             <div className={styles.divider}></div>
             <GoogleLogin
               onSuccess={(credentialResponse) =>
@@ -151,10 +157,11 @@ function SignUp() {
           </div>
         </div>
       </GoogleOAuthProvider>
-      <h3 className={styles.title}> ou </h3>
-      <Button id="connection" onClick={() => handleRedirectConnection()}>
+      <Divider>OU</Divider>
+      <br />
+      <button className={styles.button} id="connection" onClick={() => handleRedirectConnection()}>
         Se connecter
-      </Button>
+      </button>
     </div>
   );
 }

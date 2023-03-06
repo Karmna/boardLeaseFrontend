@@ -1,12 +1,12 @@
 import styles from "../styles/Profile.module.css";
 import { login, logout, updateUserProfile } from "../reducers/user";
-import { Button, Input, Divider } from "antd";
+import { Button, Input, Divider, Space } from "antd";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Layout} from "antd";
-const {Content} = Layout;
+
+
 
 function Profile() {
   const matches = useMediaQuery("(min-width:768px)");
@@ -72,10 +72,13 @@ function Profile() {
 
   return (
     
-      <Content className={styles.profilePage}>
+      <div className={styles.profilePage}>
+         
         <div className={styles.profile}>
-          <p>Profile</p>
-          <div className={styles.Input}>
+          <h3>Profile</h3>
+          <br />
+          <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+         
             <Input
               type="Prénom"
               placeholder={user.firstname}
@@ -114,15 +117,17 @@ function Profile() {
             >
               Modifier
             </Button>
-          </div>
+           
+         </Space>
           {errorMsg && <p>{errorMsg}</p>}
           {successMsg && <p>{successMsg}</p>}
         </div>
+        
         <Divider />
         <div className={styles.bookingsContainer}>
-          <p>Bookings</p>
+          <h3>Bookings</h3>
         </div>
-      </Content>
+      </div>
      
    
   );

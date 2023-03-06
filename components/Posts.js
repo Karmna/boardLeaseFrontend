@@ -21,7 +21,7 @@ function Posts() {
   }, [router.query.surfProps]);
 
   return (
-    <div>
+    <div className={styles.container}>
       {surfDetails ? (
         <>
           <Image src={surfDetails.pictures} alt={surfDetails.name} />

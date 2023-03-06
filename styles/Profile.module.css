@@ -1,5 +1,6 @@
 .profilePage {
   margin: 5%;
+  height: 100%;
 }
 
 .profile {
@@ -7,5 +8,4 @@
   size: 20px;
   line-height: 28px;
 }
-
 

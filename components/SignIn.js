@@ -4,7 +4,7 @@ import { login } from "../reducers/user";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { Button, Input } from "antd";
+import { Input, Divider, Space } from 'antd'; 
 import * as React from "react";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useRouter } from "next/router";
@@ -19,6 +19,7 @@ function SignIn() {
   const [signInPassword, setSignInPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
+  
   
   const handleSignin = (authMethod, googleCredentialResponse) => {
     setErrorMsg("");
@@ -66,7 +67,7 @@ function SignIn() {
               router.push({
                 pathname: "/booking",
               });
-
+              
             } else {
               setErrorMsg("Problem with JWT : email not found.");
               console.error("Problem with JWT : email not found.");
@@ -82,9 +83,12 @@ function SignIn() {
 
   return (
     <div className={styles.registerContainer}>
+      <h1 className={styles.title}> Connection </h1>
+      <br />
         <GoogleOAuthProvider clientId={clientId}>
           <div className={styles.container}>
             <div className={styles.registerSection}>
+            <Space direction="vertical" size="middle" style={{ display: "flex" }}>
               <Input
                 type="text"
                 placeholder="email"
@@ -101,12 +105,13 @@ function SignIn() {
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
               />
-              <Button id="connection" onClick={() => handleSignin("classic")}>
+              <button className={styles.button} id="connection" onClick={() => handleSignin("classic")}>
                 Se connecter
-              </Button>
-              <h2>Se connecter avec Google</h2>
+              </button>
+              </Space>
+              <Divider>Se connecter avec :</Divider>
               <div className={styles.divider}></div>
-              <GoogleLogin
+              <GoogleLogin 
                 onSuccess={(credentialResponse) =>
                   handleSignin("googleConnect", credentialResponse.credential)
                 }
@@ -114,6 +119,7 @@ function SignIn() {
               />
              
               {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>} 
+             
             </div>
           </div>
         </GoogleOAuthProvider>

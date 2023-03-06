@@ -1,13 +1,13 @@
 import styles from "../styles/Header.module.css";
 import { login, logout } from "../reducers/user";
-import { Modal } from "antd";
+import { Divider, Modal } from "antd";
 import * as React from "react";
 import { useState } from "react"; 
 import { useDispatch, useSelector } from "react-redux";
 import { faUser, faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Button, Dropdown, Input } from "antd";
+import { Button, Dropdown, Input, Space } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import jwt_decode from "jwt-decode";
@@ -100,11 +100,19 @@ function HeaderF() {
     },
     {
       key: "1",
-      label: <Link href="/about">A propos</Link>,
+      label: <Link href="/about">A propos</Link> ,
     },
     {
       key: "2",
-      label: <Link href="/search">Réserver</Link>,
+      label:<Link href="/search">Réserver</Link> ,
+    
+    },
+    {
+      key: "2",
+      label:
+     <div> <Divider style={{ margin: 0 }} /> <Space style={{ padding: 8 }}>
+            <Button href="/search" type="primary">Poster mon surf !</Button>
+          </Space> </div>
     },
   ];
   const menuPropsBar = {
@@ -387,9 +395,9 @@ function HeaderF() {
           menu={menuPropsBar}
           placement="bottomRight"
         >
-          <a onClick={(e) => e.preventDefault()}>
+          <div>
             <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
-          </a>
+            </div>
         </Dropdown>
 
         <Link href="/">
@@ -402,14 +410,15 @@ function HeaderF() {
         >
           <div>
             <div>
-              <a onClick={(e) => e.preventDefault()}>
+              
                 <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
                 
-              </a>
-              {user.token && (
+              
+              
+            </div>
+            {user.token && (
                   <p className={styles.userName}> {user.firstname}</p>
                 )}
-            </div>
             <div>
               <div id="react-modals">
                 <Modal
@@ -449,9 +458,9 @@ function HeaderF() {
           menu={menuPropsBar}
           placement="bottomRight"
         >
-          <a onClick={(e) => e.preventDefault()}>
+          
             <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
-          </a>
+        
         </Dropdown>
         <Link href="/">
           <img className={styles.logo} src="logo.png" alt="Logo" />
@@ -463,12 +472,12 @@ function HeaderF() {
         >
           <div>
             <div>
-              <a onClick={(e) => e.preventDefault()}>
+             
                 <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
                 {user.token && (
                   <p className={styles.userName}> {user.firstname}</p>
                 )}
-              </a>
+              
             </div>
             <div>
               <div id="react-modals">
