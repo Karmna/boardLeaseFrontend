@@ -18,6 +18,7 @@ import filter from "../reducers/filter";
 import search from "../reducers/search";
 import surfs from "../reducers/surfs";
 import favorites from "../reducers/favorites";
+import booking from "../reducers/booking";
 
 const reducers = combineReducers({
   user,
@@ -25,6 +26,7 @@ const reducers = combineReducers({
   search,
   surfs,
   favorites,
+  booking,
 });
 
 const persistConfig = { key: "boardLease", storage };
@@ -52,10 +54,38 @@ function App({ Component, pageProps }) {
       </PersistGate>
     </Provider>
   ) : (
-    <div style={{ height: '100vh', width: '100vw', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0.733)' }}>
-<FontAwesomeIcon className={styles.iconDisplayError} icon={faMobileScreen } size="10x" style={{ color: '#060c5c' }}/>
-<div style={{ fontSize:'35px', color:'white', marginTop:'3%'}}>Votre fenêtre est trop grande.</div>
-<div style={{ fontSize:'25px', color:'white', marginTop:'1%', textAlign:'center'}}>Ce site est optimisé pour une utilisation sur appareils mobiles,<br/> réduisez votre fenêtre à moins de 768 pixels pour accéder aux ressources.</div>
+    <div
+      style={{
+        height: "100vh",
+        width: "100vw",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.733)",
+      }}
+    >
+      <FontAwesomeIcon
+        className={styles.iconDisplayError}
+        icon={faMobileScreen}
+        size="10x"
+        style={{ color: "#060c5c" }}
+      />
+      <div style={{ fontSize: "35px", color: "white", marginTop: "3%" }}>
+        Votre fenêtre est trop grande.
+      </div>
+      <div
+        style={{
+          fontSize: "25px",
+          color: "white",
+          marginTop: "1%",
+          textAlign: "center",
+        }}
+      >
+        Ce site est optimisé pour une utilisation sur appareils mobiles,
+        <br /> réduisez votre fenêtre à moins de 768 pixels pour accéder aux
+        ressources.
+      </div>
     </div>
   );
   return <div>{appDisplay}</div>;

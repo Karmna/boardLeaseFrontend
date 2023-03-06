@@ -21,23 +21,27 @@ const dateFormat = "YYYY-MM-DD";
 function Posts() {
   // utilisation de useMediaQuery pour détecter les correspondances d'écran
   const matches = useMediaQuery("(min-width:768px)");
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
-  const booking = useSelector((state) => state.booking.value);
+
   const router = useRouter();
-  const [surfDetails, setSurfDetails] = useState();
+  const [surfDetails, setSurfDetails] = useState(null);
   console.log("surfDetails", surfDetails);
   const [availabilities, setAvailabilities] = useState([]);
   const [selectedDates, setSelectedDates] = useState([]);
 
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.value);
+  const booking = useSelector((state) => state.booking.value);
+
   console.log("availabilities", availabilities);
 
   useEffect(() => {
-      if (booking.startDate && booking.endDate){
-        setSelectedDates({ startDate: booking.startDate, endDate: booking.endDate });
-      }
+    if (booking.startDate && booking.endDate) {
+      setSelectedDates({
+        startDate: booking.startDate,
+        endDate: booking.endDate,
+      });
     }
-  );
+  });
 
   useEffect(() => {
     if (router.query.surfProps) {
@@ -58,8 +62,31 @@ function Posts() {
   console.log("dates sélectionnées", selectedDates);
 
   const handleRedirect = () => {
+    console.log({ surfDetails: surfDetails.name });
+    console.log({ booking });
+    dispatch(
+      storePendingBooking({
+        surfId: surfDetails._id,
+        startDate: booking.startDate,
+        endDate: booking.endDate,
+        dayPrice: surfDetails.dayPrice,
+        surfName: surfDetails.name,
+        surfType: surfDetails.type,
+        deposit: surfDetails.deposit,
+      })
+    );
     if (user.token) {
-      dispatch(storePendingBooking({surfId: surfDetails._id, startDate: selectedDates.startDate, endDate: selectedDates.endDate, priceDay: surfDetails.priceDay, surfName: surfDetails.name, surfType: surfDetails.type, deposit: surfDetails.deposit}))
+      dispatch(
+        storePendingBooking({
+          surfId: surfDetails._id,
+          startDate: selectedDates.startDate,
+          endDate: selectedDates.endDate,
+          priceDay: surfDetails.priceDay,
+          surfName: surfDetails.name,
+          surfType: surfDetails.type,
+          deposit: surfDetails.deposit,
+        })
+      );
       router.push({
         pathname: "/booking",
       });
@@ -115,20 +142,27 @@ function Posts() {
             </p>
 
             <Rate value={surfDetails.rating} />
-
             <Space direction="vertical" size={12}>
               <RangePicker
                 defaultValue={[
-                  dayjs("2023-08-01", dateFormat),
-                  dayjs("2023-08-15", dateFormat),
+                  dayjs(booking.startDate, dateFormat),
+                  dayjs(booking.endDate, dateFormat),
                 ]}
-                disabled={[false, false]}               
+                format="YYYY-MM-DD"
+                disabledDate={(current) =>
+                  current &&
+                  (current < dayjs(booking.startDate) ||
+                    current > dayjs(booking.endDate))
+                }
+                disabled={[false, false]}
                 onChange={handleDateSelection}
               />
             </Space>
-            <Button className={styles.button} onClick={handleRedirect}>
-              {" "}
-              Réserver{" "}
+            <Button
+              disabled={!booking.startDate || !booking.endDate}
+              onClick={handleRedirect}
+            >
+              Réserver
             </Button>
           </div>
         </>
