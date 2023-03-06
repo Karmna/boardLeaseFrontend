@@ -51,7 +51,7 @@ function HeaderF() {
           rel="noopener noreferrer"
           onClick={showModalInscription}
         >
-          {" "}
+
           Inscription
         </a>
       ),
@@ -404,10 +404,11 @@ function HeaderF() {
             <div>
               <a onClick={(e) => e.preventDefault()}>
                 <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
-                {user.token && (
+                
+              </a>
+              {user.token && (
                   <p className={styles.userName}> {user.firstname}</p>
                 )}
-              </a>
             </div>
             <div>
               <div id="react-modals">
@@ -435,7 +436,7 @@ function HeaderF() {
                   <div>{modalContentConnection}</div>
                 </Modal>
               </div>
-            </div>
+            </div> 
           </div>
         </Dropdown>
       </Header>
