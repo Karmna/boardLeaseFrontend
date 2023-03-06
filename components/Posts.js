@@ -9,7 +9,8 @@ import FavoritesManagement from "./FavoritesManagement";
 import { DatePicker, Space } from "antd";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-// import { storePendingBooking } from "../reducers/booking";
+import { Rate } from "antd";
+import { storePendingBooking } from "../reducers/booking";
 
 dayjs.extend(customParseFormat);
 
@@ -22,13 +23,21 @@ function Posts() {
   const matches = useMediaQuery("(min-width:768px)");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
+  const booking = useSelector((state) => state.booking.value);
   const router = useRouter();
   const [surfDetails, setSurfDetails] = useState();
   console.log("surfDetails", surfDetails);
   const [availabilities, setAvailabilities] = useState([]);
-  const [selectedDates, setSelectedDates] = useState([null, null]);
+  const [selectedDates, setSelectedDates] = useState([]);
 
   console.log("availabilities", availabilities);
+
+  useEffect(() => {
+      if (booking.startDate && booking.endDate){
+        setSelectedDates({ startDate: booking.startDate, endDate: booking.endDate });
+      }
+    }
+  );
 
   useEffect(() => {
     if (router.query.surfProps) {
@@ -41,13 +50,16 @@ function Posts() {
   function handleDateSelection(dates) {
     const selectedDates = dates.map((date) => date.$d);
     console.log(selectedDates);
-    setSelectedDates({ startDate: dates[0].$d, endDate: dates[1].$d });
+    setSelectedDates({
+      startDate: dates[0].$d,
+      endDate: dates[1].$d,
+    });
   }
   console.log("dates sélectionnées", selectedDates);
 
   const handleRedirect = () => {
     if (user.token) {
-      // dispatch(storePendingBooking({surfId: surfDetails._id, startDate: selectedDates.startDate, endDate: selectedDates.endDate, priceDay: surfDetails.priceDay, surfName: surfDetails.name, surfType: surfDetails.type, deposit: surfDetails.deposit}))
+      dispatch(storePendingBooking({surfId: surfDetails._id, startDate: selectedDates.startDate, endDate: selectedDates.endDate, priceDay: surfDetails.priceDay, surfName: surfDetails.name, surfType: surfDetails.type, deposit: surfDetails.deposit}))
       router.push({
         pathname: "/booking",
       });
@@ -59,33 +71,66 @@ function Posts() {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       {surfDetails ? (
         <>
           <Image src={surfDetails.pictures} alt={surfDetails.name} />
-          <div className={styles.title}>
-            <h1>{surfDetails.name}</h1>
-            <FavoritesManagement surf_Id={surfDetails._id} />
+          <div className={styles.content}>
+            <div className={styles.title}>
+              <h1 className={styles.name}>{surfDetails.name}</h1>
+              <FavoritesManagement surf_Id={surfDetails._id} />
+            </div>
+
+            <p className={styles.owner}>
+              <u>
+                <strong>Loué par:</strong>
+              </u>
+              &nbsp; {surfDetails.owner}
+            </p>
+            <p className={styles.placeName}>
+              <u>
+                <strong>De:</strong>
+              </u>
+              &nbsp; {surfDetails.placeName}
+            </p>
+
+            <p className={styles.type}>
+              <u>
+                <strong>Type:</strong>
+              </u>
+              &nbsp; {surfDetails.type}
+            </p>
+
+            <p className={styles.level}>
+              <u>
+                <strong>Niveau:</strong>
+              </u>
+              &nbsp; {surfDetails.level}
+            </p>
+            <p className={styles.dayPrice}>
+              <u>
+                <strong>Prix:</strong>
+              </u>
+              &nbsp; {surfDetails.dayPrice} € / jour
+            </p>
+
+            <Rate value={surfDetails.rating} />
+
+            <Space direction="vertical" size={12}>
+              <RangePicker
+                defaultValue={[
+                  dayjs("2023-08-01", dateFormat),
+                  dayjs("2023-08-15", dateFormat),
+                ]}
+                disabled={[false, false]}               
+                onChange={handleDateSelection}
+              />
+            </Space>
+            <Button className={styles.button} onClick={handleRedirect}>
+              {" "}
+              Réserver{" "}
+            </Button>
           </div>
-          <p>{surfDetails.placeName}</p>
-          <p>{surfDetails.type}</p>
-          <p>{surfDetails.rating}</p>
-          <Space direction="vertical" size={12}>
-            <RangePicker
-              defaultValue={[
-                dayjs("2023-08-01", dateFormat),
-                dayjs("2023-08-10", dateFormat),
-              ]}
-              format="YYYY-MM-DD"
-              disabledDate={(current) =>
-                current &&
-                (current < dayjs("2023-08-01") || current > dayjs("2023-08-10"))
-              }
-              disabled={[false, false]}
-              onChange={handleDateSelection}
-            />
-          </Space>
-          <Button onClick={handleRedirect}> Réserver </Button>
         </>
       ) : (
         <div>Loading...</div>

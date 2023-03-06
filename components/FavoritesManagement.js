@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import * as React from "react";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 import { updateFavorites } from "../reducers/favorites";
 
 function FavoritesManagement({ surf_Id }) {
@@ -49,7 +49,7 @@ function FavoritesManagement({ surf_Id }) {
 
   return (
     <FontAwesomeIcon
-      icon={faStar}
+      icon={faHeart}
       style={iconStyle}
       onClick={() => handleFavorite()}
     />
