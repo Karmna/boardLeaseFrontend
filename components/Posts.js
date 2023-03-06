@@ -41,7 +41,7 @@ function Posts() {
         endDate: booking.endDate,
       });
     }
-  });
+  },[]);
 
   useEffect(() => {
     if (router.query.surfProps) {
@@ -75,18 +75,7 @@ function Posts() {
         deposit: surfDetails.deposit,
       })
     );
-    if (user.token) {
-      dispatch(
-        storePendingBooking({
-          surfId: surfDetails._id,
-          startDate: selectedDates.startDate,
-          endDate: selectedDates.endDate,
-          priceDay: surfDetails.priceDay,
-          surfName: surfDetails.name,
-          surfType: surfDetails.type,
-          deposit: surfDetails.deposit,
-        })
-      );
+    if (user.token) {     
       router.push({
         pathname: "/booking",
       });
@@ -145,8 +134,8 @@ function Posts() {
             <Space direction="vertical" size={12}>
               <RangePicker
                 defaultValue={[
-                  dayjs(booking.startDate, dateFormat),
-                  dayjs(booking.endDate, dateFormat),
+                  dayjs(booking.startDate ? booking.startDate : new Date().toISOString().split('T')[0], dateFormat),
+                  dayjs(booking.endDate ? booking.endDate : new Date().toISOString().split('T')[0], dateFormat),
                 ]}
                 format="YYYY-MM-DD"
                 disabledDate={(current) =>
