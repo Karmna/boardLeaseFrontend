@@ -40,7 +40,7 @@ const handleRent = () => { console.log(imageFileList)
       .then((data) => {
         const firstCity = data.features[0];
 
-    fetch("http://localhost:3000/surfs/surfs", {
+    fetch("https://board-lease-backend.vercel.app/surfs/surfs", {
         method: "POST",
         headers: { Authorization: `Bearer ${user.token}`, "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -74,7 +74,7 @@ const handleLevel = (value) => {
 // Upload de la photo de l'annonce
 const imageProps = {
     name: 'photoFromFront',
-    action:"http://localhost:3000/surfs/upload",
+    action:"https://board-lease-backend.vercel.app/surfs/upload",
     headers: {
       authorization: 'authorization-text',
     },
@@ -95,7 +95,7 @@ const imageProps = {
     maxCount: 1,
   };
 
-  /*
+/*
 const uploadPicture = async () => {
     const formData = new FormData();
     formData.append('photoFromFront',imageFileList);
