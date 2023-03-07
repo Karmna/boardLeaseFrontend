@@ -10,12 +10,22 @@ function Surf(props) {
   const router = useRouter();
 
   const handleRedirectPost = () => {
-    router.push({
-      pathname: "/posts",
-      query: {
-        surfProps: JSON.stringify(props),
-      },
-    });
+    fetch("https://board-lease-backend.vercel.app/surfs/owner/name", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ surfId: props._id }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        router.push({
+          pathname: "/posts",
+          query: {
+            surfProps: JSON.stringify(props),
+            ownerName: JSON.stringify(data),
+          },
+        });
+        console.log("fetch surfs/owner/name", data);
+      });
   };
 
   const surfDisplay = !matches ? (

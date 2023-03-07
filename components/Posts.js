@@ -20,18 +20,26 @@ const { RangePicker } = DatePicker;
 const dateFormat = "YYYY-MM-DD";
 
 function Posts() {
-  // utilisation de useMediaQuery pour détecter les correspondances d'écran
   const matches = useMediaQuery("(min-width:768px)");
-
   const router = useRouter();
   const [surfDetails, setSurfDetails] = useState(null);
   const [availabilities, setAvailabilities] = useState([]);
   const [selectedDates, setSelectedDates] = useState([]);
+  const [ownerName, setOwnerName] = useState();
   const [isDisabled, setIsDisabled] = useState(true);
-
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const booking = useSelector((state) => state.booking.value);
+
+  useEffect(() => {
+    if (router.query.surfProps) {
+      const propsJSON = JSON.parse(router.query.surfProps);
+      const dataJSON = JSON.parse(router.query.ownerName);
+      setSurfDetails(propsJSON);
+      setAvailabilities(propsJSON.availabilities);      
+      setOwnerName(dataJSON.data);
+    }
+  }, [router.query.surfProps]);
 
   useEffect(() => {
     if (booking.startDate && booking.endDate) {
@@ -42,32 +50,19 @@ function Posts() {
     }
   }, []);
 
-  useEffect(() => {
-    if (router.query.surfProps) {
-      const propsJSON = JSON.parse(router.query.surfProps);
-      setSurfDetails(propsJSON);
-      setAvailabilities(propsJSON.availabilities);
-    }
-  }, [router.query.surfProps]);
-
   function handleDateSelection(dates) {
-    const selectedDates = dates.map((date) => date.$d);
-    console.log(selectedDates);
     setSelectedDates({
       startDate: dates[0].$d,
       endDate: dates[1].$d,
     });
   }
-  console.log("dates sélectionnées", selectedDates);
 
   const handleRedirect = () => {
-    console.log({ surfDetails: surfDetails.name });
-    console.log({ booking });
     dispatch(
       storePendingBooking({
         surfId: surfDetails._id,
-        startDate: booking.startDate,
-        endDate: booking.endDate,
+        startDate: selectedDates.startDate,
+        endDate: selectedDates.endDate,
         dayPrice: surfDetails.dayPrice,
         surfName: surfDetails.name,
         surfType: surfDetails.type,
@@ -86,7 +81,6 @@ function Posts() {
   };
 
   const dateRangeOverlaps = (dateRange1, dateRange2) => {
-    console.log(dateRange1, dateRange2);
     dateRange1.startDate = new Date(dateRange1.startDate).getTime();
     dateRange1.endDate = new Date(dateRange1.endDate).getTime();
 
@@ -138,12 +132,11 @@ function Posts() {
               <h1 className={styles.name}>{surfDetails.name}</h1>
               <FavoritesManagement surf_Id={surfDetails._id} />
             </div>
-
             <p className={styles.owner}>
               <u>
                 <strong>Loué par:</strong>
               </u>
-              &nbsp; {surfDetails.owner}
+              &nbsp; {ownerName}
             </p>
             <p className={styles.placeName}>
               <u>
@@ -151,14 +144,12 @@ function Posts() {
               </u>
               &nbsp; {surfDetails.placeName}
             </p>
-
             <p className={styles.type}>
               <u>
                 <strong>Type:</strong>
               </u>
               &nbsp; {surfDetails.type}
             </p>
-
             <p className={styles.level}>
               <u>
                 <strong>Niveau:</strong>
@@ -189,13 +180,17 @@ function Posts() {
                   dayjs(
                     booking.startDate
                       ? booking.startDate
-                      : new Date().toISOString().split("T")[0],
+                      : new Date(availabilities[0].startDate)
+                          .toISOString()
+                          .split("T")[0],
                     dateFormat
                   ),
                   dayjs(
                     booking.endDate
                       ? booking.endDate
-                      : new Date().toISOString().split("T")[0],
+                      : new Date(availabilities[0].endDate)
+                          .toISOString()
+                          .split("T")[0],
                     dateFormat
                   ),
                 ]}
@@ -207,7 +202,13 @@ function Posts() {
             <Button onClick={handleRedirect} disabled={isDisabled}>
               Réserver
             </Button>
-            {isDisabled ? <p className={styles.availabilitiesError}>Ce surf n'est pas disponible pour la période sélectionnée</p> : <p></p>}
+            {isDisabled ? (
+              <p className={styles.availabilitiesError}>
+                Ce surf n'est pas disponible pour la période sélectionnée
+              </p>
+            ) : (
+              <p></p>
+            )}
           </div>
         </>
       ) : (
