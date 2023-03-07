@@ -1,21 +1,31 @@
 .paymentsContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 5%;
+  height: 100%;
+}
 
-    margin: 5%;
-    height: 100%;
+.card {
+  padding: 2rem;
+}
+
+.input {
+  margin-bottom: 10px;
 }
 
 .button {
-    background-color: #060c5c;
-    color: white;
-    padding: 12px 24px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-bottom: 4rem;
-   
-  }
-  
-  .button:hover {
-    background-color: #060c5cb9;
-  }
+  margin-top: 2rem;
+  background-color: #060c5c;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 4rem;
+}
+
+.button:hover {
+  background-color: #060c5cb9;
+}
