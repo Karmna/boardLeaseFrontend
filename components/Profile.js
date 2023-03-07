@@ -1,16 +1,16 @@
 import styles from "../styles/Profile.module.css";
-import { login, logout, updateUserProfile } from "../reducers/user";
-import { Button, Input, Divider, Space } from "antd";
+import { Button, Input, Divider, Space, Card, DatePicker } from "antd";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import React from 'react';
+import moment from 'moment';
 
 
 function Profile() {
   const matches = useMediaQuery("(min-width:768px)");
-
+  const booking = useSelector((state) => state.booking.value);
+  console.log(booking);
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
 
@@ -20,6 +20,7 @@ function Profile() {
   const [newEmail, setNewEmail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
+  const [bookings, setBookings] = useState([]);
 
   const handleInputChange = () => {
     if (!newFirstname && !newLastname && !newUsername && !newEmail) {
@@ -70,66 +71,95 @@ function Profile() {
       });
   };
 
-  return (
-    
-      <div className={styles.profilePage}>
-         
-        <div className={styles.profile}>
-          <h3>Profile</h3>
-          <br />
-          <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-         
-            <Input
-              type="Prénom"
-              placeholder={user.firstname}
-              id="Firstname"
-              value={newFirstname}
-              onChange={(e) => setNewFirstname(e.target.value)}
-            />
-            <Input
-              type="Nom"
-              placeholder={user.lastname}
-              id="Lastname"
-              value={newLastname}
-              onChange={(e) => setNewLastname(e.target.value)}
-            />
-            <Input
-              type="Nom d'utilisateur"
-              placeholder={user.username}
-              id="username"
-              value={newUsername}
-              onChange={(e) => setNewUsername(e.target.value)}
-            />
-            <Input
-              type="Email"
-              placeholder={user.email}
-              id="Email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
+  useEffect(() => {
+    fetch(`https://board-lease-backend.vercel.app/bookings`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${user.token}`,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Réponse BDD", data);
+        setBookings(data.data);
+      });
+  }, []);
 
-            <Button
-              id="register"
-              onClick={(e) => {
-                e.preventDefault();
-                handleInputChange();
-              }}
-            >
-              Modifier
-            </Button>
-           
-         </Space>
-          {errorMsg && <p>{errorMsg}</p>}
-          {successMsg && <p>{successMsg}</p>}
-        </div>
-        
-        <Divider />
-        <div className={styles.bookingsContainer}>
-          <h3>Bookings</h3>
-        </div>
+  const startDate = new Date(booking.startDate);
+  const formattedStartDate = moment(startDate).format("DD/MM/YY");
+
+  const endDate = new Date(booking.endDate);
+  const formattedEndDate = moment(endDate).format("DD/MM/YY");
+
+  const tenantBookingsRecap = bookings.map((booking, i) => {
+    return (
+      <div key={i}>
+        <Card>
+          <li> Propriétaire : {booking.owner}</li>
+          <li> Type de surf : {booking.surfType}</li>
+          <li> Nom du surf : {booking.surfName}</li>
+          <li> Du {formattedStartDate } au {formattedEndDate}</li>  
+        </Card>
       </div>
-     
-   
+    );
+  });
+
+  return (
+    <div className={styles.profilePage}>
+      <div className={styles.profile}>
+        <h3>Profile</h3>
+        <br />
+        <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+          <Input
+            type="Prénom"
+            placeholder={user.firstname}
+            id="Firstname"
+            value={newFirstname}
+            onChange={(e) => setNewFirstname(e.target.value)}
+          />
+          <Input
+            type="Nom"
+            placeholder={user.lastname}
+            id="Lastname"
+            value={newLastname}
+            onChange={(e) => setNewLastname(e.target.value)}
+          />
+          <Input
+            type="Nom d'utilisateur"
+            placeholder={user.username}
+            id="username"
+            value={newUsername}
+            onChange={(e) => setNewUsername(e.target.value)}
+          />
+          <Input
+            type="Email"
+            placeholder={user.email}
+            id="Email"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+          />
+
+          <Button
+            id="register"
+            onClick={(e) => {
+              e.preventDefault();
+              handleInputChange();
+            }}
+          >
+            Modifier
+          </Button>
+        </Space>
+        {errorMsg && <p>{errorMsg}</p>}
+        {successMsg && <p>{successMsg}</p>}
+      </div>
+
+      <Divider />
+      <div className={styles.bookingsContainer}>
+        <h3>Bookings</h3>
+        <div>{tenantBookingsRecap}</div>
+      </div>
+    </div>
   );
 }
 

@@ -45,6 +45,18 @@ function Payments() {
     return isCreditCardNumberValid() && cardName && expiredDate && crypto;
   };
 
+
+    
+  
+  const RedirectionRecapBooking = () => {
+    router.push({
+      pathname: "/signIn",
+    });
+  };
+
+
+
+
   return (
     <div className={styles.paymentsContainer}>
       <h1> Paiement </h1>

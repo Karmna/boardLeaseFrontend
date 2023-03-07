@@ -15,6 +15,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { Layout } from "antd";
 const { Header, Content, Footer } = Layout;
 
+
 function HeaderF() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
@@ -28,12 +29,13 @@ function HeaderF() {
   const [signUpLastname, setSignUpLastname] = useState("");
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpMail, setSignUpMail] = useState(""); 
-
+ 
   const clientId = process.env.CLIENT_ID;
   const matches = useMediaQuery("(min-width:768px)");
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+
 
   const showModalInscription = () => {
     setIsModalVisibleInscription(!isModalVisibleInscription);
@@ -111,7 +113,7 @@ function HeaderF() {
       key: "2",
       label:
      <div> <Divider style={{ margin: 0 }} /> <Space style={{ padding: 8 }}>
-            <Button href="/search" type="primary">Poster mon surf !</Button>
+            <Button href="/rent" type="primary"  >Poster mon surf !</Button>
           </Space> </div>
     },
   ];
@@ -139,6 +141,9 @@ function HeaderF() {
     setSignInUserEmail("");
     setSignInPassword("");
   };
+
+
+
 
   const handleCloseModal = () => {
     // TODO : add onCloseModal (errorclear, form reset, modal not visible)

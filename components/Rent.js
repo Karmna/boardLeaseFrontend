@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/Rent.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
-import { DatePicker, Space, Select, message, Upload, Button } from "antd";
+import { DatePicker, Space, Select, message, Upload, Button, Divider  } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 import { useRouter } from "next/router";
 
@@ -38,9 +38,14 @@ const handleRent = () => {
     fetch(`https://api-adresse.data.gouv.fr/search/?q=${destination}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log("destination", data)
+        /*if (data.length = 0) {
+          message.error("Oups ! Veuillez recommencer svp.");
+          return
+        }*/
         const firstCity = data.features[0];
 
-    fetch("http://localhost:3000/surfs/surfs", {
+    fetch("https://board-lease-backend.vercel.app/surfs/surfs", {
         method: "POST",
         headers: { Authorization: `Bearer ${user.token}`, "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -48,7 +53,7 @@ const handleRent = () => {
             level: level, 
             name: titlePost, 
             dayPrice: dayPrice, 
-            // TODO pictures,
+            pictures : imageFileList,
             placeName: destination, 
             latitude: firstCity.geometry.coordinates[1],
             longitude: firstCity.geometry.coordinates[0],
@@ -58,6 +63,17 @@ const handleRent = () => {
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
+            if (data.result) {
+            message.success("Votre annonce vient d'être postée, merci !");
+            setTitlePost("");
+            setDestination("");
+            setLevel("");
+            setType("");
+            setDayPrice("");
+            setImageFileList("");
+            } else {
+            message.error("Oups ! Veuillez recommencer svp.");
+            }
         })
     });
     //On redirige vers une page via UseRouter ?
@@ -73,7 +89,8 @@ const handleLevel = (value) => {
 
 // Upload de la photo de l'annonce
 const imageProps = {
-    name: 'file',
+    name: 'photoFromFront',
+    action:"https://board-lease-backend.vercel.app/surfs/upload",
     headers: {
       authorization: 'authorization-text',
     },
@@ -83,15 +100,18 @@ const imageProps = {
       }
       if (info.file.status === 'done') {
         message.success(`${info.file.name} file uploaded successfully`);
+        setImageFileList(info.file.response.url)
       } else if (info.file.status === 'error') {
         message.error(`${info.file.name} file upload failed.`);
       }
-      setImageFileList(info.file.linkProps);
-      console.log(imageFileList)
+      
+      console.log(info)
+      
     },
     maxCount: 1,
   };
 
+/*
 const uploadPicture = async () => {
     const formData = new FormData();
     formData.append('photoFromFront',imageFileList);
@@ -103,7 +123,7 @@ const uploadPicture = async () => {
     console.log(data);
 dispatch(addPhoto(data.url));
 });
-}
+}*/
 
 return (
     
@@ -120,38 +140,51 @@ return (
           priority={true}
         />
       </div>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Où sera disponible votre board ?"
-        id="destination"
-        onChange={(e) => setDestination(e.target.value)}
-        value={destination}
-      />
-      <div className={styles.dateContainer}>
-        <Space direction="vertical">
-          <DatePicker onChange={handleStartDate} placeholder="Date de début" />
-        </Space>
-        <Space direction="vertical">
-          <DatePicker onChange={handleEndDate} placeholder="Date de fin" />
-        </Space>
-      </div>
-
 
 {/*Input pour le titre de l'annonce*/}
+<div className={styles.containerTitle}>
+<span>Choisir le titre de votre annonce :</span>
       <input
-        className={styles.input}
+        className={styles.inputTitle}
         type="text"
-        placeholder="Titre de votre annonce"
+        placeholder="Je loue mon surf.."
         id="titlePost"
         onChange={(e) => setTitlePost(e.target.value)}
         value={titlePost}
       />
+</div>
 
-
+      {/*Input pour renseigner la localité*/}
+      <div className={styles.containerDestination}>
+        <span>Où sera disponible votre board ?</span>
+      <input
+        className={styles.inputDestination}
+        type="text"
+        placeholder="Lacanau, Hossegor.."
+        id="destination"
+        onChange={(e) => setDestination(e.target.value)}
+        value={destination}
+      />
+      </div>
+      <Divider />
+      {/*startDate et endDate*/}
+      <div className={styles.dateContainer}>
+      <span>Renseigner vos dates de disponibilité :</span>
+        <div className={styles.startDate}> 
+        <Space direction="vertical">
+          <DatePicker onChange={handleStartDate} placeholder="Date de début" />
+        </Space>
+        </div>
+        <div className={styles.endDate}>
+        <Space direction="vertical">
+          <DatePicker onChange={handleEndDate} placeholder="Date de fin" />
+        </Space>
+        </div>
+      </div>
+      <Divider />
     {/*Select pour choisir type de surf*/}
-    <div>
-    Select pour choisir type de surf
+    <div className={styles.selectType}>
+    <span>Quel est le type de votre board ?</span>
     <Space wrap>
     <Select
       defaultValue="Mon type de surf"
@@ -183,8 +216,8 @@ return (
 
 
     {/*Select pour choisir level de surf*/}
-    <div>
-    Select pour choisir level de surf
+    <div className={styles.selectLevel}>
+    <span>Quel niveau correspond à votre board ?</span>
     <Space wrap>
     <Select
       defaultValue="Le niveau de mon surf"
@@ -215,31 +248,34 @@ return (
   </div>
 <div>
   {/*Input pour le price par day*/}
+  <div className={styles.containerPrice}>
+  <span>Prix /jour en euros :</span>
   <input
-        className={styles.input}
+        className={styles.inputPrice}
         type="Number"
         placeholder="20"
         id="dayPrice"
         onChange={(e) => setDayPrice(e.target.value)}
         value={dayPrice}
       />
-       Euros
+
+  </div>
 </div>
 {console.log(titlePost, destination, searchStartDate, searchEndDate, level, type, dayPrice)}
 
 
-<div>
-Votre image :
+<div className={styles.containerUpload}>
+Une image représentant votre board :
   <Upload {...imageProps}>
 
-    <Button icon={<UploadOutlined />}>Click to Upload (Max : 1)</Button>
+    <Button icon={<UploadOutlined />}>Click (Max : 1)</Button>
   </Upload>
 </div>
 
   {/*Bouton pour envoyer le formulaire*/}
 <div>
       <button className={styles.button} onClick={() => handleRent()}>
-        Je loue mon surf !
+        Je publie mon annonce
       </button>
     </div>
 
