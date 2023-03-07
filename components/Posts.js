@@ -11,6 +11,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Rate } from "antd";
 import { storePendingBooking } from "../reducers/booking";
+import SurfsComments from "./surfsComments";
 
 dayjs.extend(customParseFormat);
 
@@ -24,15 +25,13 @@ function Posts() {
 
   const router = useRouter();
   const [surfDetails, setSurfDetails] = useState(null);
-  console.log("surfDetails", surfDetails);
   const [availabilities, setAvailabilities] = useState([]);
   const [selectedDates, setSelectedDates] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const booking = useSelector((state) => state.booking.value);
-
-  console.log("availabilities", availabilities);
 
   useEffect(() => {
     if (booking.startDate && booking.endDate) {
@@ -41,7 +40,7 @@ function Posts() {
         endDate: booking.endDate,
       });
     }
-  },[]);
+  }, []);
 
   useEffect(() => {
     if (router.query.surfProps) {
@@ -75,7 +74,7 @@ function Posts() {
         deposit: surfDetails.deposit,
       })
     );
-    if (user.token) {     
+    if (user.token) {
       router.push({
         pathname: "/booking",
       });
@@ -85,6 +84,49 @@ function Posts() {
       });
     }
   };
+
+  const dateRangeOverlaps = (dateRange1, dateRange2) => {
+    console.log(dateRange1, dateRange2);
+    dateRange1.startDate = new Date(dateRange1.startDate).getTime();
+    dateRange1.endDate = new Date(dateRange1.endDate).getTime();
+
+    dateRange2.startDate = new Date(dateRange2.startDate).getTime();
+    dateRange2.endDate = new Date(dateRange2.endDate).getTime();
+
+    if (
+      dateRange1.startDate <= dateRange2.startDate &&
+      dateRange2.startDate <= dateRange1.endDate
+    )
+      return true; // dateRange2 starts in dateRange1
+    if (
+      dateRange1.startDate <= dateRange2.endDate &&
+      dateRange2.endDate <= dateRange1.endDate
+    )
+      return true; // dateRange2 ends in dateRange1
+    if (
+      dateRange2.startDate < dateRange1.startDate &&
+      dateRange1.endDate < dateRange2.endDate
+    )
+      return true; // dateRange2 includes dateRange1
+    return false;
+  };
+
+  const checkAvailabibility = (dateRangeArray, dateRange) => {
+    for (let dr of dateRangeArray) {
+      if (dateRangeOverlaps(dr, dateRange)) {
+        return false;
+      }
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    if (checkAvailabibility(availabilities, selectedDates)) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [selectedDates]);
 
   return (
     <div className={styles.container}>
@@ -129,30 +171,43 @@ function Posts() {
               </u>
               &nbsp; {surfDetails.dayPrice} € / jour
             </p>
-
+            <div className={styles.availabilities}>
+              <p className={styles.dispoText}> Disponibilités :</p>
+              {availabilities.map((availability) => (
+                <p>
+                  du{" "}
+                  {new Date(availability.startDate).toISOString().split("T")[0]}{" "}
+                  au{" "}
+                  {new Date(availability.endDate).toISOString().split("T")[0]}
+                </p>
+              ))}
+            </div>
             <Rate value={surfDetails.rating} />
             <Space direction="vertical" size={12}>
               <RangePicker
                 defaultValue={[
-                  dayjs(booking.startDate ? booking.startDate : new Date().toISOString().split('T')[0], dateFormat),
-                  dayjs(booking.endDate ? booking.endDate : new Date().toISOString().split('T')[0], dateFormat),
+                  dayjs(
+                    booking.startDate
+                      ? booking.startDate
+                      : new Date().toISOString().split("T")[0],
+                    dateFormat
+                  ),
+                  dayjs(
+                    booking.endDate
+                      ? booking.endDate
+                      : new Date().toISOString().split("T")[0],
+                    dateFormat
+                  ),
                 ]}
                 format="YYYY-MM-DD"
-                disabledDate={(current) =>
-                  current &&
-                  (current < dayjs(booking.startDate) ||
-                    current > dayjs(booking.endDate))
-                }
                 disabled={[false, false]}
                 onChange={handleDateSelection}
               />
             </Space>
-            <Button
-              disabled={!booking.startDate || !booking.endDate}
-              onClick={handleRedirect}
-            >
+            <Button onClick={handleRedirect} disabled={isDisabled}>
               Réserver
             </Button>
+            {isDisabled ? <p className={styles.availabilitiesError}>Ce surf n'est pas disponible pour la période sélectionnée</p> : <p></p>}
           </div>
         </>
       ) : (

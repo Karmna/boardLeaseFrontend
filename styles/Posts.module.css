@@ -48,3 +48,14 @@ border: 1px solid #060c5c;
     height: 100%;
     padding: 10%;
 }
+
+.dispoText{
+  font-weight: 700;
+  text-decoration: underline;
+  
+}
+
+.availabilitiesError {
+  color: red;
+  font-weight: 400;
+}
