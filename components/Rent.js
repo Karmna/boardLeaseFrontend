@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import styles from "../styles/Rent.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
-import { DatePicker, Space, Select, message, Upload, Button } from "antd";
+import { DatePicker, Space, Select, message, Upload, Button, Divider  } from "antd";
 import { UploadOutlined } from '@ant-design/icons';
 import { useRouter } from "next/router";
 
@@ -34,10 +34,15 @@ const handleEndDate = (date, dateString) => {
 };
 
 // fonction qui gère 
-const handleRent = () => { console.log(imageFileList)
+const handleRent = () => {
     fetch(`https://api-adresse.data.gouv.fr/search/?q=${destination}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log("destination", data)
+        /*if (data.length = 0) {
+          message.error("Oups ! Veuillez recommencer svp.");
+          return
+        }*/
         const firstCity = data.features[0];
 
     fetch("https://board-lease-backend.vercel.app/surfs/surfs", {
@@ -58,6 +63,17 @@ const handleRent = () => { console.log(imageFileList)
         .then((response) => response.json())
         .then((data) => {
             console.log(data)
+            if (data.result) {
+            message.success("Votre annonce vient d'être postée, merci !");
+            setTitlePost("");
+            setDestination("");
+            setLevel("");
+            setType("");
+            setDayPrice("");
+            setImageFileList("");
+            } else {
+            message.error("Oups ! Veuillez recommencer svp.");
+            }
         })
     });
     //On redirige vers une page via UseRouter ?
@@ -150,7 +166,8 @@ return (
         value={destination}
       />
       </div>
-
+      <Divider />
+      {/*startDate et endDate*/}
       <div className={styles.dateContainer}>
       <span>Renseigner vos dates de disponibilité :</span>
         <div className={styles.startDate}> 
@@ -164,7 +181,7 @@ return (
         </Space>
         </div>
       </div>
-
+      <Divider />
     {/*Select pour choisir type de surf*/}
     <div className={styles.selectType}>
     <span>Quel est le type de votre board ?</span>
