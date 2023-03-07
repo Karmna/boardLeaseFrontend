@@ -147,7 +147,7 @@ return (
       <input
         className={styles.inputTitle}
         type="text"
-        placeholder="Je loue un surf.."
+        placeholder="Je loue mon surf.."
         id="titlePost"
         onChange={(e) => setTitlePost(e.target.value)}
         value={titlePost}
