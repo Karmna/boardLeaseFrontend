@@ -1,7 +1,7 @@
 import Rent from "../components/Rent";
 
-function RentPage() {
+function rentPage() {
   return <Rent />;
 }
 
-export default Rent;
+export default rentPage;
