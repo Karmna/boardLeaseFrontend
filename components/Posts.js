@@ -3,10 +3,11 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as React from "react";
-import { Button, Image } from "antd";
+import { Button, Image, Popover } from "antd";
 import { useRouter } from "next/router";
 import FavoritesManagement from "./FavoritesManagement";
 import { DatePicker, Space } from "antd";
+import "antd/dist/reset.css";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { Rate } from "antd";
@@ -27,6 +28,7 @@ function Posts() {
   const [selectedDates, setSelectedDates] = useState([]);
   const [ownerName, setOwnerName] = useState();
   const [isDisabled, setIsDisabled] = useState(true);
+  const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const booking = useSelector((state) => state.booking.value);
@@ -36,7 +38,7 @@ function Posts() {
       const propsJSON = JSON.parse(router.query.surfProps);
       const dataJSON = JSON.parse(router.query.ownerName);
       setSurfDetails(propsJSON);
-      setAvailabilities(propsJSON.availabilities);      
+      setAvailabilities(propsJSON.availabilities);
       setOwnerName(dataJSON.data);
     }
   }, [router.query.surfProps]);
@@ -122,6 +124,14 @@ function Posts() {
     }
   }, [selectedDates]);
 
+  const hide = () => {
+    setOpen(false);
+  };
+
+  const handleOpenChange = (newOpen) => {
+    setOpen(newOpen);
+  };
+
   return (
     <div className={styles.container}>
       {surfDetails ? (
@@ -173,9 +183,32 @@ function Posts() {
                 </p>
               ))}
             </div>
-            <Rate value={surfDetails.rating} />
+
+            <Popover
+              style={{
+                height: "auto",
+                width: "auto",
+                border: "none",
+                borderRadius: "0px",
+                cursor: "pointer",
+                fontSize: "17px",
+                margin: "0px",
+                padding: "0px"
+              }}
+              content={<SurfsComments />}
+              trigger="click"
+              open={open}
+              onOpenChange={handleOpenChange}             
+            >
+              <div className={styles.comments}>
+                <p>
+                  <u>Notes et avis récents</u>
+                </p>
+              </div>
+            </Popover>
+
             <Space direction="vertical" size={12}>
-              <RangePicker
+              <RangePicker              
                 defaultValue={[
                   dayjs(
                     booking.startDate

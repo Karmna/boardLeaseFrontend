@@ -1,0 +1,13 @@
+.container {
+    width: 90vw;
+    height: 50vh; 
+    margin-bottom: 2%;
+    overflow: scroll;
+}
+
+.card {
+    background-color: rgba(246, 220, 248, 0.774);
+    margin-top: 2%;
+    padding: 2%;
+    border-radius: 10px;   
+}
