@@ -14,7 +14,7 @@ import jwt_decode from "jwt-decode";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Layout } from "antd";
 const { Header, Content, Footer } = Layout;
-import { useRouter } from "next/router";
+
 
 function HeaderF() {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ function HeaderF() {
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const router = useRouter();
+
 
   const showModalInscription = () => {
     setIsModalVisibleInscription(!isModalVisibleInscription);
@@ -113,7 +113,7 @@ function HeaderF() {
       key: "2",
       label:
      <div> <Divider style={{ margin: 0 }} /> <Space style={{ padding: 8 }}>
-            <Button href="/search" type="primary" onClick={() => handleRedirectRent()} >Poster mon surf !</Button>
+            <Button href="/rent" type="primary"  >Poster mon surf !</Button>
           </Space> </div>
     },
   ];
@@ -142,11 +142,7 @@ function HeaderF() {
     setSignInPassword("");
   };
 
-  const handleRedirectRent= () => {
-    router.push({
-      pathname: "/rent",
-    });
-  };
+
 
 
   const handleCloseModal = () => {
