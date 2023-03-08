@@ -40,10 +40,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
     "redux-persist": "^6.0.0",
-<<<<<<< HEAD
-=======
     "styled-components": "^5.3.8",
->>>>>>> b9cb0ec82b8ef63e036d78be7740e36fe39bb351
     "stripe": "^11.13.0",
     "uid2": "^1.0.0"
   },

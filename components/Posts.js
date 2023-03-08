@@ -34,31 +34,33 @@ function Posts() {
   const booking = useSelector((state) => state.booking.value);
 
   useEffect(() => {
+    const propsJSON = JSON.parse(router.query.surfProps);
+    const dataJSON = JSON.parse(router.query.ownerName);
     if (router.query.surfProps) {
-      const propsJSON = JSON.parse(router.query.surfProps);
-      const dataJSON = JSON.parse(router.query.ownerName);
       setSurfDetails(propsJSON);
       setAvailabilities(propsJSON.availabilities);
       setOwnerName(dataJSON.data);
     }
-  }, [router.query.surfProps]);
 
-  useEffect(() => {
     if (booking.startDate && booking.endDate) {
       setSelectedDates({
         startDate: booking.startDate,
         endDate: booking.endDate,
       });
-    }
-  }, []);
+    } else {
+      console.log(availabilities);
 
-  useEffect(() => {
-    if (router.query.surfProps) {
-      const propsJSON = JSON.parse(router.query.surfProps);
-      setSurfDetails(propsJSON);
-      setAvailabilities(propsJSON.availabilities);
+      setSelectedDates(propsJSON.availabilities[0]);
     }
   }, [router.query.surfProps]);
+
+  useEffect(() => {
+    if (checkAvailabibility(availabilities, selectedDates)) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+  }, [selectedDates]);
 
   function handleDateSelection(dates) {
     setSelectedDates({
@@ -125,14 +127,6 @@ function Posts() {
     return true;
   };
 
-  useEffect(() => {
-    if (checkAvailabibility(availabilities, selectedDates)) {
-      setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
-    }
-  }, [selectedDates]);
-
   const hide = () => {
     setOpen(false);
   };
@@ -152,47 +146,51 @@ function Posts() {
               <FavoritesManagement surf_Id={surfDetails._id} />
             </div>
             <Card>
-            <p className={styles.owner}>
-              <u>
-                <strong>Loué par:</strong>
-              </u>
-              &nbsp; {ownerName}
-            </p>
-            <p className={styles.placeName}>
-              <u>
-                <strong>De:</strong>
-              </u>
-              &nbsp; {surfDetails.placeName}
-            </p>
-            <p className={styles.type}>
-              <u>
-                <strong>Type:</strong>
-              </u>
-              &nbsp; {surfDetails.type}
-            </p>
-            <p className={styles.level}>
-              <u>
-                <strong>Niveau:</strong>
-              </u>
-              &nbsp; {surfDetails.level}
-            </p>
-            <p className={styles.dayPrice}>
-              <u>
-                <strong>Prix:</strong>
-              </u>
-              &nbsp; {surfDetails.dayPrice} € / jour
-            </p>
-            <div className={styles.availabilities}>
-              <p className={styles.dispoText}> Disponibilités :</p>
-              {availabilities.map((availability, i) => (
-                <p key={i}>
-                  du{" "}
-                  {new Date(availability.startDate).toISOString().split("T")[0]}{" "}
-                  au{" "}
-                  {new Date(availability.endDate).toISOString().split("T")[0]}
-                </p>
-              ))}
-            </div>
+              <p className={styles.owner}>
+                <u>
+                  <strong>Loué par:</strong>
+                </u>
+                &nbsp; {ownerName}
+              </p>
+              <p className={styles.placeName}>
+                <u>
+                  <strong>De:</strong>
+                </u>
+                &nbsp; {surfDetails.placeName}
+              </p>
+              <p className={styles.type}>
+                <u>
+                  <strong>Type:</strong>
+                </u>
+                &nbsp; {surfDetails.type}
+              </p>
+              <p className={styles.level}>
+                <u>
+                  <strong>Niveau:</strong>
+                </u>
+                &nbsp; {surfDetails.level}
+              </p>
+              <p className={styles.dayPrice}>
+                <u>
+                  <strong>Prix:</strong>
+                </u>
+                &nbsp; {surfDetails.dayPrice} € / jour
+              </p>
+              <div className={styles.availabilities}>
+                <p className={styles.dispoText}> Disponibilités :</p>
+                {availabilities.map((availability, i) => (
+                  <p key={i}>
+                    du{" "}
+                    {
+                      new Date(availability.startDate)
+                        .toISOString()
+                        .split("T")[0]
+                    }{" "}
+                    au{" "}
+                    {new Date(availability.endDate).toISOString().split("T")[0]}
+                  </p>
+                ))}
+              </div>
             </Card>
             <Popover
               style={{
@@ -203,12 +201,12 @@ function Posts() {
                 cursor: "pointer",
                 fontSize: "17px",
                 margin: "0px",
-                padding: "0px"
+                padding: "0px",
               }}
               content={<SurfsComments />}
               trigger="click"
               open={open}
-              onOpenChange={handleOpenChange}             
+              onOpenChange={handleOpenChange}
             >
               <div className={styles.comments}>
                 <p>
@@ -218,7 +216,7 @@ function Posts() {
             </Popover>
 
             <Space direction="vertical" size={12}>
-              <RangePicker              
+              <RangePicker
                 defaultValue={[
                   dayjs(
                     booking.startDate
