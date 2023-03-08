@@ -1,5 +1,4 @@
-import Payments from '../components/Payments';
-
+import Payments from "../components/Payments";
 
 function PaymentsPage() {
   return <Payments />;
