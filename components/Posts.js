@@ -174,8 +174,8 @@ function Posts() {
             </p>
             <div className={styles.availabilities}>
               <p className={styles.dispoText}> Disponibilités :</p>
-              {availabilities.map((availability) => (
-                <p>
+              {availabilities.map((availability, i) => (
+                <p key={i}>
                   du{" "}
                   {new Date(availability.startDate).toISOString().split("T")[0]}{" "}
                   au{" "}

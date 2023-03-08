@@ -12,7 +12,7 @@ function FooterFunction() {
   const matches = useMediaQuery("(min-width:768px)");
 
   const footerDisplay = !matches ? (
-    <Layout>
+    // <Layout>
       <Footer className={styles.footerStyle}>
         <div className={styles.footerlogoExplore}>
           <Link href="/explorer">
@@ -30,9 +30,9 @@ function FooterFunction() {
           <p>Favoris</p>
         </div>
       </Footer>
-    </Layout>
+    // </Layout>
   ) : (
-    <Layout>
+    // <Layout>
       <Footer className={styles.footerStyleDesktop}>
         <div>
           <p>
@@ -49,7 +49,7 @@ function FooterFunction() {
           <p> Nous contacter</p>
         </div>
       </Footer>
-    </Layout>
+    // </Layout>
   );
 
   return <div>{footerDisplay}</div>;
