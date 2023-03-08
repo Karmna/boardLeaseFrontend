@@ -8,6 +8,7 @@ const initialState = {
 
     // stage 2/3 : dispatch du bouton réserver dans component Posts.js
     surfId: "",
+    placeName: "",
     surfName: "",
     surfType: "",
     dayPrice: 0,
@@ -36,6 +37,7 @@ export const bookingSlice = createSlice({
       state.value.surfId = action.payload.surfId;
       state.value.startDate = action.payload.startDate;
       state.value.endDate = action.payload.endDate;
+      state.value.placeName = action.payload.placeName;
       state.value.surfName = action.payload.surfName;
       state.value.surfType = action.payload.surfType;
       state.value.dayPrice = action.payload.dayPrice;

@@ -14,6 +14,12 @@
   margin-bottom: 10px;
 }
 
+.error {
+  color: red;
+  font-weight: 600;
+  text-align: center;
+}
+
 .button {
   margin-top: 2rem;
   background-color: #060c5c;
