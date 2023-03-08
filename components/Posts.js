@@ -11,13 +11,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { storePendingBooking } from "../reducers/booking";
 import SurfsComments from "./surfsComments";
-<<<<<<< HEAD
-import { faDollar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-=======
-import { checkAvailabibility } from "../lib/leaseLibraryFront";
->>>>>>> bd1704f195f542535ff32d49355fee37745b76b1
-
+import { checkAvailabibility} from "../lib/leaseLibraryFront"
 dayjs.extend(customParseFormat);
 
 const { RangePicker } = DatePicker;
@@ -134,106 +128,12 @@ function Posts() {
             <p className={styles.owner}>
               Surf de {ownerName} de {surfDetails.placeName}
             </p>
-<<<<<<< HEAD
             <Card bordered={false} >
               <p className={styles.type}>
                 <u>
                   <strong>Type:</strong>
                 </u>
                 &nbsp; {surfDetails.type}
-=======
-            <p className={styles.placeName}>
-              <u>
-                <strong>De:</strong>
-              </u>
-              &nbsp; {surfDetails.placeName}
-            </p>
-            <p className={styles.type}>
-              <u>
-                <strong>Type:</strong>
-              </u>
-              &nbsp; {surfDetails.type}
-            </p>
-            <p className={styles.level}>
-              <u>
-                <strong>Niveau:</strong>
-              </u>
-              &nbsp; {surfDetails.level}
-            </p>
-            <p className={styles.dayPrice}>
-              <u>
-                <strong>Prix:</strong>
-              </u>
-              &nbsp; {surfDetails.dayPrice} € / jour
-            </p>
-            <div className={styles.availabilities}>
-              <p className={styles.dispoText}> Disponibilités :</p>
-              {availabilities.map((availability, i) => (
-                <p key={i}>
-                  du{" "}
-                  {new Date(availability.startDate).toISOString().split("T")[0]}{" "}
-                  au{" "}
-                  {new Date(availability.endDate).toISOString().split("T")[0]}
-                </p>
-              ))}
-            </div>
-            </Card>
-            <Popover
-              style={{
-                height: "auto",
-                width: "auto",
-                border: "none",
-                borderRadius: "0px",
-                cursor: "pointer",
-                fontSize: "17px",
-                margin: "0px",
-                padding: "0px"
-              }}
-              content={<SurfsComments />}
-              trigger="click"
-              open={open}
-              onOpenChange={handleOpenChange}             
-            >
-              <div className={styles.comments}>
-                <p>
-                  <u>Notes et avis récents</u>
-                </p>
-              </div>
-            </Popover>
-
-            <Space direction="vertical" size={12}>
-              <RangePicker              
-                defaultValue={[
-                  dayjs(
-                    booking.startDate
-                      ? booking.startDate
-                      : new Date(availabilities[0].startDate)
-                          .toISOString()
-                          .split("T")[0],
-                    dateFormat
-                  ),
-                  dayjs(
-                    booking.endDate
-                      ? booking.endDate
-                      : new Date(availabilities[0].endDate)
-                          .toISOString()
-                          .split("T")[0],
-                    dateFormat
-                  ),
-                ]}
-                format="YYYY-MM-DD"
-                disabled={[false, false]}
-                onChange={handleDateSelection}
-                popupStyle={{ width: '50%' }}                
-              />
-            </Space>
-            <Button onClick={handleRedirect} disabled={isDisabled}>
-              Réserver
-            </Button>
-            {isDisabled ? (
-              <p className={styles.availabilitiesError}>
-                Ce surf n'est pas disponible pour la période sélectionnée
->>>>>>> bd1704f195f542535ff32d49355fee37745b76b1
               </p>
               <p className={styles.level}>
                 <u>
@@ -262,7 +162,6 @@ function Posts() {
                   </p>
                 ))}
               </div>
-
               <Space direction="vertical" size={12}>
                 <strong className={styles.dispoText}>
                   Sélectionner des dates:
@@ -307,8 +206,7 @@ function Posts() {
               Ce surf n'est pas disponible pour la période sélectionnée
             </p>
           ) : (
-            <p></p>
-           
+            <p></p>           
           )}
           </div>
         </>
