@@ -102,7 +102,7 @@ function Payments() {
 
     // Simule l'appel à un centre de paiment avec un timeout
     setTimeout(() => {
-      fetch("http://localhost:3000/bookings", {
+      fetch("https://board-lease-backend.vercel.app/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
