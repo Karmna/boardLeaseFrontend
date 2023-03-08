@@ -1,6 +1,6 @@
 .logo {
   height: 100%;
-
+width: auto;
   color: white;
 }
 
@@ -21,6 +21,9 @@
   height: 64px;
   padding-inline: 50;
   line-height: 64px;
+  top: 0;
+  
+ 
 }
 
 .userSelector {
@@ -33,4 +36,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.inputContainer {
+  margin-top: 50%;
+  margin-bottom: 50%;
 }

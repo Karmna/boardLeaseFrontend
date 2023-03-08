@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import styles from "../styles/Home.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
-import { DatePicker, Space } from "antd";
+import { Card, DatePicker, Space, Input } from "antd";
 import { addFilter } from "../reducers/filter";
 import { storeTenantDateRange } from "../reducers/booking";
 import { useRouter } from "next/router";
@@ -52,38 +52,46 @@ function Home() {
 
   return (
     <div className={styles.content}>
-      <div className={styles.textContainer}>
-        <h1 className={styles.h1}>Welcome to Board Lease !</h1>
+       <div className={styles.textContainer}>
+        <h1 className={styles.h1}>Board Lease </h1>
+        <br/>
         <h2 className={styles.h2}>Location de surfboard entre particuliers</h2>
       </div>
       <div className={styles.imageContainer}>
         <Image
-          src="/slide-image-1.webp"
+          className={styles.image}
+          src="/home2.jpg"
           layout="fill"
           objectFit="contain"
           alt="Slide image 1"
           priority={true}
         />
       </div>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Destination"
-        id="searchPlace"
-        onChange={(e) => setSearchPlace(e.target.value)}
-        value={searchPlace}
-      />
-      <div className={styles.dateContainer}>
-        <Space direction="vertical">
-          <DatePicker onChange={handleStartDate} placeholder="Date de début" />
-        </Space>
-        <Space direction="vertical">
-          <DatePicker onChange={handleEndDate} placeholder="Date de fin" />
-        </Space>
-      </div>
+      <div className={styles.inputContainer}>
+        <Input
+          className={styles.input}
+          type="text"
+          placeholder="Destination"
+          id="searchPlace"
+          onChange={(e) => setSearchPlace(e.target.value)}
+          value={searchPlace}
+        />
+        <div className={styles.dateContainer}>
+          <Space direction="vertical">
+            <DatePicker
+              onChange={handleStartDate}
+              placeholder="Date de début"
+            />
+          </Space>
+          <Space direction="vertical">
+            <DatePicker onChange={handleEndDate} placeholder="Date de fin" />
+          </Space>
+        </div>
       <button className={styles.button} onClick={() => handleSearch()}>
         Rechercher
       </button>
+    </div>
+
     </div>
   );
 }

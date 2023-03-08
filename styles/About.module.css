@@ -1,11 +1,11 @@
 .images {
   width: 100%;
 }
-.p {
-  margin: 30px;
-}
 
 .aboutContainer {
   height: 100%;
- padding: 10px;
+ padding: 20px;
+ padding-bottom: 80px;
+ 
 }
+

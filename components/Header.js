@@ -393,7 +393,7 @@ function HeaderF() {
     );
   }
   const footerDisplay = !matches ? (
-    <Layout>
+    <div>
       <Header className={styles.headerStyle}>
         <Dropdown
           className={styles.dropDown}
@@ -454,9 +454,9 @@ function HeaderF() {
           </div>
         </Dropdown>
       </Header>
-    </Layout>
+    </div>
   ) : (
-    <Layout>
+    
       <Header className={styles.headerStyleDesktop}>
         <Dropdown
           className={styles.dropDown}
@@ -514,7 +514,7 @@ function HeaderF() {
           </div>
         </Dropdown>
       </Header>
-    </Layout>
+    
   );
 
   return <div>{footerDisplay}</div>;

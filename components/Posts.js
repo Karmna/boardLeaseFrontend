@@ -6,7 +6,7 @@ import * as React from "react";
 import { Button, Image, Popover } from "antd";
 import { useRouter } from "next/router";
 import FavoritesManagement from "./FavoritesManagement";
-import { DatePicker, Space } from "antd";
+import { DatePicker, Space, Card } from "antd";
 import "antd/dist/reset.css";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
@@ -142,6 +142,7 @@ function Posts() {
               <h1 className={styles.name}>{surfDetails.name}</h1>
               <FavoritesManagement surf_Id={surfDetails._id} />
             </div>
+            <Card>
             <p className={styles.owner}>
               <u>
                 <strong>Loué par:</strong>
@@ -183,7 +184,7 @@ function Posts() {
                 </p>
               ))}
             </div>
-
+            </Card>
             <Popover
               style={{
                 height: "auto",

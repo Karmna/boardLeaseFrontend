@@ -162,6 +162,9 @@ function SignUp() {
       <button className={styles.button} id="connection" onClick={() => handleRedirectConnection()}>
         Se connecter
       </button>
+      <br/>
+      <br/>
+      
     </div>
   );
 }

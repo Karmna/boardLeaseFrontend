@@ -1,32 +1,38 @@
-.footerContainer {
-  height: 96px;
-}
+
 
 .footerStyle {
-  height: 96 px;
+  height: 64px;
   background-color: #060c5c;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+  width: 100%;
+  padding-inline: 50;
+  bottom: 0;
+  position: fixed;
 }
 
 .useSelector {
   font-size: 20px;
   color: white;
+ 
 }
 
-.p {
-  color: white;
-  font-size: 10px;
-}
+
 
 .footerlogoExplore {
   color: white;
+  font-size: 10px;
+  padding: 40px;
+ 
+  
 }
 
 .footerlogoCoeur {
   color: white;
+  font-size: 10px;
+  padding: 40px;
 }
 
 .footerStyleDesktop {

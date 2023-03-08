@@ -1,6 +1,7 @@
 .registerContainer {
     height: 100%;
     padding: 10%;
+    margin-bottom: 60px;
     
 }
 
@@ -12,7 +13,8 @@
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-bottom: 4rem;
+    margin-bottom: 60px;
+    
   }
   
   .button:hover {

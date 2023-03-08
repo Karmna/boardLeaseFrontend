@@ -4,7 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { Layout } from "antd";
-const { Footer, Content, Header } = Layout;
+const { Header, Content, Footer } = Layout;
+
 
 // test deploy
 
@@ -12,7 +13,7 @@ function FooterFunction() {
   const matches = useMediaQuery("(min-width:768px)");
 
   const footerDisplay = !matches ? (
-    <Layout>
+   
       <Footer className={styles.footerStyle}>
         <div className={styles.footerlogoExplore}>
           <Link href="/explorer">
@@ -21,18 +22,22 @@ function FooterFunction() {
               icon={faMagnifyingGlass}
             />
           </Link>
+          <br/>
+          <br/>
           <p>Explorer</p>
         </div>
         <div className={styles.footerlogoCoeur}>
           <Link href="/favorites">
             <FontAwesomeIcon className={styles.useSelector} icon={faHeart} />
           </Link>
+          <br/>
+          <br/>
           <p>Favoris</p>
         </div>
       </Footer>
-    </Layout>
+    
   ) : (
-    <Layout>
+   
       <Footer className={styles.footerStyleDesktop}>
         <div>
           <p>
@@ -49,7 +54,7 @@ function FooterFunction() {
           <p> Nous contacter</p>
         </div>
       </Footer>
-    </Layout>
+    
   );
 
   return <div>{footerDisplay}</div>;
