@@ -8,7 +8,7 @@ import Cards from "react-credit-cards";
 import Stripe from "stripe";
 import "react-credit-cards/es/styles-compiled.css";
 import CheckoutForm from "./CheckoutForm";
-import { CardElement, Elements } from "@stripe/react-stripe-js";
+import { CardElement, Elements, PaymentElement } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
 
 import uid2 from "uid2";

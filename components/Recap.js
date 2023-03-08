@@ -74,7 +74,9 @@ function Recap() {
           </div>
           <br/>
           <br/>
-          <p> Merci pour votre réservation. Une copie vient d’être envoyée à votre adresse email !</p>
+          <div className={styles.gifContainer}>
+          <p> Merci pour votre réservation. 
+            Une copie vient d’être envoyée à votre adresse email !</p>
           <br/>
           <Image
           width={150}
@@ -84,6 +86,7 @@ function Recap() {
           alt="Slide image 1"
           priority={true}
         />
+        </div>
           
         </div>
       )}
