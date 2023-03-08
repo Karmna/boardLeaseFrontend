@@ -97,20 +97,20 @@ function HeaderF() {
 
   const menuBar = [
     {
-      key: "2",
+      key: "1",
       label: <Link href="/">Menu</Link>,
     },
     {
-      key: "1",
+      key: "2",
       label: <Link href="/about">A propos</Link> ,
     },
     {
-      key: "2",
+      key: "3",
       label:<Link href="/search">Réserver</Link> ,
     
     },
     {
-      key: "2",
+      key: "4",
       label:
      <div> <Divider style={{ margin: 0 }} /> <Space style={{ padding: 8 }}>
             <Button href="/rent" type="primary"  >Poster mon surf !</Button>
