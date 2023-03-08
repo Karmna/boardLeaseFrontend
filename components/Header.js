@@ -414,16 +414,17 @@ function HeaderF() {
           placement="bottomRight"
         >
           <div>
+          
             <div>
-              
+            {user.token && (
+                  <div className={styles.userName}> {user.firstname}</div>
+                )}
                 <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
                 
-              
-              
             </div>
-            {user.token && (
+            {/* {user.token && (
                   <p className={styles.userName}> {user.firstname}</p>
-                )}
+                )} */}
             <div>
               <div id="react-modals">
                 <Modal
