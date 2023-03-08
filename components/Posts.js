@@ -128,10 +128,11 @@ function Posts() {
             <p className={styles.owner}>
               Surf de {ownerName} de {surfDetails.placeName}
             </p>
-            <Space direction="vertical" size={12}>
-                <strong className={styles.dispoText}>
+            <div className={styles.buttonContainer}>
+            <Space bordered={false} direction="vertical" size={12} >
+                {/* <strong className={styles.dispoText}>
                   Sélectionner des dates:
-                </strong>
+                </strong> */}
                 <RangePicker
                   defaultValue={[
                     dayjs(
@@ -163,6 +164,7 @@ function Posts() {
           >
             Réserver
           </button>
+          </div>
             <Card bordered={false} >
               <p className={styles.type}>
                 <u>
@@ -197,45 +199,12 @@ function Posts() {
                   </p>
                 ))}
               </div>
-              <Space direction="vertical" size={12}>
-                <strong className={styles.dispoText}>
-                  Sélectionner des dates:
-                </strong>
-                <RangePicker
-                  defaultValue={[
-                    dayjs(
-                      booking.startDate
-                        ? booking.startDate
-                        : new Date(availabilities[0].startDate)
-                            .toISOString()
-                            .split("T")[0],
-                      dateFormat
-                    ),
-                    dayjs(
-                      booking.endDate
-                        ? booking.endDate
-                        : new Date(availabilities[0].endDate)
-                            .toISOString()
-                            .split("T")[0],
-                      dateFormat
-                    ),
-                  ]}
-                  format="YYYY-MM-DD"
-                  disabled={[false, false]}
-                  onChange={handleDateSelection}
-                />
-              </Space>
+              
             </Card>
           </div>
           <br/>
-          <div className={styles.buttonContainer}>
-          <button
-            className={styles.button}
-            onClick={handleRedirect}
-            disabled={isDisabled}
-          >
-            Réserver
-          </button>
+         
+          
           {isDisabled ? (
             <p className={styles.availabilitiesError}>
               Ce surf n'est pas disponible pour la période sélectionnée
@@ -243,7 +212,7 @@ function Posts() {
           ) : (
             <p></p>           
           )}
-          </div>
+          
         </>
       ) : (
         <div>Loading...</div>

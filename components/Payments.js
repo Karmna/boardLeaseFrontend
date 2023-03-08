@@ -134,8 +134,6 @@ function Payments() {
 
   return (
     <div className={styles.paymentsContainer}>
-      <h1> Paiement </h1>
-      <br />
       <Space
         direction="vertical"
         size="middle"

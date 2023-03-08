@@ -71,7 +71,8 @@ border: 1px solid #060c5c;
 }
 
 .buttonContainer {
-  /* display: flex; */
-  flex-direction: column; 
-  align-items: center;
+  display: flex;
+  flex-direction: row; 
+  justify-content: space-between;
+  align-items: center
 }
