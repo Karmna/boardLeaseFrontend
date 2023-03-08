@@ -1,0 +1,26 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.card {
+display: flex;
+padding-top: 20px;
+}
+
+.deleteButton{
+    background-color: white;
+    border: 1px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.deleteButton.button:click {
+    background-color: #060c5cb9;
+  }
