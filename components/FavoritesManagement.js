@@ -12,9 +12,7 @@ function FavoritesManagement({ surf_Id }) {
   const favorites = useSelector((state) => state.favorites.value);
   const [isFavorite, setIsFavorite] = useState(false);
   const router = useRouter();
-
-  console.log("surf_Id", surf_Id);
-
+  
   useEffect(() => {
     if (favorites.some((favorite) => favorite._id === surf_Id)) {
       setIsFavorite(true);
