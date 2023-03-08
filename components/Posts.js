@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { storePendingBooking } from "../reducers/booking";
 import SurfsComments from "./surfsComments";
-import { checkAvailabibility} from "../lib/leaseLibraryFront"
+import { checkAvailabibility } from "../lib/leaseLibraryFront";
 dayjs.extend(customParseFormat);
 
 const { RangePicker } = DatePicker;
@@ -30,26 +30,32 @@ function Posts() {
   const user = useSelector((state) => state.user.value);
   const booking = useSelector((state) => state.booking.value);
 
-  useEffect(() => {
-    const propsJSON = JSON.parse(router.query.surfProps);
-    const dataJSON = JSON.parse(router.query.ownerName);
-    if (router.query.surfProps) {
-      setSurfDetails(propsJSON);
-      setAvailabilities(propsJSON.availabilities);
-      setOwnerName(dataJSON.data);
-    }
+    let toggleDisplay=true
+    useEffect(() => {   
+      if (router.query.surfProps) {
+      const propsJSON = JSON.parse(router.query.surfProps);
+      const dataJSON = JSON.parse(router.query.ownerName);
+      if (router.query.surfProps) {
+        setSurfDetails(propsJSON);
+        setAvailabilities(propsJSON.availabilities);
+        setOwnerName(dataJSON.data);
+      }
 
-    if (booking.startDate && booking.endDate) {
-      setSelectedDates({
-        startDate: booking.startDate,
-        endDate: booking.endDate,
-      });
-    } else {
-      console.log(availabilities);
+      if (booking.startDate && booking.endDate) {
+        setSelectedDates({
+          startDate: booking.startDate,
+          endDate: booking.endDate,
+        });
+      } else {
+        console.log(availabilities);
 
-      setSelectedDates(propsJSON.availabilities[0]);
-    }
-  }, [router.query.surfProps]);
+        setSelectedDates(propsJSON.availabilities[0]);
+      }
+      } else {
+        toggleDisplay=false
+      }
+    }, [router.query.surfProps]);
+ 
 
   useEffect(() => {
     if (checkAvailabibility(availabilities, selectedDates)) {
@@ -95,7 +101,7 @@ function Posts() {
 
   return (
     <div className={styles.container}>
-      {surfDetails ? (
+      {surfDetails && toggleDisplay ? (
         <>
           <div className={styles.title}>
             <h1 className={styles.name}>{surfDetails.name}</h1>
@@ -129,41 +135,42 @@ function Posts() {
               Surf de {ownerName} de {surfDetails.placeName}
             </p>
             <Space direction="vertical" size={12}>
-                <strong className={styles.dispoText}>
-                  Sélectionner des dates:
-                </strong>
-                <RangePicker
-                  defaultValue={[
-                    dayjs(
-                      booking.startDate
-                        ? booking.startDate
-                        : new Date(availabilities[0].startDate)
-                            .toISOString()
-                            .split("T")[0],
-                      dateFormat
-                    ),
-                    dayjs(
-                      booking.endDate
-                        ? booking.endDate
-                        : new Date(availabilities[0].endDate)
-                            .toISOString()
-                            .split("T")[0],
-                      dateFormat
-                    ),
-                  ]}
-                  format="YYYY-MM-DD"
-                  disabled={[false, false]}
-                  onChange={handleDateSelection}
-                />
-              </Space>
+              <strong className={styles.dispoText}>
+                Sélectionner des dates:
+              </strong>
+              <RangePicker
+                defaultValue={[
+                  dayjs(
+                    booking.startDate
+                      ? booking.startDate
+                      : new Date(availabilities[0].startDate)
+                          .toISOString()
+                          .split("T")[0],
+                    dateFormat
+                  ),
+                  dayjs(
+                    booking.endDate
+                      ? booking.endDate
+                      : new Date(availabilities[0].endDate)
+                          .toISOString()
+                          .split("T")[0],
+                    dateFormat
+                  ),
+                ]}
+                format="YYYY-MM-DD"
+                disabled={[false, false]}
+                onChange={handleDateSelection}
+                popupStyle={{ width: 50 }}
+              />
+            </Space>
             <button
-            className={styles.button}
-            onClick={handleRedirect}
-            disabled={isDisabled}
-          >
-            Réserver
-          </button>
-            <Card bordered={false} >
+              className={styles.button}
+              onClick={handleRedirect}
+              disabled={isDisabled}
+            >
+              Réserver
+            </button>
+            <Card bordered={false}>
               <p className={styles.type}>
                 <u>
                   <strong>Type:</strong>
@@ -197,52 +204,24 @@ function Posts() {
                   </p>
                 ))}
               </div>
-              <Space direction="vertical" size={12}>
-                <strong className={styles.dispoText}>
-                  Sélectionner des dates:
-                </strong>
-                <RangePicker
-                  defaultValue={[
-                    dayjs(
-                      booking.startDate
-                        ? booking.startDate
-                        : new Date(availabilities[0].startDate)
-                            .toISOString()
-                            .split("T")[0],
-                      dateFormat
-                    ),
-                    dayjs(
-                      booking.endDate
-                        ? booking.endDate
-                        : new Date(availabilities[0].endDate)
-                            .toISOString()
-                            .split("T")[0],
-                      dateFormat
-                    ),
-                  ]}
-                  format="YYYY-MM-DD"
-                  disabled={[false, false]}
-                  onChange={handleDateSelection}
-                />
-              </Space>
             </Card>
           </div>
-          <br/>
+          <br />
           <div className={styles.buttonContainer}>
-          <button
-            className={styles.button}
-            onClick={handleRedirect}
-            disabled={isDisabled}
-          >
-            Réserver
-          </button>
-          {isDisabled ? (
-            <p className={styles.availabilitiesError}>
-              Ce surf n'est pas disponible pour la période sélectionnée
-            </p>
-          ) : (
-            <p></p>           
-          )}
+            <button
+              className={styles.button}
+              onClick={handleRedirect}
+              disabled={isDisabled}
+            >
+              Réserver
+            </button>
+            {isDisabled ? (
+              <p className={styles.availabilitiesError}>
+                Ce surf n'est pas disponible pour la période sélectionnée
+              </p>
+            ) : (
+              <p></p>
+            )}
           </div>
         </>
       ) : (
