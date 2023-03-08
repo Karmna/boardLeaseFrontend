@@ -23,9 +23,7 @@ function SearchPage() {
             />
             {surfs &&
               surfs.map((data, i) => {
-                return (
-                  <Markers key={i} markerData={data}/>
-                );
+                return <Markers key={i} markerData={data} />;
               })}
           </>
         )}

@@ -24,7 +24,6 @@ function Surf(props) {
             ownerName: JSON.stringify(data),
           },
         });
-        console.log("fetch surfs/owner/name", data);
       });
   };
 

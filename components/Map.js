@@ -1,7 +1,7 @@
 // Import de la fonction dynamique de Next.js permettant de charger un composant de manière asynchrone
 import dynamic from "next/dynamic";
 
-const DynamicMap = dynamic(() => import("./DynamicMap"), {
+const MapWithNoSSR = dynamic(() => import("./DynamicMap"), {
   ssr: false, // Empêche le rendu côté serveur (server-side rendering)
 });
 
@@ -13,7 +13,7 @@ const Map = (props) => {
   const { width = DEFAULT_WIDTH, height = DEFAULT_HEIGHT } = props;
   return (
     <div style={{ aspectRatio: width / height }}>
-      <DynamicMap {...props} />
+      <MapWithNoSSR {...props} />
     </div>
   );
 };

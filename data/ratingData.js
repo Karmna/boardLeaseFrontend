@@ -115,15 +115,20 @@ export const surfRating6 = [
     name: "Léa",
     text: "Site sérieux, propiétaire au top.",
     rating: 4,
-  },
+  }, 
   {
-    name: "Romain",
-    text: "Ras",
+    name: "Emma",
+    text: "Board Lease est de loin le meilleur site de location de planches de surf que j'ai utilisé. Les planches sont toujours en excellent état et le service à la clientèle est exceptionnel. Les propriétaires sont toujours serviables et sympathiques et sont prêts à partager leur passion pour le surf avec les clients. Je recommande vivement Board Lease à tous les surfeurs !",
     rating: 5,
   },
 ];
 
 export const surfRating7 = [
+  {
+    name: "Lucie",
+    text: "Première fois que je loue une planche de surf et j'ai été agréablement surprise par la qualité du service. Je recommande.",
+    rating: 4,
+  },
   {
     name: "Marie",
     text: "Excellent service, je recommande.",
@@ -143,6 +148,11 @@ export const surfRating8 = [
     rating: 5,
   },
   {
+    name: "Manon",
+    text: "J'ai loué une planche de surf pour une journée avec mes amis et nous avons passé un excellent moment à surfer les vagues. La planche était en excellent état et le propriétaire était très serviable et sympathique. Nous recommandons vivement Board Lease à tous les surfeurs !",
+    rating: 4,
+  },
+  {
     name: "Thomas",
     text: "Très bonne expérience, merci !",
     rating: 4,
@@ -160,11 +170,7 @@ export const surfRating9 = [
     text: "Location facile et rapide, je suis très satisfait.",
     rating: 4,
   },
-  {
-    name: "Lucie",
-    text: "Première fois que je loue une planche de surf et j'ai été agréablement surprise par la qualité du service. Je recommande.",
-    rating: 4,
-  },
+
   {
     name: "Antoine",
     text: "Je suis un surfeur expérimenté et j'ai été ravi de trouver des planches de qualité sur Board.Lease. Merci !",
@@ -183,11 +189,7 @@ export const surfRating10 = [
     text: "Board Lease est le meilleur site de location de planches de surf que j'ai utilisé. Les planches sont toujours en excellent état et les propriétaires sont toujours serviables et sympathiques. Je recommande vivement Board Lease à tous les surfeurs !",
     rating: 5,
   },
-  {
-    name: "Manon",
-    text: "J'ai loué une planche de surf pour une journée avec mes amis et nous avons passé un excellent moment à surfer les vagues. La planche était en excellent état et le propriétaire était très serviable et sympathique. Nous recommandons vivement Board Lease à tous les surfeurs !",
-    rating: 4,
-  },
+  
 ];
 
 export const surfRating11 = [
@@ -291,12 +293,7 @@ export const surfRating18 = [
     name: "Thomas",
     text: "J'ai loué une planche de surf pour une journée avec Board Lease et j'ai été très satisfait de l'ensemble de l'expérience. La planche était en excellent état et le propriétaire était très serviable et patient avec moi, même si je suis un surfeur débutant. Je recommande vivement Board Lease à tous les surfeurs qui cherchent une location de qualité !",
     rating: 4,
-  },
-  {
-    name: "Emma",
-    text: "Board Lease est de loin le meilleur site de location de planches de surf que j'ai utilisé. Les planches sont toujours en excellent état et le service à la clientèle est exceptionnel. Les propriétaires sont toujours serviables et sympathiques et sont prêts à partager leur passion pour le surf avec les clients. Je recommande vivement Board Lease à tous les surfeurs !",
-    rating: 5,
-  },
+  }, 
   {
     name: "Alex",
     text: "J'ai loué une planche de surf pour un week-end avec Board Lease et j'ai été très satisfait de l'ensemble de l'expérience. La planche était en excellent état et le propriétaire était très serviable et compétent. Il m'a également fourni de bons conseils sur les spots de surf de la région. Je recommande vivement Board Lease à tous les surfeurs qui cherchent une location de qualité !",
