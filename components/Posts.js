@@ -1,5 +1,4 @@
 import styles from "../styles/Posts.module.css";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as React from "react";
@@ -10,9 +9,9 @@ import { DatePicker, Space, Card } from "antd";
 import "antd/dist/reset.css";
 import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
-import { Rate } from "antd";
 import { storePendingBooking } from "../reducers/booking";
 import SurfsComments from "./surfsComments";
+import { checkAvailabibility } from "../lib/leaseLibraryFront";
 
 dayjs.extend(customParseFormat);
 
@@ -21,7 +20,6 @@ const { RangePicker } = DatePicker;
 const dateFormat = "YYYY-MM-DD";
 
 function Posts() {
-  const matches = useMediaQuery("(min-width:768px)");
   const router = useRouter();
   const [surfDetails, setSurfDetails] = useState(null);
   const [availabilities, setAvailabilities] = useState([]);
@@ -92,45 +90,6 @@ function Posts() {
       });
     }
   };
-
-  const dateRangeOverlaps = (dateRange1, dateRange2) => {
-    dateRange1.startDate = new Date(dateRange1.startDate).getTime();
-    dateRange1.endDate = new Date(dateRange1.endDate).getTime();
-
-    dateRange2.startDate = new Date(dateRange2.startDate).getTime();
-    dateRange2.endDate = new Date(dateRange2.endDate).getTime();
-
-    if (
-      dateRange1.startDate <= dateRange2.startDate &&
-      dateRange2.startDate <= dateRange1.endDate
-    )
-      return true; // dateRange2 starts in dateRange1
-    if (
-      dateRange1.startDate <= dateRange2.endDate &&
-      dateRange2.endDate <= dateRange1.endDate
-    )
-      return true; // dateRange2 ends in dateRange1
-    if (
-      dateRange2.startDate < dateRange1.startDate &&
-      dateRange1.endDate < dateRange2.endDate
-    )
-      return true; // dateRange2 includes dateRange1
-    return false;
-  };
-
-  const checkAvailabibility = (dateRangeArray, dateRange) => {
-    for (let dr of dateRangeArray) {
-      if (dateRangeOverlaps(dr, dateRange)) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const hide = () => {
-    setOpen(false);
-  };
-
   const handleOpenChange = (newOpen) => {
     setOpen(newOpen);
   };
@@ -146,51 +105,47 @@ function Posts() {
               <FavoritesManagement surf_Id={surfDetails._id} />
             </div>
             <Card>
-              <p className={styles.owner}>
-                <u>
-                  <strong>Loué par:</strong>
-                </u>
-                &nbsp; {ownerName}
-              </p>
-              <p className={styles.placeName}>
-                <u>
-                  <strong>De:</strong>
-                </u>
-                &nbsp; {surfDetails.placeName}
-              </p>
-              <p className={styles.type}>
-                <u>
-                  <strong>Type:</strong>
-                </u>
-                &nbsp; {surfDetails.type}
-              </p>
-              <p className={styles.level}>
-                <u>
-                  <strong>Niveau:</strong>
-                </u>
-                &nbsp; {surfDetails.level}
-              </p>
-              <p className={styles.dayPrice}>
-                <u>
-                  <strong>Prix:</strong>
-                </u>
-                &nbsp; {surfDetails.dayPrice} € / jour
-              </p>
-              <div className={styles.availabilities}>
-                <p className={styles.dispoText}> Disponibilités :</p>
-                {availabilities.map((availability, i) => (
-                  <p key={i}>
-                    du{" "}
-                    {
-                      new Date(availability.startDate)
-                        .toISOString()
-                        .split("T")[0]
-                    }{" "}
-                    au{" "}
-                    {new Date(availability.endDate).toISOString().split("T")[0]}
-                  </p>
-                ))}
-              </div>
+            <p className={styles.owner}>
+              <u>
+                <strong>Loué par:</strong>
+              </u>
+              &nbsp; {ownerName}
+            </p>
+            <p className={styles.placeName}>
+              <u>
+                <strong>De:</strong>
+              </u>
+              &nbsp; {surfDetails.placeName}
+            </p>
+            <p className={styles.type}>
+              <u>
+                <strong>Type:</strong>
+              </u>
+              &nbsp; {surfDetails.type}
+            </p>
+            <p className={styles.level}>
+              <u>
+                <strong>Niveau:</strong>
+              </u>
+              &nbsp; {surfDetails.level}
+            </p>
+            <p className={styles.dayPrice}>
+              <u>
+                <strong>Prix:</strong>
+              </u>
+              &nbsp; {surfDetails.dayPrice} € / jour
+            </p>
+            <div className={styles.availabilities}>
+              <p className={styles.dispoText}> Disponibilités :</p>
+              {availabilities.map((availability, i) => (
+                <p key={i}>
+                  du{" "}
+                  {new Date(availability.startDate).toISOString().split("T")[0]}{" "}
+                  au{" "}
+                  {new Date(availability.endDate).toISOString().split("T")[0]}
+                </p>
+              ))}
+            </div>
             </Card>
             <Popover
               style={{
@@ -201,12 +156,12 @@ function Posts() {
                 cursor: "pointer",
                 fontSize: "17px",
                 margin: "0px",
-                padding: "0px",
+                padding: "0px"
               }}
               content={<SurfsComments />}
               trigger="click"
               open={open}
-              onOpenChange={handleOpenChange}
+              onOpenChange={handleOpenChange}             
             >
               <div className={styles.comments}>
                 <p>
@@ -216,7 +171,7 @@ function Posts() {
             </Popover>
 
             <Space direction="vertical" size={12}>
-              <RangePicker
+              <RangePicker              
                 defaultValue={[
                   dayjs(
                     booking.startDate
@@ -238,6 +193,7 @@ function Posts() {
                 format="YYYY-MM-DD"
                 disabled={[false, false]}
                 onChange={handleDateSelection}
+                popupStyle={{ width: '50%' }}                
               />
             </Space>
             <Button onClick={handleRedirect} disabled={isDisabled}>
