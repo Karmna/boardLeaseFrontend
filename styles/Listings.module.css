@@ -1,6 +1,9 @@
 .container{
     width: 100vw;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .cardsContainer {
@@ -9,16 +12,29 @@
     width: 100vw;
 }
 
+.h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #060c5c;
+    display: flex;
+
+}
+
 .card {
+justify-content: space-between;
 display: flex;
 padding-top: 20px;
 }
+
+
 
 .deleteButton{
     background-color: white;
     border: 1px;
     border-radius: 4px;
     transition: background-color 0.3s ease;
+    padding-right: 25px;
 }
 
 .deleteButton.button:click {

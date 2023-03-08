@@ -3,9 +3,8 @@ import { Button, Input, Divider, Space, Card, DatePicker } from "antd";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import React from 'react';
-import moment from 'moment';
-
+import React from "react";
+import moment from "moment";
 
 function Profile() {
   const matches = useMediaQuery("(min-width:768px)");
@@ -92,14 +91,17 @@ function Profile() {
   const endDate = new Date(booking.endDate);
   const formattedEndDate = moment(endDate).format("DD/MM/YY");
 
-  const tenantBookingsRecap = bookings.map((booking, i) => {
+  const tenantBookingsRecap = bookings?.map((booking, i) => {
     return (
       <div key={i}>
         <Card>
           <li> Propriétaire : {booking.owner}</li>
           <li> Type de surf : {booking.surfType}</li>
           <li> Nom du surf : {booking.surfName}</li>
-          <li> Du {formattedStartDate } au {formattedEndDate}</li>  
+          <li>
+            {" "}
+            Du {formattedStartDate} au {formattedEndDate}
+          </li>
         </Card>
       </div>
     );

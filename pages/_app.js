@@ -27,6 +27,7 @@ const reducers = combineReducers({
   surfs,
   favorites,
   booking,
+  listings,
 });
 
 const persistConfig = { key: "boardLease", storage };

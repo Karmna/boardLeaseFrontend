@@ -35,12 +35,16 @@
     "next": "12.1.6",
     "react": "^18.2.0",
     "react-credit-cards": "^0.8.3",
+    "react-datepicker": "^4.10.0",
     "react-dom": "^18.2.0",
     "react-leaflet": "^4.2.0",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
     "redux-persist": "^6.0.0",
+<<<<<<< HEAD
+=======
     "styled-components": "^5.3.8",
+>>>>>>> b9cb0ec82b8ef63e036d78be7740e36fe39bb351
     "stripe": "^11.13.0",
     "uid2": "^1.0.0"
   },

@@ -1,5 +1,5 @@
 import * as React from "react";
-import styles from "../styles/Search.module.css";
+import styles from "../styles/Filter.module.css";
 import { useState } from "react";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Checkbox, Rate } from "antd";
@@ -42,17 +42,54 @@ function Filter() {
     setOpen(flag);
   };
 
-  // Fonction qui gère le changement des filtres sélectionnés par l'utilisateur (type, level, maxPrice) à travers des checkboxes
-  const onChange = (e) => {
-    const { checked, value } = e.target;
+  const typeOptions = [    
+    {
+      label: "Longboard",
+      value: "Longboard",
+    },
+    {
+      label: "Funboard",
+      value: "Funboard",
+    },
+    {
+      label: "Fish",
+      value: "Fish",
+    },
+    {
+      label: "Shortboard",
+      value: "Shortboard",
+    },
+    {
+      label: "StandUp Paddle",      
+      value: "StandUp Paddle",      
+    },
+  ];
 
-    if (e.target.description === "type") {
-      setType(checked ? [...type, value] : type.filter((t) => t !== value));
-    } else if (e.target.description === "level") {
-      setLevel(checked ? [...level, value] : level.filter((l) => l !== value));
-    } else if (e.target.description === "price") {
-      setMaxPrice(checked ? value : 100);
-    }
+  const levelOptions = [
+  {
+    label: "Débutant",
+    value: "Débutant",
+  },
+  {
+    label: "Intermédiaire",
+    value: "Intermédiaire",
+  },
+  {
+    label: "Confirmé",      
+    value: "Confirmé",      
+  },
+];
+
+  const onChangeType = (value) => {
+    setType(value);
+  };
+
+  const onChangeLevel = (value) => {
+    setLevel(value);
+  };
+
+  const onChangeMaxPrice = () => {
+    setMaxPrice(15);
   };
 
   // Items présents dans le dropdown, les checkboxes(type, level, maxPrice), le rating et bouton filtrer.
@@ -64,46 +101,13 @@ function Filter() {
       children: [
         {
           key: "1-1",
-          label: (
-            <Checkbox onChange={onChange} value="Longboard" description="type">
-              Longboard
-            </Checkbox>
-          ),
-        },
-        {
-          key: "1-2",
-          label: (
-            <Checkbox onChange={onChange} value="Funboard" description="type">
-              Funboard
-            </Checkbox>
-          ),
-        },
-        {
-          key: "1-3",
-          label: (
-            <Checkbox onChange={onChange} value="Fish" description="type">
-              Fish
-            </Checkbox>
-          ),
-        },
-        {
-          key: "1-4",
-          label: (
-            <Checkbox onChange={onChange} value="Shortboard" description="type">
-              Shortboard
-            </Checkbox>
-          ),
-        },
-        {
-          key: "1-5",
-          label: (
-            <Checkbox
-              onChange={onChange}
-              value="StandUp Paddle"
-              description="type"
-            >
-              StandUp Paddle
-            </Checkbox>
+          label: (          
+            <Checkbox.Group
+              options={typeOptions}
+              value={type}
+              onChange={onChangeType}
+              className={styles.checkBox}
+            />           
           ),
         },
       ],
@@ -116,29 +120,12 @@ function Filter() {
         {
           key: "2-1",
           label: (
-            <Checkbox onChange={onChange} value="Débutant" description="level">
-              Débutant
-            </Checkbox>
-          ),
-        },
-        {
-          key: "2-2",
-          label: (
-            <Checkbox
-              onChange={onChange}
-              value="Intermédiaire"
-              description="level"
-            >
-              Intermédiaire
-            </Checkbox>
-          ),
-        },
-        {
-          key: "2-3",
-          label: (
-            <Checkbox onChange={onChange} value="Confirmé" description="level">
-              Confirmé
-            </Checkbox>
+            <Checkbox.Group
+              options={levelOptions}
+              value={level}
+              onChange={onChangeLevel}
+              className={styles.checkBox}
+            />
           ),
         },
       ],
@@ -151,9 +138,7 @@ function Filter() {
         {
           key: "3-1",
           label: (
-            <Checkbox onChange={onChange} value={15} description="price">
-              moins de 15€/jour
-            </Checkbox>
+            <Checkbox onChange={onChangeMaxPrice}>moins de 15€/jour</Checkbox>
           ),
         },
       ],
@@ -170,7 +155,6 @@ function Filter() {
               <Rate
                 onChange={(minRating) => {
                   setMinRating(minRating);
-                  // dispatch(addFilter({ minRating: minRating }));
                 }}
                 value={minRating}
               />
