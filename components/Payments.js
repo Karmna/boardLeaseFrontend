@@ -25,6 +25,7 @@ function Payments() {
   const [crypto, setCrypto] = useState("");
   const [focus, setFocus] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [paymentMsg, setPaymentMsg] = useState("");
 
   const router = useRouter();
   const booking = useSelector((state) => state.booking.value);
@@ -76,10 +77,10 @@ function Payments() {
   };
 
   const handlePay = async () => {
-    // if (!isCreditCardValid()) {
-    //   setErrorMsg("Vérifiez vos informations de paiment.");
-    //   return;
-    // }
+    if (!isCreditCardValid()) {
+      setErrorMsg("Vérifiez vos informations de paiment.");
+      return;
+    }
 
     if (
       !booking.surfId ||
@@ -90,6 +91,8 @@ function Payments() {
     ) {
       return;
     }
+
+    setPaymentMsg("Votre paiement est en cours de traitement...");
     /*
     1. vérif creditCard
     2. vérif info dans le store
@@ -217,7 +220,8 @@ function Payments() {
         </Card>
       </Space>
       <br />
-      <p className={styles.error}>{errorMsg && errorMsg}</p>
+      <p className={styles.error}>{errorMsg}</p>
+      <p className={styles.paymentMsg}>{paymentMsg}</p>
       <button className={styles.button} id="pay" onClick={handlePay}>
         Confirmer et payer
       </button>
