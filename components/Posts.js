@@ -2,7 +2,7 @@ import styles from "../styles/Posts.module.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import * as React from "react";
-import { Image, List, Popover } from "antd";
+import { Image, Popover } from "antd";
 import { useRouter } from "next/router";
 import FavoritesManagement from "./FavoritesManagement";
 import { DatePicker, Space, Card } from "antd";
@@ -11,7 +11,7 @@ import dayjs from "dayjs";
 import customParseFormat from "dayjs/plugin/customParseFormat";
 import { storePendingBooking } from "../reducers/booking";
 import SurfsComments from "./surfsComments";
-import { checkAvailabibility} from "../lib/leaseLibraryFront"
+import { checkAvailabibility } from "../lib/leaseLibraryFront";
 dayjs.extend(customParseFormat);
 
 const { RangePicker } = DatePicker;
@@ -30,27 +30,32 @@ function Posts() {
   const user = useSelector((state) => state.user.value);
   const booking = useSelector((state) => state.booking.value);
 
-  useEffect(() => {
-    const propsJSON = JSON.parse(router.query.surfProps);
-    const dataJSON = JSON.parse(router.query.ownerName);
-    if (router.query.surfProps) {
-      setSurfDetails(propsJSON);
-      setAvailabilities(propsJSON.availabilities);
-      setOwnerName(dataJSON.data);
-    }
+    let toggleDisplay=true
+    useEffect(() => {   
+      if (router.query.surfProps) {
+      const propsJSON = JSON.parse(router.query.surfProps);
+      const dataJSON = JSON.parse(router.query.ownerName);
+      if (router.query.surfProps) {
+        setSurfDetails(propsJSON);
+        setAvailabilities(propsJSON.availabilities);
+        setOwnerName(dataJSON.data);
+      }
 
-    if (booking.startDate && booking.endDate) {
-      setSelectedDates({
-        startDate: booking.startDate,
-        endDate: booking.endDate,
-      });
-    } else {
-      console.log(availabilities);
+      if (booking.startDate && booking.endDate) {
+        setSelectedDates({
+          startDate: booking.startDate,
+          endDate: booking.endDate,
+        });
+      } else {
+        console.log(availabilities);
 
-      setSelectedDates(propsJSON.availabilities[0]);
-    }
-  }, [router.query.surfProps]);
-
+        setSelectedDates(propsJSON.availabilities[0]);
+      }
+      } else {
+        toggleDisplay=false
+      }
+    }, [router.query.surfProps]);
+ 
   useEffect(() => {
     if (checkAvailabibility(availabilities, selectedDates)) {
       setIsDisabled(true);
@@ -95,7 +100,7 @@ function Posts() {
 
   return (
     <div className={styles.container}>
-      {surfDetails ? (
+      {surfDetails && toggleDisplay ? (
         <>
           <div className={styles.title}>
             <h1 className={styles.name}>{surfDetails.name}</h1>
@@ -128,11 +133,10 @@ function Posts() {
             <p className={styles.owner}>
               Surf de {ownerName} de {surfDetails.placeName}
             </p>
-            <div className={styles.buttonContainer}>
-            <Space bordered={false} direction="vertical" size={12} >
-                {/* <strong className={styles.dispoText}>
+            <Space direction="vertical" size={12}>
+                <strong className={styles.dispoText}>
                   Sélectionner des dates:
-                </strong> */}
+                </strong>
                 <RangePicker
                   defaultValue={[
                     dayjs(
@@ -155,6 +159,7 @@ function Posts() {
                   format="YYYY-MM-DD"
                   disabled={[false, false]}
                   onChange={handleDateSelection}
+                  popupStyle={{width:100}}
                 />
               </Space>
             <button
@@ -164,7 +169,6 @@ function Posts() {
           >
             Réserver
           </button>
-          </div>
             <Card bordered={false} >
               <p className={styles.type}>
                 <u>
@@ -198,13 +202,18 @@ function Posts() {
                     {new Date(availability.endDate).toISOString().split("T")[0]}
                   </p>
                 ))}
-              </div>
-              
+              </div>             
             </Card>
           </div>
           <br/>
-         
-          
+          <div className={styles.buttonContainer}>
+          <button
+            className={styles.button}
+            onClick={handleRedirect}
+            disabled={isDisabled}
+          >
+            Réserver
+          </button>
           {isDisabled ? (
             <p className={styles.availabilitiesError}>
               Ce surf n'est pas disponible pour la période sélectionnée
@@ -212,7 +221,7 @@ function Posts() {
           ) : (
             <p></p>           
           )}
-          
+          </div>
         </>
       ) : (
         <div>Loading...</div>
