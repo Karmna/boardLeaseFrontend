@@ -56,15 +56,23 @@ function Booking() {
               disabled={true}
               onChange={setSearchStartDate}
               placeholder={
-                booking.startDate ? booking.startDate : "Date de début"
+                booking.startDate
+                  ? new Date(booking.startDate).toISOString().split("T")[0]
+                  : "Date de début"
               }
+              // startDate: new Date(searchStartDate).toISOString().split("T")[0],
+              // endDate: new Date(searchEndDate).toISOString().split("T")[0],
             />
           </Space>
           <Space direction="vertical">
             <DatePicker
               disabled={true}
               onChange={setSearchEndDate}
-              placeholder={booking.startDate ? booking.endDate : "Date de fin"}
+              placeholder={
+                booking.startDate
+                  ? new Date(booking.endDate).toISOString().split("T")[0]
+                  : "Date de fin"
+              }
             />
           </Space>
         </div>
