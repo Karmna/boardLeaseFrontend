@@ -52,6 +52,14 @@ function Posts() {
     }
   }, []);
 
+  useEffect(() => {
+    if (router.query.surfProps) {
+      const propsJSON = JSON.parse(router.query.surfProps);
+      setSurfDetails(propsJSON);
+      setAvailabilities(propsJSON.availabilities);
+    }
+  }, [router.query.surfProps]);
+
   function handleDateSelection(dates) {
     setSelectedDates({
       startDate: dates[0].$d,
@@ -66,6 +74,7 @@ function Posts() {
         startDate: selectedDates.startDate,
         endDate: selectedDates.endDate,
         dayPrice: surfDetails.dayPrice,
+        placeName: surfDetails.placeName,
         surfName: surfDetails.name,
         surfType: surfDetails.type,
         deposit: surfDetails.deposit,

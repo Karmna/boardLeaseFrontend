@@ -23,6 +23,8 @@
     "@mui/x-date-pickers-pro": "^6.0.0",
     "@react-oauth/google": "^0.8.0",
     "@reduxjs/toolkit": "^1.9.3",
+    "@stripe/react-stripe-js": "^1.16.5",
+    "@stripe/stripe-js": "^1.48.0",
     "antd": "^5.2.3",
     "bcrypt": "^5.1.0",
     "debounce": "^1.2.1",
@@ -38,7 +40,11 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.2",
     "redux-persist": "^6.0.0",
+<<<<<<< HEAD
     "styled-components": "^5.3.8",
+=======
+    "stripe": "^11.13.0",
+>>>>>>> fakeStripe
     "uid2": "^1.0.0"
   },
   "devDependencies": {
