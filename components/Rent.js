@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styles from "../styles/Rent.module.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
@@ -9,19 +9,23 @@ import {
   Space,
   Select,
   message,
-  Upload,
-  Button,
   Divider,
 } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
+
+// Import de la fonction dynamique de Next.js permettant de charger un composant de manière asynchrone
+import dynamic from "next/dynamic";
+
+const UploadWidget = dynamic(() => import("./UploadWidget"), {
+  ssr: false, // Empêche le rendu côté serveur (server-side rendering)
+});
+
 
 function Rent() {
   const user = useSelector((state) => state.user.value);
   // utilisation de useMediaQuery pour détecter les correspondances d'écran
   const matches = useMediaQuery("(min-width:768px)");
 
-  const dispatch = useDispatch();
   const [titlePost, setTitlePost] = useState("");
   const [destination, setDestination] = useState("");
   const [searchStartDate, setSearchStartDate] = useState();
@@ -81,7 +85,6 @@ le geo coding pour recup long et lat en fonction de la location*/
           .then((data) => {
             console.log(data);
             if (data.result) {
-              // dispatch(updateListings(data.data));
               message.success("Votre annonce vient d'être postée, merci !");
               setTitlePost("");
               setDestination("");
@@ -102,43 +105,11 @@ le geo coding pour recup long et lat en fonction de la location*/
     setLevel(value);
   };
 
-  // Upload de la photo de l'annonce
-  const imageProps = {
-    name: "photoFromFront",
-    action: "https://board-lease-backend.vercel.app/surfs/upload",
-    headers: {
-      authorization: `Bearer ${user.token}`,
-    },
-    onChange(info) {
-      if (info.file.status !== "uploading") {
-        console.log(info.file, info.fileList);
-      }
-      if (info.file.status === "done") {
-        message.success(`${info.file.name} file uploaded successfully`);
-        setImageFileList(info.file.response.url);
-        console.log("imagefilelist : ", info.file.response.url);
-      } else if (info.file.status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
-      }
+  const handleUploadImage = (imageUrl) => {
+    setImageFileList(imageUrl);
+  }
+console.log("Image URl", imageFileList);
 
-      console.log(info);
-    },
-    maxCount: 1,
-  };
-
-  /*
-const uploadPicture = async () => {
-    const formData = new FormData();
-    formData.append('photoFromFront',imageFileList);
-    fetch('http://localhost:3000/surfs/upload', {
-  method: 'POST',
-  body: formData,
-  }).then((response) => response.json())
-  .then((data) => {
-    console.log(data);
-dispatch(addPhoto(data.url));
-});
-}*/
 
   return (
     <div className={styles.content}>
@@ -298,9 +269,7 @@ dispatch(addPhoto(data.url));
 
       <div className={styles.containerUpload}>
         Une image représentant votre board :
-        <Upload {...imageProps}>
-          <Button icon={<UploadOutlined />}>Click (Max : 1)</Button>
-        </Upload>
+      <UploadWidget handleUploadImage={handleUploadImage}/>
       </div>
 
       {/*Bouton pour envoyer le formulaire*/}
