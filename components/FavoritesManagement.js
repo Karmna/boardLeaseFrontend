@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import * as React from "react";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { updateFavorites } from "../reducers/favorites";
 
 function FavoritesManagement({ surf_Id }) {
@@ -40,15 +40,15 @@ function FavoritesManagement({ surf_Id }) {
       });
   };
 
-  let iconStyle = { color: "#BABEBF" };
+  let iconStyle = faHeart;
   if (isFavorite) {
-    iconStyle = { color: "#060c5c" };
+    iconStyle = faTrash;
   }
 
   return (
     <FontAwesomeIcon
-      icon={faHeart}
-      style={iconStyle}    
+      icon={iconStyle}
+      style={ {color : "#060c5c"}}    
       onClick={() => handleFavorite()}
       size="lg"
     />
