@@ -143,7 +143,7 @@ function Payments() {
         style={{ display: "flex" }}
       ></Space>
 
-      <div id="PaymentForm">
+      <div class={styles.paymentForm}>
         <div className={styles.card}>
           <Cards
             cvc={crypto}
@@ -201,6 +201,11 @@ function Payments() {
       {/* <Elements stripe={stripePromise}>
         <CheckoutForm></CheckoutForm>
       </Elements> */}
+      <p className={styles.error}>{errorMsg}</p>
+      <p className={styles.paymentMsg}>{paymentMsg}</p>
+      <button className={styles.button} id="pay" onClick={handlePay}>
+        Confirmer et payer
+      </button>
 
       <Divider />
       <Space direction="vertical" size="middle" style={{ display: "flex" }}>
@@ -219,13 +224,6 @@ function Payments() {
           </p>
         </Card>
       </Space>
-     
-      <button className={styles.button} id="pay" onClick={handlePay}>
-        Confirmer et payer
-      </button>
-      <p className={styles.error}>{errorMsg}</p>
-      <p className={styles.paymentMsg}>{paymentMsg}</p>
-      <br />
     </div>
   );
 }
