@@ -40,15 +40,17 @@ function FavoritesManagement({ surf_Id }) {
       });
   };
 
-  let iconStyle = faHeart;
+  let icon = faHeart;
+  let iconStyle = {color : "#B1b4b5"};
   if (isFavorite) {
-    iconStyle = faTrash;
+    icon = faTrash;
+    iconStyle = {color : "#060c5c"};
   }
 
   return (
     <FontAwesomeIcon
-      icon={iconStyle}
-      style={ {color : "#060c5c"}}    
+      icon={icon}
+      style={iconStyle}    
       onClick={() => handleFavorite()}
       size="lg"
     />

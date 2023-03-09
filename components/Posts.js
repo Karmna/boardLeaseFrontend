@@ -5,6 +5,8 @@ import * as React from "react";
 import { Image, Popover } from "antd";
 import { useRouter } from "next/router";
 import FavoritesManagement from "./FavoritesManagement";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
 import { DatePicker, Space, Card } from "antd";
 import "antd/dist/reset.css";
 import dayjs from "dayjs";
@@ -30,9 +32,9 @@ function Posts() {
   const user = useSelector((state) => state.user.value);
   const booking = useSelector((state) => state.booking.value);
 
-    let toggleDisplay=true
-    useEffect(() => {   
-      if (router.query.surfProps) {
+  let toggleDisplay = true;
+  useEffect(() => {
+    if (router.query.surfProps) {
       const propsJSON = JSON.parse(router.query.surfProps);
       const dataJSON = JSON.parse(router.query.ownerName);
       if (router.query.surfProps) {
@@ -51,11 +53,11 @@ function Posts() {
 
         setSelectedDates(propsJSON.availabilities[0]);
       }
-      } else {
-        toggleDisplay=false
-      }
-    }, [router.query.surfProps]);
- 
+    } else {
+      toggleDisplay = false;
+    }
+  }, [router.query.surfProps]);
+
   useEffect(() => {
     if (checkAvailabibility(availabilities, selectedDates)) {
       setIsDisabled(true);
@@ -98,10 +100,25 @@ function Posts() {
     setOpen(newOpen);
   };
 
+  const handleRedirectSearch = () => {
+    router.push({
+      pathname: "/search",
+    });
+  };
+
   return (
     <div className={styles.container}>
       {surfDetails && toggleDisplay ? (
         <>
+          <div>
+            <FontAwesomeIcon
+              className={styles.chevronIcon}
+              icon={faChevronLeft}
+              style={{ color: "#060c5c" }}
+              onClick={handleRedirectSearch}
+              size="s"
+            />
+          </div>
           <div className={styles.title}>
             <h1 className={styles.name}>{surfDetails.name}</h1>
             <FavoritesManagement surf_Id={surfDetails._id} />
@@ -134,7 +151,7 @@ function Posts() {
               Surf de {ownerName} de {surfDetails.placeName}
             </p>
             <div className={styles.buttonContainer}>
-            <Space direction="vertical" size={12}>
+              <Space direction="vertical" size={12}>
                 {/* <strong className={styles.dispoText}>
                   Sélectionner des dates:
                 </strong> */}
@@ -159,18 +176,18 @@ function Posts() {
                   ]}
                   format="YYYY-MM-DD"
                   disabled={[false, false]}
-                  onChange={handleDateSelection}                      
+                  onChange={handleDateSelection}
                 />
               </Space>
-            <button
-            className={styles.button}
-            onClick={handleRedirect}
-            disabled={isDisabled}
-          >
-            Réserver
-          </button>
-          </div>
-            <Card bordered={false} >
+              <button
+                className={styles.button}
+                onClick={handleRedirect}
+                disabled={isDisabled}
+              >
+                Réserver
+              </button>
+            </div>
+            <Card bordered={false}>
               <p className={styles.type}>
                 <u>
                   <strong>Type:</strong>
@@ -203,20 +220,18 @@ function Posts() {
                     {new Date(availability.endDate).toISOString().split("T")[0]}
                   </p>
                 ))}
-              </div>             
+              </div>
             </Card>
           </div>
-          <br/>
-          
-          
+          <br />
+
           {isDisabled ? (
             <p className={styles.availabilitiesError}>
               Ce surf n'est pas disponible pour la période sélectionnée
             </p>
           ) : (
-            <p></p>           
+            <p></p>
           )}
-          
         </>
       ) : (
         <div>Loading...</div>
