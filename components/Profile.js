@@ -3,6 +3,7 @@ import { Button, Input, Divider, Space, Card, DatePicker } from "antd";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import { updateUserProfile } from "../reducers/user";
 import React from "react";
 import moment from "moment";
 
