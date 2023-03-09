@@ -219,12 +219,12 @@ function Payments() {
           </p>
         </Card>
       </Space>
-      <br />
-      <p className={styles.error}>{errorMsg}</p>
-      <p className={styles.paymentMsg}>{paymentMsg}</p>
+     
       <button className={styles.button} id="pay" onClick={handlePay}>
         Confirmer et payer
       </button>
+      <p className={styles.error}>{errorMsg}</p>
+      <p className={styles.paymentMsg}>{paymentMsg}</p>
       <br />
     </div>
   );
