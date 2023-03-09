@@ -3,10 +3,6 @@
   flex-direction: column;
   justify-content: space-around;
   margin: 5%;
-  height: 100%;
-  margin-bottom: 30%;
-  margin-top: 20%;
-  z-index: 0;
 }
 
 .card {
@@ -38,7 +34,6 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin-bottom: 30%;
 }
 
 .button:hover {
