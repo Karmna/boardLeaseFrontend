@@ -14,6 +14,8 @@ import jwt_decode from "jwt-decode";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Layout } from "antd";
 const { Header, Content, Footer } = Layout;
+import Image from "next/image";
+import Logo from "../public/Logo.svg";
 
 function HeaderF() {
   const dispatch = useDispatch();
@@ -400,14 +402,23 @@ function HeaderF() {
           menu={menuPropsBar}
           placement="bottomRight"
         >
-          <div>
-            <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
+          <div className={styles.useSelector}>
+            <FontAwesomeIcon size="xl" icon={faBars} />
           </div>
         </Dropdown>
 
-        <Link href="/">
-          <img className={styles.logo} src="Logo.svg" alt="Logo" />
-        </Link>
+        <div className={styles.logoContainer}>
+          <Link href="/">
+            <Image
+              className={styles.logo}
+              src={Logo}
+              width={48}
+              height={48}
+              alt="Logo"
+            />
+          </Link>
+        </div>
+
         <Dropdown
           className={styles.dropDown}
           menu={menuProps}
@@ -420,7 +431,11 @@ function HeaderF() {
                   Bienvenue, {user.firstname}
                 </div>
               )}
-              <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
+              <FontAwesomeIcon
+                className={styles.useSelector}
+                size="lg"
+                icon={faUser}
+              />
             </div>
             {/* {user.token && (
                   <p className={styles.userName}> {user.firstname}</p>
