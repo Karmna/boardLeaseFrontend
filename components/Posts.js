@@ -159,8 +159,7 @@ function Posts() {
                   ]}
                   format="YYYY-MM-DD"
                   disabled={[false, false]}
-                  onChange={handleDateSelection}
-                  popupStyle={{width:100}}
+                  onChange={handleDateSelection}                      
                 />
               </Space>
             <button

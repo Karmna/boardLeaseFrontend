@@ -47,7 +47,7 @@ function Search() {
     ));
 
   return (
-    <div className={styles.content}>
+    <div className={styles.container}>
       <Filter />
       <div className={styles.cardsContainer}>{surf}</div>
     </div>

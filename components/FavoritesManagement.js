@@ -40,7 +40,7 @@ function FavoritesManagement({ surf_Id }) {
       });
   };
 
-  let iconStyle = { color: "#eeeee4" };
+  let iconStyle = { color: "#BABEBF" };
   if (isFavorite) {
     iconStyle = { color: "#060c5c" };
   }
@@ -48,8 +48,9 @@ function FavoritesManagement({ surf_Id }) {
   return (
     <FontAwesomeIcon
       icon={faHeart}
-      style={iconStyle}
+      style={iconStyle}    
       onClick={() => handleFavorite()}
+      size="lg"
     />
   );
 }

@@ -20,7 +20,9 @@
 }
 
 .description {
+  width: 100%;
   margin: 2px;
+  margin-left: 5%;
 }
 
 .title {
