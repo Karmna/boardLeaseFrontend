@@ -6,7 +6,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding: 10px 40px 10px 40px;
+  padding: 18px 40px 10px 40px;
 }
 
 .useSelector {
@@ -33,6 +33,10 @@
   justify-content: center;
   color: white;
   font-size: 10px;
+}
+
+.legend {
+  line-height: 1;
 }
 
 .footerStyleDesktop {

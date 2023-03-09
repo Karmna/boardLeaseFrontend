@@ -21,14 +21,14 @@ function FooterFunction() {
           />
         </Link>
 
-        <p>Explorer</p>
+        <p className={styles.legend}>Explorer</p>
       </div>
       <div className={styles.footerlogoCoeur}>
         <Link href="/favorites">
           <FontAwesomeIcon className={styles.useSelector} icon={faHeart} />
         </Link>
 
-        <p>Favoris</p>
+        <p className={styles.legend}>Favoris</p>
       </div>
     </footer>
   ) : (
