@@ -92,6 +92,7 @@ function Payments() {
       return;
     }
 
+    setErrorMsg("");
     setPaymentMsg("Votre paiement est en cours de traitement...");
     /*
     1. vérif creditCard
