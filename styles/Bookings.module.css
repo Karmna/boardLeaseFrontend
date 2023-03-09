@@ -9,7 +9,9 @@
 .cardsContainer {
   display: flex;
   flex-direction: column;
-  width: 100vw;
+  align-items: flex-start;
+  width: 100%;
+  padding: 0 2rem 2rem 2rem;
 }
 
 .h1 {
@@ -22,18 +24,6 @@
 
 .card {
   justify-content: space-between;
-  display: flex;
+  width: 100%;
   padding-top: 20px;
-}
-
-.deleteButton {
-  background-color: white;
-  border: 1px;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-  padding-right: 25px;
-}
-
-.deleteButton.button:click {
-  background-color: #060c5cb9;
 }
