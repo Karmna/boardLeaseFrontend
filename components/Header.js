@@ -2,7 +2,7 @@ import styles from "../styles/Header.module.css";
 import { login, logout } from "../reducers/user";
 import { Divider, Modal } from "antd";
 import * as React from "react";
-import { useState } from "react"; 
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { faUser, faXmark, faBars } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,7 +14,6 @@ import jwt_decode from "jwt-decode";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Layout } from "antd";
 const { Header, Content, Footer } = Layout;
-
 
 function HeaderF() {
   const dispatch = useDispatch();
@@ -28,14 +27,13 @@ function HeaderF() {
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpLastname, setSignUpLastname] = useState("");
   const [signUpFirstname, setSignUpFirstname] = useState("");
-  const [signUpMail, setSignUpMail] = useState(""); 
- 
+  const [signUpMail, setSignUpMail] = useState("");
+
   const clientId = process.env.CLIENT_ID;
   const matches = useMediaQuery("(min-width:768px)");
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-
 
   const showModalInscription = () => {
     setIsModalVisibleInscription(!isModalVisibleInscription);
@@ -53,7 +51,6 @@ function HeaderF() {
           rel="noopener noreferrer"
           onClick={showModalInscription}
         >
-
           Inscription
         </a>
       ),
@@ -102,26 +99,32 @@ function HeaderF() {
     },
     {
       key: "2",
-      label: <Link href="/about">A propos</Link> ,
+      label: <Link href="/about">A propos</Link>,
     },
     {
       key: "3",
-      label:<Link href="/search">Réserver</Link> ,
-    
+      label: <Link href="/search">Réserver</Link>,
     },
     {
       key: "4",
-      label:
-     <div> <Divider style={{ margin: 0 }} /> <Space style={{ padding: 8 }}>
-            <Button href="/rent" type="primary"  >Poster mon surf !</Button>
-          </Space> </div>
+      label: (
+        <div>
+          {" "}
+          <Divider style={{ margin: 0 }} />{" "}
+          <Space style={{ padding: 8 }}>
+            <Button href="/rent" type="primary">
+              Poster mon surf !
+            </Button>
+          </Space>{" "}
+        </div>
+      ),
     },
   ];
   const menuPropsBar = {
     items: menuBar,
     onClick: handleMenuClick,
   };
- 
+
   const handleMenuClick = (e) => {
     console.log("click", e);
   };
@@ -141,9 +144,6 @@ function HeaderF() {
     setSignInUserEmail("");
     setSignInPassword("");
   };
-
-
-
 
   const handleCloseModal = () => {
     // TODO : add onCloseModal (errorclear, form reset, modal not visible)
@@ -402,7 +402,7 @@ function HeaderF() {
         >
           <div>
             <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
-            </div>
+          </div>
         </Dropdown>
 
         <Link href="/">
@@ -414,13 +414,13 @@ function HeaderF() {
           placement="bottomRight"
         >
           <div>
-          
-            <div>
-            {user.token && (
-                  <div className={styles.userName}> {user.firstname}</div>
-                )}
-                <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
-                
+            <div className={styles.userContainer}>
+              {user.token && (
+                <div className={styles.userName}>
+                  Bienvenue, {user.firstname}
+                </div>
+              )}
+              <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
             </div>
             {/* {user.token && (
                   <p className={styles.userName}> {user.firstname}</p>
@@ -451,71 +451,63 @@ function HeaderF() {
                   <div>{modalContentConnection}</div>
                 </Modal>
               </div>
-            </div> 
+            </div>
           </div>
         </Dropdown>
       </Header>
     </div>
   ) : (
-    
-      <Header className={styles.headerStyleDesktop}>
-        <Dropdown
-          className={styles.dropDown}
-          menu={menuPropsBar}
-          placement="bottomRight"
-        >
-          
-            <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
-        
-        </Dropdown>
-        <Link href="/">
-          <img className={styles.logo} src="logo.png" alt="Logo" />
-        </Link>
-        <Dropdown
-          className={styles.dropDown}
-          menu={menuProps}
-          placement="bottomRight"
-        >
+    <Header className={styles.headerStyleDesktop}>
+      <Dropdown
+        className={styles.dropDown}
+        menu={menuPropsBar}
+        placement="bottomRight"
+      >
+        <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
+      </Dropdown>
+      <Link href="/">
+        <img className={styles.logo} src="logo.png" alt="Logo" />
+      </Link>
+      <Dropdown
+        className={styles.dropDown}
+        menu={menuProps}
+        placement="bottomRight"
+      >
+        <div>
           <div>
-            <div>
-             
-                <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
-                {user.token && (
-                  <p className={styles.userName}> {user.firstname}</p>
-                )}
-              
-            </div>
-            <div>
-              <div id="react-modals">
-                <Modal
-                  title="Inscription"
-                  className={styles.modal}
-                  open={isModalVisibleInscription}
-                  closable={false}
-                  footer={null}
-                >
-                  <FontAwesomeIcon
-                    icon={faXmark}
-                    onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
-                  />
-                  <div>{modalContentInscription}</div>
-                </Modal>
-                <Modal
-                  title="Connection"
-                  className={styles.modal}
-                  open={isModalVisibleConnection}
-                  closable={false}
-                  footer={null}
-                >
-                  <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
-                  <div>{modalContentConnection}</div>
-                </Modal>
-              </div>
+            <FontAwesomeIcon className={styles.useSelector} icon={faUser} />
+            {user.token && <p className={styles.userName}> {user.firstname}</p>}
+          </div>
+          <div>
+            <div id="react-modals">
+              <Modal
+                title="Inscription"
+                className={styles.modal}
+                open={isModalVisibleInscription}
+                closable={false}
+                footer={null}
+              >
+                <FontAwesomeIcon
+                  icon={faXmark}
+                  onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
+                />
+                <div>{modalContentInscription}</div>
+              </Modal>
+              <Modal
+                title="Connection"
+                className={styles.modal}
+                open={isModalVisibleConnection}
+                closable={false}
+                footer={null}
+              >
+                <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
+                <div>{modalContentConnection}</div>
+              </Modal>
             </div>
           </div>
-        </Dropdown>
-      </Header>
-    
+        </div>
+      </Dropdown>
+    </Header>
   );
 
   return <div>{footerDisplay}</div>;
