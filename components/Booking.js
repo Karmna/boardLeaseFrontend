@@ -81,9 +81,7 @@ function Booking() {
         <div className={styles.recapPaiment}>
           <div className={styles.recapitulatif}>
             <Divider orientation="left">Récapitulatif</Divider>
-            <p>
-              Board : {booking.surfName} 
-            </p>
+            <p>Board : {booking.surfName}</p>
             <p>Type : {booking.surfType}</p>
             <p>
               Réservation pour {recapNumberOfDays}{" "}
@@ -97,17 +95,21 @@ function Booking() {
               Total : {total}€
             </Divider>
           </div>
-          <Link href="/payments">
-            <button className={styles.button}>Passer au paiement</button>
-          </Link>
+          <div className={styles.btnContainer}>
+            <Link href="/payments">
+              <button className={styles.button}>Passer au paiement</button>
+            </Link>
+          </div>
         </div>
       )}
       {!booking.surfName && (
-        <Link href="/">
-          <button onClick={handlePayment} className={styles.button}>
-            Trouver un surf
-          </button>
-        </Link>
+        <div className={styles.btnContainer}>
+          <Link href="/">
+            <button onClick={handlePayment} className={styles.button}>
+              Trouver un surf
+            </button>
+          </Link>
+        </div>
       )}
     </div>
   );

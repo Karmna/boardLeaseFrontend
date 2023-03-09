@@ -6,14 +6,12 @@
   align-items: center;
   justify-content: space-around;
   padding: 4rem 2rem 4rem 2rem;
- 
- 
 }
 
 .title {
   font-size: 2rem;
   color: #060c5c;
-  padding-bottom: 1rem;
+  /* padding-bottom: 1rem; */
 }
 /* .datesBlock {
   width: 60%;
@@ -24,7 +22,6 @@
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  
 }
 /* .recapitulatif {
   padding-top: 4rem;
@@ -35,7 +32,12 @@
   color: #333;
 } */
 
-
+.btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 2rem;
+}
 
 .button {
   background-color: #060c5c;
@@ -45,13 +47,8 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  margin: 4rem;
 }
 
 .button:hover {
   background-color: #1c216db9;
-}
-
-.recapPaiment{
-  margin-bottom: 20%;
 }
