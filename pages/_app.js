@@ -20,6 +20,8 @@ import surfs from "../reducers/surfs";
 import favorites from "../reducers/favorites";
 import booking from "../reducers/booking";
 
+import Layout from "../components/Layout";
+
 const reducers = combineReducers({
   user,
   filter,
@@ -48,9 +50,11 @@ function App({ Component, pageProps }) {
         <Head>
           <title>BoardLease</title>
         </Head>
-        <Header className={styles.Header} />
-        <Component {...pageProps} className={styles.Component} />
-        <Footer className={styles.Footer}  />
+        {/* <Header className={styles.Header} /> */}
+        <Layout>
+          <Component {...pageProps} className={styles.Component} />
+        </Layout>
+        {/* <Footer className={styles.Footer} /> */}
       </PersistGate>
     </Provider>
   ) : (
