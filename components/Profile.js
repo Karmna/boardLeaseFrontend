@@ -4,16 +4,9 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { updateUserProfile } from "../reducers/user";
-import React from "react";
-import moment from "moment";
+import { useRouter } from "next/router";
 
 function Profile() {
-  const matches = useMediaQuery("(min-width:768px)");
-  const booking = useSelector((state) => state.booking.value);
-  console.log(booking);
-  const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
-
   const [newFirstname, setNewFirstname] = useState("");
   const [newLastname, setNewLastname] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -21,6 +14,13 @@ function Profile() {
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
   const [bookings, setBookings] = useState([]);
+
+  const matches = useMediaQuery("(min-width:768px)");
+  // const booking = useSelector((state) => state.booking.value);
+  // console.log(booking);
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+  const router = useRouter();
 
   const handleInputChange = () => {
     if (!newFirstname && !newLastname && !newUsername && !newEmail) {
@@ -86,11 +86,11 @@ function Profile() {
       });
   }, []);
 
-  const startDate = new Date(booking.startDate);
-  const formattedStartDate = moment(startDate).format("DD/MM/YY");
+  // const startDate = new Date(booking.startDate);
+  // const formattedStartDate = moment(startDate).format("DD/MM/YY");
 
-  const endDate = new Date(booking.endDate);
-  const formattedEndDate = moment(endDate).format("DD/MM/YY");
+  // const endDate = new Date(booking.endDate);
+  // const formattedEndDate = moment(endDate).format("DD/MM/YY");
 
   const tenantBookingsRecap = bookings?.map((booking, i) => {
     return (
@@ -100,7 +100,7 @@ function Profile() {
           <li> Type de surf : {booking.surfType}</li>
           <li> Nom du surf : {booking.surfName}</li>
           <li>
-            Du {formattedStartDate} au {formattedEndDate}
+            Du {booking.startDate} au {booking.endDate}
           </li>
         </Card>
       </div>
@@ -157,9 +157,27 @@ function Profile() {
       </div>
 
       <Divider />
-      <div className={styles.bookingsContainer}>
-        <h3>Bookings</h3>
-        <div>{tenantBookingsRecap}</div>
+      <div className={styles.BtnContainer}>
+        <button
+          className={styles.button}
+          onClick={() =>
+            router.push({
+              pathname: "/bookings",
+            })
+          }
+        >
+          Réservations
+        </button>
+        <button
+          className={styles.button}
+          onClick={() =>
+            router.push({
+              pathname: "/listings",
+            })
+          }
+        >
+          Mes surfs loués
+        </button>
       </div>
     </div>
   );

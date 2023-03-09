@@ -12,3 +12,24 @@
 .card {
   padding-bottom: 10px;
 }
+
+.BtnContainer {
+  padding-top: 2rem;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.button {
+  background-color: #060c5c;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #060c5cb9;
+}
