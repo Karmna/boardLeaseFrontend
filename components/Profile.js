@@ -93,13 +93,12 @@ function Profile() {
 
   const tenantBookingsRecap = bookings?.map((booking, i) => {
     return (
-      <div key={i}>
+      <div key={i} className={styles.card}>
         <Card>
           <li> Propriétaire : {booking.owner}</li>
           <li> Type de surf : {booking.surfType}</li>
           <li> Nom du surf : {booking.surfName}</li>
           <li>
-            {" "}
             Du {formattedStartDate} au {formattedEndDate}
           </li>
         </Card>
