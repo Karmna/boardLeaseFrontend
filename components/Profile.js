@@ -2,18 +2,11 @@ import styles from "../styles/Profile.module.css";
 import { Button, Input, Divider, Space, Card, DatePicker } from "antd";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateUserProfile } from "../reducers/user";
-import React from "react";
-import moment from "moment";
+import { useRouter } from "next/router";
 
 function Profile() {
-  const matches = useMediaQuery("(min-width:768px)");
-  const booking = useSelector((state) => state.booking.value);
-  console.log(booking);
-  const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
-
   const [newFirstname, setNewFirstname] = useState("");
   const [newLastname, setNewLastname] = useState("");
   const [newUsername, setNewUsername] = useState("");
@@ -22,6 +15,12 @@ function Profile() {
   const [successMsg, setSuccessMsg] = useState("");
   const [bookings, setBookings] = useState([]);
 
+  const matches = useMediaQuery("(min-width:768px)");
+
+  const user = useSelector((state) => state.user.value);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
   const handleInputChange = () => {
     if (!newFirstname && !newLastname && !newUsername && !newEmail) {
       setErrorMsg(
@@ -29,10 +28,7 @@ function Profile() {
       );
       return;
     }
-    // if(!newFirstname) newFirstname = user.firstname;
-    // if(!newLastname) newFirstname = user.firstname;
-    // if(!newUsername) newFirstname = user.firstname;
-    // if(!newEmail) newFirstname = user.firstname;
+
     fetch("https://board-lease-backend.vercel.app/users", {
       method: "PUT",
       headers: {
@@ -70,42 +66,6 @@ function Profile() {
         }
       });
   };
-
-  useEffect(() => {
-    fetch(`https://board-lease-backend.vercel.app/bookings`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Réponse BDD", data);
-        setBookings(data.data);
-      });
-  }, []);
-
-  const startDate = new Date(booking.startDate);
-  const formattedStartDate = moment(startDate).format("DD/MM/YY");
-
-  const endDate = new Date(booking.endDate);
-  const formattedEndDate = moment(endDate).format("DD/MM/YY");
-
-  const tenantBookingsRecap = bookings?.map((booking, i) => {
-    return (
-      <div key={i} className={styles.card}>
-        <Card>
-          <li> Propriétaire : {booking.owner}</li>
-          <li> Type de surf : {booking.surfType}</li>
-          <li> Nom du surf : {booking.surfName}</li>
-          <li>
-            Du {formattedStartDate} au {formattedEndDate}
-          </li>
-        </Card>
-      </div>
-    );
-  });
 
   return (
     <div className={styles.profilePage}>
@@ -157,9 +117,27 @@ function Profile() {
       </div>
 
       <Divider />
-      <div className={styles.bookingsContainer}>
-        <h3>Bookings</h3>
-        <div>{tenantBookingsRecap}</div>
+      <div className={styles.BtnContainer}>
+        <button
+          className={styles.button}
+          onClick={() =>
+            router.push({
+              pathname: "/bookings",
+            })
+          }
+        >
+          Réservations
+        </button>
+        <button
+          className={styles.button}
+          onClick={() =>
+            router.push({
+              pathname: "/listings",
+            })
+          }
+        >
+          Mes surfs loués
+        </button>
       </div>
     </div>
   );
