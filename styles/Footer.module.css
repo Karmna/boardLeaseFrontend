@@ -1,40 +1,48 @@
 .footerStyle {
-  height: 72px;
+  height: 64px;
   background-color: #060c5c;
   display: flex;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
-  padding-inline: 50;
-  bottom: 0;
-  position: fixed;
+  padding: 10px 40px 10px 40px;
 }
 
 .useSelector {
   font-size: 20px;
   color: white;
+  padding-bottom: 5px;
 }
 
 .footerlogoExplore {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: white;
   font-size: 10px;
-  padding: 40px;
 }
 
 .footerlogoCoeur {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: white;
   font-size: 10px;
-  padding: 40px;
 }
 
 .footerStyleDesktop {
   width: 100%;
-  text-align: center;
   color: white;
   background-color: #060c5c;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .footerDesktopLink {
