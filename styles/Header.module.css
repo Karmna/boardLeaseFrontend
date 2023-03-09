@@ -41,6 +41,7 @@
   padding-inline: 50;
   line-height: 64px;
   top: 0;
+  /* position: fixed; */
 }
 
 .userSelector {

@@ -7,13 +7,13 @@ function About() {
 
   return (
     <div className={styles.aboutContainer}>
-      <img className={styles.images} src="images-1.jpg" alt="Logo" />
+      <img className={styles.images} src="about.jpg" alt="Logo" />
       <h6 className={styles.h6} >"Avec Board Lease, louez une planche en toute simplicité, et profitez d'une session de surf de qualité !"</h6>
 
       <div className={styles.aboutText}>
       <Space direction="vertical" size="middle" style={{ display: "flex" }}>
         <br />
-        <h2>Board Lease </h2>
+        <h2>A propos de nous </h2>
         <p>
           Board Lease est une plateforme en ligne qui permet aux surfeurs de louer
           leur planche à d'autres passionnés pour des sessions inoubliables. Le

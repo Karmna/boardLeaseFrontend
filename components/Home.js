@@ -52,12 +52,22 @@ function Home() {
 
   return (
     <div className={styles.content}>
+      <div className={styles.imageContainer}>
+       <img
+          className={styles.image}
+          src="/home2.jpg"
+          alt="Slide image 1"
+          layout="fill"
+          objectFit="contain"
+          priority={true}
+        />
+        </div>
        <div className={styles.textContainer}>
+      
         <h1 className={styles.h1}>Board Lease </h1>
         <br/>
         <h2 className={styles.h2}>Location de surfboard entre particuliers</h2>
-      </div>
-      <div className={styles.imageContainer}>
+      {/* <div className={styles.imageContainer}>
         <Image
           className={styles.image}
           src="/home2.jpg"
@@ -66,7 +76,7 @@ function Home() {
           alt="Slide image 1"
           priority={true}
         />
-      </div>
+      </div> */}
       <div className={styles.inputContainer}>
         <Input
           className={styles.input}
@@ -91,7 +101,7 @@ function Home() {
         Rechercher
       </button>
     </div>
-
+    </div>
     </div>
   );
 }

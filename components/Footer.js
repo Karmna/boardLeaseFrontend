@@ -14,7 +14,7 @@ function FooterFunction() {
 
   const footerDisplay = !matches ? (
    
-      <Footer className={styles.footerStyle}>
+      <footer className={styles.footerStyle}>
         <div className={styles.footerlogoExplore}>
           <Link href="/explorer">
             <FontAwesomeIcon
@@ -34,7 +34,7 @@ function FooterFunction() {
           <br/>
           <p>Favoris</p>
         </div>
-      </Footer>
+      </footer>
     
   ) : (
    
