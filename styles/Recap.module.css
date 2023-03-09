@@ -1,16 +1,18 @@
 .container {
-    height: 100%;
-    padding: 5%;
-}
-.gifContainer {
- display: flex;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  padding: 5%;
 }
 
-.containerText {
-  justify-content: center;
-  align-items: center;
-  display: flex;
+.recap {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.gifContainer {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  color: #060c5c;
 }

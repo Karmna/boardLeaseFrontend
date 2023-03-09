@@ -55,13 +55,9 @@ function Recap() {
         </div>
       </div>
       {booking.dayPrice && booking.startDate && booking.endDate && (
-        <div className="recapPaiment">
+        <div className={styles.recap}>
           <div className={styles.recapitulatif}>
-            <Card
-              title="Récapitulatif du paiement"
-              bordered={false}
-              style={{ width: 300 }}
-            >
+            <Card title="Récapitulatif du paiement" bordered={false}>
               <p>
                 Board : {booking.name} (type : {booking.surfType}).
               </p>
@@ -77,13 +73,9 @@ function Recap() {
               </Divider>
             </Card>
           </div>
-          <br />
-          <br />
+
           <div className={styles.gifContainer}>
-            <p>
-              Merci pour votre réservation. 
-            </p>
-            <br />
+            <p>Merci pour votre réservation.</p>
             <p> Ambre, Xavier, Sebastien et Antony de l'équipe Board Lease !</p>
           </div>
         </div>
