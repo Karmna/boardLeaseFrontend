@@ -2,7 +2,7 @@ import styles from "../styles/Profile.module.css";
 import { Button, Input, Divider, Space, Card, DatePicker } from "antd";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { updateUserProfile } from "../reducers/user";
 import { useRouter } from "next/router";
 
@@ -16,8 +16,7 @@ function Profile() {
   const [bookings, setBookings] = useState([]);
 
   const matches = useMediaQuery("(min-width:768px)");
-  // const booking = useSelector((state) => state.booking.value);
-  // console.log(booking);
+
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -29,10 +28,7 @@ function Profile() {
       );
       return;
     }
-    // if(!newFirstname) newFirstname = user.firstname;
-    // if(!newLastname) newFirstname = user.firstname;
-    // if(!newUsername) newFirstname = user.firstname;
-    // if(!newEmail) newFirstname = user.firstname;
+
     fetch("https://board-lease-backend.vercel.app/users", {
       method: "PUT",
       headers: {
@@ -70,42 +66,6 @@ function Profile() {
         }
       });
   };
-
-  useEffect(() => {
-    fetch(`https://board-lease-backend.vercel.app/bookings`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${user.token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Réponse BDD", data);
-        setBookings(data.data);
-      });
-  }, []);
-
-  // const startDate = new Date(booking.startDate);
-  // const formattedStartDate = moment(startDate).format("DD/MM/YY");
-
-  // const endDate = new Date(booking.endDate);
-  // const formattedEndDate = moment(endDate).format("DD/MM/YY");
-
-  const tenantBookingsRecap = bookings?.map((booking, i) => {
-    return (
-      <div key={i} className={styles.card}>
-        <Card>
-          <li> Propriétaire : {booking.owner}</li>
-          <li> Type de surf : {booking.surfType}</li>
-          <li> Nom du surf : {booking.surfName}</li>
-          <li>
-            Du {booking.startDate} au {booking.endDate}
-          </li>
-        </Card>
-      </div>
-    );
-  });
 
   return (
     <div className={styles.profilePage}>
