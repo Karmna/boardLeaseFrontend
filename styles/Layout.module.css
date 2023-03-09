@@ -4,3 +4,8 @@
   flex-direction: column;
   justify-content: space-between;
 }
+
+.mainContainer {
+  height: 100%;
+  overflow: scroll;
+}
