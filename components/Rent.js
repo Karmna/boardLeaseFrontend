@@ -30,10 +30,10 @@ function Rent() {
   const [type, setType] = useState("");
   const [dayPrice, setDayPrice] = useState("");
   const [imageFileList, setImageFileList] = useState("");
-
   const router = useRouter();
 
-  // fonction qui gére la selection des dates début / fin et set l'état.
+
+// fonction qui gére la selection des dates début / fin et set l'état.
   const handleStartDate = (date, dateString) => {
     setSearchStartDate(dateString);
   };
@@ -41,18 +41,21 @@ function Rent() {
     setSearchEndDate(dateString);
   };
 
-  // fonction qui gère
+
+/* fonction qui gère une fois qu'on clique sur "je publie mon annonce" 
+le geo coding pour recup long et lat en fonction de la location*/ 
   const handleRent = () => {
+//Si pas de location renseignée on affiche msg error
+    if (!destination) {
+      message.error("Oups ! Veuillez renseigner une location svp.");
+      return
+    }
     fetch(`https://api-adresse.data.gouv.fr/search/?q=${destination}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("destination", data);
-        /*if (data.length = 0) {
-          message.error("Oups ! Veuillez recommencer svp.");
-          return
-        }*/
-        const firstCity = data.features[0];
+      const firstCity = data.features[0];
 
+/*et ensuite créé le surf en BDD*/
         fetch("https://board-lease-backend.vercel.app/surfs/surfs", {
           method: "POST",
           headers: {
@@ -82,10 +85,7 @@ function Rent() {
               message.success("Votre annonce vient d'être postée, merci !");
               setTitlePost("");
               setDestination("");
-              setLevel("");
-              setType("");
               setDayPrice("");
-              setImageFileList("");
             } else {
               message.error("Oups ! Veuillez recommencer svp.");
             }
@@ -107,7 +107,7 @@ function Rent() {
     name: "photoFromFront",
     action: "https://board-lease-backend.vercel.app/surfs/upload",
     headers: {
-      authorization: "authorization-text",
+      authorization: `Bearer ${user.token}`,
     },
     onChange(info) {
       if (info.file.status !== "uploading") {
@@ -116,6 +116,7 @@ function Rent() {
       if (info.file.status === "done") {
         message.success(`${info.file.name} file uploaded successfully`);
         setImageFileList(info.file.response.url);
+        console.log("imagefilelist : ", info.file.response.url);
       } else if (info.file.status === "error") {
         message.error(`${info.file.name} file upload failed.`);
       }
