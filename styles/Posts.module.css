@@ -21,9 +21,7 @@ margin-top: 2%;
     justify-content: space-between;  
   
 }
-/* .availabilities {
-  margin-left: 4%;
-} */
+
 
 .rangePicker{  
 width: 100%;
@@ -74,5 +72,5 @@ border: 1px solid #060c5c;
   display: flex;
   flex-direction: row; 
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 }

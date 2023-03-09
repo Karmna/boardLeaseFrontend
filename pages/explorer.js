@@ -18,7 +18,7 @@ function ExplorerPage() {
 
   return (
     <div className={styles.mapContainer}>
-      <MapWithNoSSR surfs={surfs}/>
+      <MapWithNoSSR surfs={surfs} />
     </div>
   );
 }

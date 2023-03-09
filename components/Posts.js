@@ -133,10 +133,11 @@ function Posts() {
             <p className={styles.owner}>
               Surf de {ownerName} de {surfDetails.placeName}
             </p>
+            <div className={styles.buttonContainer}>
             <Space direction="vertical" size={12}>
-                <strong className={styles.dispoText}>
+                {/* <strong className={styles.dispoText}>
                   Sélectionner des dates:
-                </strong>
+                </strong> */}
                 <RangePicker
                   defaultValue={[
                     dayjs(
@@ -169,6 +170,7 @@ function Posts() {
           >
             Réserver
           </button>
+          </div>
             <Card bordered={false} >
               <p className={styles.type}>
                 <u>
@@ -206,14 +208,8 @@ function Posts() {
             </Card>
           </div>
           <br/>
-          <div className={styles.buttonContainer}>
-          <button
-            className={styles.button}
-            onClick={handleRedirect}
-            disabled={isDisabled}
-          >
-            Réserver
-          </button>
+          
+          
           {isDisabled ? (
             <p className={styles.availabilitiesError}>
               Ce surf n'est pas disponible pour la période sélectionnée
@@ -221,7 +217,7 @@ function Posts() {
           ) : (
             <p></p>           
           )}
-          </div>
+          
         </>
       ) : (
         <div>Loading...</div>

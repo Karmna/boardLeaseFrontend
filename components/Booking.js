@@ -78,15 +78,16 @@ function Booking() {
         </div>
       </div>
       {booking.dayPrice && booking.startDate && booking.endDate && (
-        <div className="recapPaiment">
+        <div className={styles.recapPaiment}>
           <div className={styles.recapitulatif}>
             <Divider orientation="left">Récapitulatif</Divider>
             <p>
-              Board : {booking.name} (type : {booking.surfType}).
+              Board : {booking.surfName} 
             </p>
+            <p>Type : {booking.surfType}</p>
             <p>
               Réservation pour {recapNumberOfDays}{" "}
-              {recapNumberOfDays > 1 ? "jours" : "jour"}.
+              {recapNumberOfDays > 1 ? "jours" : "jour"}
             </p>
             <p>Prix à la journée : {booking.dayPrice}€</p>
             <p>Prix hors taxes : {booking.dayPrice * recapNumberOfDays}€</p>
@@ -97,7 +98,7 @@ function Booking() {
             </Divider>
           </div>
           <Link href="/payments">
-            <button className={styles.button}>Passer au paiment</button>
+            <button className={styles.button}>Passer au paiement</button>
           </Link>
         </div>
       )}
