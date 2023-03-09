@@ -81,19 +81,10 @@ function Recap() {
           <br />
           <div className={styles.gifContainer}>
             <p>
-              {" "}
-              Merci pour votre réservation. Une copie vient d’être envoyée à
-              votre adresse email !
+              Merci pour votre réservation. 
             </p>
             <br />
-            <Image
-              width={150}
-              src="/surfing-olympics.gif"
-              layout="fill"
-              objectFit="contain"
-              alt="Slide image 1"
-              priority={true}
-            />
+            <p> Ambre, Xavier, Sebastien et Antony de l'équipe Board Lease !</p>
           </div>
         </div>
       )}

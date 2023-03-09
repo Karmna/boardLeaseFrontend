@@ -4,8 +4,16 @@
 
 .aboutContainer {
   height: 100%;
- padding: 20px;
- padding-bottom: 80px;
- 
 }
 
+.aboutText {
+  padding: 20px;
+  padding-bottom: 20%;
+  
+}
+
+.h6 {
+  padding: 10px;
+  font-style: italic;
+  color: #060c5c;
+}

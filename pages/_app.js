@@ -48,9 +48,9 @@ function App({ Component, pageProps }) {
         <Head>
           <title>BoardLease</title>
         </Head>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
+        <Header className={styles.Header} />
+        <Component {...pageProps} className={styles.Component} />
+        <Footer className={styles.Footer}  />
       </PersistGate>
     </Provider>
   ) : (

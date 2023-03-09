@@ -40,3 +40,20 @@ body {
 /* #__next {
   height: 100vh;
 } */
+
+.Header{
+height: 10%;
+position: fixed;
+top:0;
+}
+
+.Footer {
+  height: 10%;
+  position: fixed;
+  bottom: 0;
+}
+
+.Component{
+  height: 80%;
+  
+}

@@ -6,7 +6,8 @@
   align-items: center;
   justify-content: space-around;
   padding: 4rem 2rem 4rem 2rem;
-  margin-bottom: 40%;
+ 
+ 
 }
 
 .title {
@@ -14,26 +15,27 @@
   color: #060c5c;
   padding-bottom: 1rem;
 }
-.datesBlock {
+/* .datesBlock {
   width: 60%;
-}
+} */
+
 .dateContainer {
   width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  flex-direction: row;
+  
 }
-.recapitulatif {
+/* .recapitulatif {
   padding-top: 4rem;
   padding-bottom: 4rem;
-}
+} 
 
-.recapitulatif p {
+/* .recapitulatif p {
   color: #333;
-}
+} */
 
-.total {
-  padding-top: 3rem;
-}
+
 
 .button {
   background-color: #060c5c;
@@ -48,4 +50,8 @@
 
 .button:hover {
   background-color: #1c216db9;
+}
+
+.recapPaiment{
+  margin-bottom: 20%;
 }

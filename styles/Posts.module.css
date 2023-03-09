@@ -3,6 +3,7 @@
     padding: 10%;
     display: flex;
     flex-direction: column; 
+    /* margin-top: 20%; */
        
 }
 
@@ -12,6 +13,7 @@ display: flex;
 flex-direction: column;
 justify-content: space-between;
 margin-top: 2%;
+margin-bottom: 10%;
 
 
 }
@@ -19,11 +21,10 @@ margin-top: 2%;
     display: flex;
     align-items: center;  
     justify-content: space-between;  
+    color: #060c5c;
   
 }
-/* .availabilities {
-  margin-left: 4%;
-} */
+
 
 .rangePicker{  
 width: 100%;
@@ -50,11 +51,13 @@ border: 1px solid #060c5c;
   .container {
     height: 100%;
     padding: 5%;
+  
 }
 
 .dispoText{
   font-weight: 700;
   text-decoration: underline;
+
   
 }
 
@@ -74,5 +77,15 @@ border: 1px solid #060c5c;
   display: flex;
   flex-direction: row; 
   justify-content: space-between;
-  align-items: center
+  align-items: center;
+}
+
+.owner {
+  font-style: italic;
+  color: #060c5c;
+}
+
+.comments{
+  font-style: italic;
+  color: #060c5c;
 }
