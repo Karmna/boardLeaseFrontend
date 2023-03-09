@@ -3,14 +3,14 @@ import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import Leaflet from "leaflet";
 import Markers from "./Markers";
-import { TileLayer, MapContainer, useMap, Popup } from "react-leaflet";
+import { TileLayer, MapContainer } from "react-leaflet";
 
 // Définition des dimensions par défaut de la carte
 const DEFAULT_WIDTH = 600;
-const DEFAULT_HEIGHT = 600;
+const DEFAULT_HEIGHT = 1140;
 
 // Définition de la position du centre de la carte par défaut au chargement
-const DEFAULT_CENTER = [43.488, -1.555];
+const DEFAULT_CENTER = [46.455, 2.100];
 
 // Définition de la valeur du zoom par défaut au chargement
 const DEFAULT_ZOOM = 5;
@@ -36,18 +36,13 @@ const Map = ({surfs}) => {
       zoom={DEFAULT_ZOOM}
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {surfs &&
         surfs.map((data, i) => {
           return <Markers key={i} markerData={data} />;
-        })}
-      {/* <Marker position={DEFAULT_CENTER}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker> */}
+        })}      
     </MapContainer>
   );
 };

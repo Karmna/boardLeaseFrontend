@@ -33,13 +33,12 @@ function Surf(props) {
         className={styles.image}
         src={props.pictures[0]}
         alt={props.name}
-        width={100}
-        height={100}
+        width={120}
+        height={120}
       />
       <div className={styles.description}>
-        <h3 className={styles.name}>{props.name}</h3>
-
-        <p className={styles.level}>Niveau: {props.level}</p>
+        <h3 className={styles.name}>{props.name}</h3>       
+        <p className={styles.type}>{props.type} pour niveau {props.level}</p>
         <span className={styles.rating}>
           <Rate value={props.rating} />
         </span>
