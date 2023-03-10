@@ -150,6 +150,19 @@
     margin-bottom: 20px;
     margin-top: 2px;
   }
+
+  .uploadButton{
+    font-size: 20px;
+    background-color: #aeaeae;
+    color: rgb(12, 0, 107);
+    padding: 5px 22px;
+    border: 1px solid rgb(12, 0, 107);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 15px;
+    margin-top: 2px;
+  }
   
   .button.button:click {
     background-color: #060c5cb9;
