@@ -58,9 +58,7 @@ function Recap() {
         <div className={styles.recap}>
           <div className={styles.recapitulatif}>
             <Card title="Récapitulatif du paiement" bordered={false}>
-              <p>
-                Board : {booking.surfName} 
-              </p>
+              <p>Board : {booking.surfName}</p>
               <p>Type : {booking.surfType}</p>
               <p>
                 Réservation pour {recapNumberOfDays}{" "}
@@ -69,9 +67,15 @@ function Recap() {
               <p>Prix à la journée : {booking.dayPrice}€</p>
               <p> Caution : {booking.deposit}€ </p>
               <p>Prix hors taxes : {booking.dayPrice * recapNumberOfDays}€</p>
-              <p>Taxes : {booking.dayPrice * recapNumberOfDays * 0.2}€</p>
+              <p>
+                Taxes : {Math.floor(booking.dayPrice * recapNumberOfDays * 0.2)}
+                €
+              </p>
               <Divider className={styles.total} orientation="right">
-                Total : {booking.dayPrice * recapNumberOfDays * 1.2}€
+                Total :
+                {booking.deposit +
+                  Math.floor(booking.dayPrice * recapNumberOfDays * 1.2)}
+                €
               </Divider>
             </Card>
           </div>
