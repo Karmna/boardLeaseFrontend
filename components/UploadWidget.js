@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import styles from "../styles/Rent.module.css";
 
 function UploadWidget(props) {
     const cloudinaryRef = useRef ();
@@ -17,7 +18,7 @@ function UploadWidget(props) {
         });
     }, [])
 return (
-    <button onClick={() => widgetRef.current.open()}>
+    <button className={styles.uploadButton} onClick={() => widgetRef.current.open()}>
         Upload
     </button>
 )

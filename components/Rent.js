@@ -60,7 +60,7 @@ le geo coding pour recup long et lat en fonction de la location*/
       const firstCity = data.features[0];
 
 /*et ensuite créé le surf en BDD*/
-        fetch("https://board-lease-backend.vercel.app/surfs/surfs", {
+        fetch("http://localhost:3000/surfs/surfs", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -199,8 +199,12 @@ console.log("Image URl", imageFileList);
                 label: "Fish",
               },
               {
-                value: "Malibu",
-                label: "Malibu",
+                value: "Funboard",
+                label: "Funboard",
+              },
+              {
+                value: "StandUp Paddle",
+                label: "StandUp Paddle",
               },
             ]}
           />
@@ -234,10 +238,6 @@ console.log("Image URl", imageFileList);
               {
                 value: "Confirmé",
                 label: "Confirmé",
-              },
-              {
-                value: "Avancé",
-                label: "Avancé",
               },
             ]}
           />
