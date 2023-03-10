@@ -1,0 +1,32 @@
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .textContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+  }
+  
+  .h1 {
+    font-size: 28px;
+    color: #060c5c;
+  }
+  
+  .h2 {
+    padding-top: 10px;
+    font-size: 18px;
+    color: #747477;
+  }
+  
+  .imageContainer {
+    width: 100%;
+    height: 100%;
+  }
