@@ -15,6 +15,9 @@ function End() {
         <h1 className={styles.h1}>vous remercie pour votre attention!</h1>
         <h2 className={styles.h2}>Ambre, Sébastien, Antony, Xavier.</h2>
       </div>
+      <br/>
+      <br/>
+      <br/>
       <div className={styles.imageContainer}>
         <Image className={styles.imageGif}
           src="/surfing-olympics.gif"
