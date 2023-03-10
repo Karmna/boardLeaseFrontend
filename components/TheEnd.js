@@ -12,7 +12,7 @@ function End() {
     <div className={styles.content}>
       <div className={styles.textContainer}>
         <h1 className={styles.h1}>Toute l'équipe Board Lease</h1>
-        <h1 className={styles.h1}>vous remercie !</h1>
+        <h1 className={styles.h1}>vous remercie pour votre attention!</h1>
         <h2 className={styles.h2}>Ambre, Sébastien, Antony, Xavier.</h2>
       </div>
       <div className={styles.imageContainer}>
