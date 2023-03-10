@@ -89,10 +89,16 @@ function Booking() {
             </p>
             <p>Prix à la journée : {booking.dayPrice}€</p>
             <p>Prix hors taxes : {booking.dayPrice * recapNumberOfDays}€</p>
-            <p>Taxes : {booking.dayPrice * recapNumberOfDays * 0.2}€</p>
+            <p>
+              Taxes :{" "}
+              {Math.floor(booking.dayPrice * recapNumberOfDays * 0.2).toFixed(
+                2
+              )}
+              €
+            </p>
             <p>Caution : {booking.deposit}€</p>
             <Divider className={styles.total} orientation="right">
-              Total : {total}€
+              Total : {total.toFixed(2)}€
             </Divider>
           </div>
           <div className={styles.btnContainer}>
