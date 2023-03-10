@@ -425,7 +425,13 @@ function HeaderF() {
           placement="bottomRight"
         >
           <div>
-            <div className={styles.userContainer}>
+            <div
+              className={
+                user.token
+                  ? styles.userContainer
+                  : styles.userContainerDisconnected
+              }
+            >
               {user.token && (
                 <div className={styles.userName}>
                   Bienvenue, {user.firstname}
@@ -437,9 +443,7 @@ function HeaderF() {
                 icon={faUser}
               />
             </div>
-            {/* {user.token && (
-                  <p className={styles.userName}> {user.firstname}</p>
-                )} */}
+
             <div>
               <div id="react-modals">
                 <Modal
