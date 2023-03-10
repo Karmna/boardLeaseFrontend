@@ -151,7 +151,7 @@ function Posts() {
               </p>
             </div>
           </Popover>
-          <Image src={surfDetails.pictures} alt={surfDetails.name} />;
+          <Image src={surfDetails.pictures} alt={surfDetails.name} />
           <div className={styles.content}>
             <p className={styles.owner}>
               Surf de {ownerName} de {surfDetails.placeName}
