@@ -126,7 +126,7 @@ function Profile() {
             })
           }
         >
-          Réservations
+          Mes réservations
         </button>
         <button
           className={styles.button}
@@ -136,7 +136,7 @@ function Profile() {
             })
           }
         >
-          Mes surfs loués
+        Mes annonces
         </button>
       </div>
     </div>
