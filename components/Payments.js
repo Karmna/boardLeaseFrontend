@@ -188,7 +188,7 @@ function Payments() {
           <Input
             type="tel"
             name="cvc"
-            placeholder="Crypto"
+            placeholder="CVC"
             id="Crypto"
             onChange={(e) => setCrypto(e.target.value)}
             value={crypto}
