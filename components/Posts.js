@@ -16,10 +16,6 @@ import SurfsComments from "./surfsComments";
 import { checkAvailabibility } from "../lib/leaseLibraryFront";
 dayjs.extend(customParseFormat);
 
-const { RangePicker } = DatePicker;
-
-const dateFormat = "YYYY-MM-DD";
-
 function Posts() {
   const router = useRouter();
   const [surfDetails, setSurfDetails] = useState(null);
@@ -31,6 +27,8 @@ function Posts() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.value);
   const booking = useSelector((state) => state.booking.value);
+
+  console.log("selectedDates", selectedDates);
 
   let toggleDisplay = true;
   useEffect(() => {
@@ -66,12 +64,19 @@ function Posts() {
     }
   }, [selectedDates]);
 
-  function handleDateSelection(dates) {
-    setSelectedDates({
-      startDate: dates[0].$d,
-      endDate: dates[1].$d,
-    });
-  }
+  const handleStartDate = (date, dateString) => {
+    setSelectedDates((endDate) => ({
+      ...endDate,
+      startDate: dateString,
+    }));
+  };
+
+  const handleEndDate = (date, dateString) => {
+    setSelectedDates((startDate) => ({
+      ...startDate,
+      endDate: dateString,
+    }));
+  };
 
   const handleRedirect = () => {
     dispatch(
@@ -151,32 +156,28 @@ function Posts() {
               Surf de {ownerName} de {surfDetails.placeName}
             </p>
             <div className={styles.buttonContainer}>
-              <Space direction="vertical" size={12}>
-                {/* <strong className={styles.dispoText}>
-                  Sélectionner des dates:
-                </strong> */}
-                <RangePicker
-                  defaultValue={[
-                    dayjs(
-                      booking.startDate
-                        ? booking.startDate
-                        : new Date(availabilities[0].startDate)
-                            .toISOString()
-                            .split("T")[0],
-                      dateFormat
-                    ),
-                    dayjs(
-                      booking.endDate
-                        ? booking.endDate
-                        : new Date(availabilities[0].endDate)
-                            .toISOString()
-                            .split("T")[0],
-                      dateFormat
-                    ),
-                  ]}
-                  format="YYYY-MM-DD"
-                  disabled={[false, false]}
-                  onChange={handleDateSelection}
+              <Space direction="vertical">
+                <DatePicker
+                  onChange={handleStartDate}
+                  placeholder={
+                    booking.startDate
+                      ? booking.startDate
+                      : new Date(availabilities[0].startDate)
+                          .toISOString()
+                          .split("T")[0]
+                  }
+                />
+              </Space>
+              <Space direction="vertical">
+                <DatePicker
+                  onChange={handleEndDate}
+                  placeholder={
+                    booking.endDate
+                      ? booking.endDate
+                      : new Date(availabilities[0].endDate)
+                          .toISOString()
+                          .split("T")[0]
+                  }
                 />
               </Space>
               <button
