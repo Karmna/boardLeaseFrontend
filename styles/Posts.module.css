@@ -6,6 +6,10 @@
   /* margin-top: 20%; */
 }
 
+.chevronIcon{
+  margin-bottom: 2%;
+}
+
 .content {
   height: 100%;
   display: flex;

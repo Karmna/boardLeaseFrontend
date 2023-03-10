@@ -29,6 +29,7 @@ function Posts() {
   const booking = useSelector((state) => state.booking.value);
 
   console.log("selectedDates", selectedDates);
+  console.log("surfDetails", surfDetails);
 
   let toggleDisplay = true;
   useEffect(() => {
@@ -121,7 +122,7 @@ function Posts() {
               icon={faChevronLeft}
               style={{ color: "#060c5c" }}
               onClick={handleRedirectSearch}
-              size="s"
+              size="lg"
             />
           </div>
           <div className={styles.title}>
@@ -150,7 +151,7 @@ function Posts() {
               </p>
             </div>
           </Popover>
-          <Image src={surfDetails.pictures} alt={surfDetails.name} />
+          <Image src={surfDetails.pictures} alt={surfDetails.name} />;
           <div className={styles.content}>
             <p className={styles.owner}>
               Surf de {ownerName} de {surfDetails.placeName}
@@ -225,7 +226,6 @@ function Posts() {
             </Card>
           </div>
           <br />
-
           {isDisabled ? (
             <p className={styles.availabilitiesError}>
               Ce surf n'est pas disponible pour la période sélectionnée
