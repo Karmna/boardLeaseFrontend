@@ -60,7 +60,7 @@ le geo coding pour recup long et lat en fonction de la location*/
       const firstCity = data.features[0];
 
 /*et ensuite créé le surf en BDD*/
-        fetch("http://localhost:3000/surfs/surfs", {
+        fetch("https://board-lease-backend.vercel.app/surfs/surfs", {
           method: "POST",
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -89,6 +89,7 @@ le geo coding pour recup long et lat en fonction de la location*/
               setTitlePost("");
               setDestination("");
               setDayPrice("");
+              router.push("/listings");
             } else {
               message.error("Oups ! Veuillez recommencer svp.");
             }
