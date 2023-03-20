@@ -1,16 +1,17 @@
-import { useSelector } from "react-redux"
 import Search from "../components/Search";
-import dynamic from "next/dynamic";
-
-const MapWithNoSSR = dynamic(() => import("../components/Map"), { ssr: false });
+import Head from "next/head";
 
 function SearchPage() {
-  const surfs = useSelector((state) => state.surfs.value);
- 
   return (
-    <div >
-      <Search/>          
-      {/* <MapWithNoSSR className={styles.map} surfs={surfs}/> */}
+    <div>
+      <Head>
+        <title>BoardLease : surfs en location pour votre destination</title>
+        <meta
+          property="og:title"
+          content="BoardLease : surfs en location pour votre destination"
+        />
+      </Head>
+      <Search />
     </div>
   );
 }

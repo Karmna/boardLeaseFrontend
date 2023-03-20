@@ -48,7 +48,7 @@ function App({ Component, pageProps }) {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         <Head>
-          <title>BoardLease</title>
+          <title>BoardLease : location de surfboards entre particuliers</title>
         </Head>
         <Layout>
           <Component {...pageProps} />
