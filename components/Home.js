@@ -6,6 +6,7 @@ import { DatePicker, Space, Input } from "antd";
 import { addFilter } from "../reducers/filter";
 import { storeTenantDateRange } from "../reducers/booking";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 function Home() {
   const dispatch = useDispatch();
@@ -48,12 +49,11 @@ function Home() {
   return (
     <div className={styles.content}>
       <div className={styles.imageContainer}>
-        <img
-          className={styles.image}
+        <Image
           src="/home2.jpg"
           alt="Slide image 1"
+          objectFit="cover"
           layout="fill"
-          objectFit="contain"
           priority={true}
         />
       </div>
