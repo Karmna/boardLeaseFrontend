@@ -462,7 +462,17 @@ function HeaderF() {
         <FontAwesomeIcon className={styles.useSelector} icon={faBars} />
       </Dropdown>
       <Link href="/">
-        <img className={styles.logo} src="logo.png" alt="Logo" />
+        <div className={styles.logoContainer}>
+          <Link href="/">
+            <Image
+              className={styles.logo}
+              src={Logo}
+              width={48}
+              height={48}
+              alt="Logo"
+            />
+          </Link>
+        </div>
       </Link>
       <Dropdown
         className={styles.dropDown}
