@@ -1,25 +1,19 @@
 import styles from "../styles/globals.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
-
 import { Provider } from "react-redux";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
 import { persistStore, persistReducer } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
 import storage from "redux-persist/lib/storage";
-
 import user from "../reducers/user";
 import filter from "../reducers/filter";
 import search from "../reducers/search";
 import surfs from "../reducers/surfs";
 import favorites from "../reducers/favorites";
 import booking from "../reducers/booking";
-
 import Layout from "../components/Layout";
 
 const reducers = combineReducers({

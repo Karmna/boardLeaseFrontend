@@ -11,11 +11,7 @@
 .title {
   font-size: 2rem;
   color: #060c5c;
-  /* padding-bottom: 1rem; */
 }
-/* .datesBlock {
-  width: 60%;
-} */
 
 .dateContainer {
   width: 100%;
@@ -23,14 +19,6 @@
   justify-content: space-between;
   flex-direction: row;
 }
-/* .recapitulatif {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
-} 
-
-/* .recapitulatif p {
-  color: #333;
-} */
 
 .btnContainer {
   width: 100%;
