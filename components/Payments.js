@@ -1,22 +1,13 @@
 import styles from "../styles/Payments.module.css";
 import { Input, Divider, Space, Card } from "antd";
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useRouter } from "next/router";
 import { calculateNumberOfDays } from "../lib/leaseLibraryFront";
 import Cards from "react-credit-cards";
-import Stripe from "stripe";
 import "react-credit-cards/es/styles-compiled.css";
-import CheckoutForm from "./CheckoutForm";
-import { CardElement, Elements, PaymentElement } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 
 import uid2 from "uid2";
-import { storeFulfilledBooking } from "../reducers/booking";
-
-const stripePromise = loadStripe(
-  "pk_test_51Mizz2HUwd3Z4pQXsmbWkQEJ8ptsohp3LyNy7OhFnxoLreinfbuuz8gqPKyMzZXGtKPwGeTRa7qhXPpqw2NUTsKl00DU5olg8X"
-);
 
 function Payments() {
   const [cardNumber, setCardNumber] = useState("");
@@ -30,7 +21,6 @@ function Payments() {
   const router = useRouter();
   const booking = useSelector((state) => state.booking.value);
   const user = useSelector((state) => state.user.value);
-  const dispatch = useDispatch();
 
   console.log(booking);
 
@@ -45,10 +35,6 @@ function Payments() {
   const regexCardNumber =
     "(^4[0-9]{12}(?:[0-9]{3})?$)|(^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$)|(3[47][0-9]{13})|(^3(?:0[0-5]|[68][0-9])[0-9]{11}$)|(^6(?:011|5[0-9]{2})[0-9]{12}$)|(^(?:2131|1800|35d{3})d{11}$)";
 
-  const handleInputFocus = async (e) => {
-    setFocus: e.target.name;
-  };
-
   const isCreditCardNumberValid = () => {
     if (cardNumber.match(regexCardNumber)) {
       return true;
@@ -62,14 +48,6 @@ function Payments() {
     }
 
     setExpiredDate(e.target.value);
-  };
-
-  const handleCryptoInput = (e) => {
-    if (isNaN(e.target.value)) {
-      return;
-    }
-
-    setCrypto(e.target.value);
   };
 
   const isCreditCardValid = () => {
@@ -199,9 +177,6 @@ function Payments() {
         </form>
       </div>
 
-      {/* <Elements stripe={stripePromise}>
-        <CheckoutForm></CheckoutForm>
-      </Elements> */}
       <p className={styles.error}>{errorMsg}</p>
       <p className={styles.paymentMsg}>{paymentMsg}</p>
       <button className={styles.button} id="pay" onClick={handlePay}>

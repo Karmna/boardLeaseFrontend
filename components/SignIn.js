@@ -1,26 +1,22 @@
 import styles from "../styles/SignIn.module.css";
-
 import { login } from "../reducers/user";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { Input, Divider, Space } from 'antd'; 
+import { Input, Divider, Space } from "antd";
 import * as React from "react";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
 
-
-function SignIn() {  
-
+function SignIn() {
   const clientId = process.env.CLIENT_ID;
   const dispatch = useDispatch();
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const router = useRouter();
-  
-  
+
   const handleSignin = (authMethod, googleCredentialResponse) => {
     setErrorMsg("");
     if (authMethod !== "classic" && authMethod !== "googleConnect") {
@@ -67,7 +63,6 @@ function SignIn() {
               router.push({
                 pathname: "/booking",
               });
-              
             } else {
               setErrorMsg("Problem with JWT : email not found.");
               console.error("Problem with JWT : email not found.");
@@ -80,15 +75,18 @@ function SignIn() {
       });
   };
 
-
   return (
     <div className={styles.registerContainer}>
       <h1 className={styles.title}> Connection </h1>
       <br />
-        <GoogleOAuthProvider clientId={clientId}>
-          <div className={styles.container}>
-            <div className={styles.registerSection}>
-            <Space direction="vertical" size="middle" style={{ display: "flex" }}>
+      <GoogleOAuthProvider clientId={clientId}>
+        <div className={styles.container}>
+          <div className={styles.registerSection}>
+            <Space
+              direction="vertical"
+              size="middle"
+              style={{ display: "flex" }}
+            >
               <Input
                 type="text"
                 placeholder="email"
@@ -105,25 +103,28 @@ function SignIn() {
                   visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
                 }
               />
-              <button className={styles.button} id="connection" onClick={() => handleSignin("classic")}>
+              <button
+                className={styles.button}
+                id="connection"
+                onClick={() => handleSignin("classic")}
+              >
                 Se connecter
               </button>
-              </Space>
-              <Divider>Se connecter avec :</Divider>
-              <div className={styles.divider}></div>
-              <GoogleLogin 
-                onSuccess={(credentialResponse) =>
-                  handleSignin("googleConnect", credentialResponse.credential)
-                }
-                onError={(error) => console.error(error)}
-              />
-             
-              {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>} 
-             
-            </div>
+            </Space>
+            <Divider>Se connecter avec :</Divider>
+            <div className={styles.divider}></div>
+            <GoogleLogin
+              onSuccess={(credentialResponse) =>
+                handleSignin("googleConnect", credentialResponse.credential)
+              }
+              onError={(error) => console.error(error)}
+            />
+
+            {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
           </div>
-        </GoogleOAuthProvider>
-      </div>
+        </div>
+      </GoogleOAuthProvider>
+    </div>
   );
 }
 

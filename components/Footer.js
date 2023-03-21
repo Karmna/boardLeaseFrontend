@@ -4,9 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Link from "next/link";
 import { Layout } from "antd";
-const { Header, Content, Footer } = Layout;
-
-// test deploy
+const { Footer } = Layout;
 
 function FooterFunction() {
   const matches = useMediaQuery("(min-width:768px)");

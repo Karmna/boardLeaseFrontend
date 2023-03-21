@@ -1,27 +1,23 @@
 import styles from "../styles/SignUp.module.css";
-import { login, logout } from "../reducers/user";
+import { login } from "../reducers/user";
 import * as React from "react";
-import { useState } from "react"; 
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Input, Divider, Space } from 'antd'; 
+import { Input, Divider, Space } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
 
-
-
-
 function SignUp() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.value);
   const [signUpUsername, setSignUpUsername] = useState("");
   const [signUpPassword, setSignUpPassword] = useState("");
   const [signUpLastname, setSignUpLastname] = useState("");
   const [signUpFirstname, setSignUpFirstname] = useState("");
   const [signUpMail, setSignUpMail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  
+
   const clientId = process.env.CLIENT_ID;
   const router = useRouter();
 
@@ -101,48 +97,56 @@ function SignUp() {
       <GoogleOAuthProvider clientId={clientId}>
         <div className={styles.container}>
           <div className={styles.content}>
-          <Space direction="vertical" size="middle" style={{ display: "flex" }}>
-            <Input
-              type="Prénom"
-              placeholder="Prénom"
-              id="signUpFirstname"
-              onChange={(e) => setSignUpFirstname(e.target.value)}
-              value={signUpFirstname}
-            />
-            <Input
-              type="Nom"
-              placeholder="Nom"
-              id="signUpLastname"
-              onChange={(e) => setSignUpLastname(e.target.value)}
-              value={signUpLastname}
-            />
-            <Input
-              type="Nom d'utilisateur"
-              placeholder="Nom d'utilisateur"
-              id="signUpUsername"
-              onChange={(e) => setSignUpUsername(e.target.value)}
-              value={signUpUsername}
-            />
-            <Input
-              type="Email"
-              placeholder="Email"
-              id="Email"
-              onChange={(e) => setSignUpMail(e.target.value)}
-              value={signUpMail}
-            />
-            <Input.Password
-              placeholder="Mot de passe"
-              id="signUpPassword"
-              onChange={(e) => setSignUpPassword(e.target.value)}
-              value={signUpPassword}
-              iconRender={(visible) =>
-                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
-              }
-            />
-         
-            <button className={styles.button} id="register" onClick={() => handleSignup("classic")}>
-              S'enregistrer
-            </button>
+            <Space
+              direction="vertical"
+              size="middle"
+              style={{ display: "flex" }}
+            >
+              <Input
+                type="Prénom"
+                placeholder="Prénom"
+                id="signUpFirstname"
+                onChange={(e) => setSignUpFirstname(e.target.value)}
+                value={signUpFirstname}
+              />
+              <Input
+                type="Nom"
+                placeholder="Nom"
+                id="signUpLastname"
+                onChange={(e) => setSignUpLastname(e.target.value)}
+                value={signUpLastname}
+              />
+              <Input
+                type="Nom d'utilisateur"
+                placeholder="Nom d'utilisateur"
+                id="signUpUsername"
+                onChange={(e) => setSignUpUsername(e.target.value)}
+                value={signUpUsername}
+              />
+              <Input
+                type="Email"
+                placeholder="Email"
+                id="Email"
+                onChange={(e) => setSignUpMail(e.target.value)}
+                value={signUpMail}
+              />
+              <Input.Password
+                placeholder="Mot de passe"
+                id="signUpPassword"
+                onChange={(e) => setSignUpPassword(e.target.value)}
+                value={signUpPassword}
+                iconRender={(visible) =>
+                  visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+                }
+              />
+
+              <button
+                className={styles.button}
+                id="register"
+                onClick={() => handleSignup("classic")}
+              >
+                S'enregistrer
+              </button>
             </Space>
             <Divider>S'inscrire avec :</Divider>
             <br />
@@ -153,18 +157,21 @@ function SignUp() {
               }
               onError={(error) => setErrorMsg(error)}
             />
-          {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>} 
+            {errorMsg && <div style={{ color: "red" }}>{errorMsg}</div>}
           </div>
         </div>
       </GoogleOAuthProvider>
       <Divider>OU</Divider>
       <br />
-      <button className={styles.button} id="connection" onClick={() => handleRedirectConnection()}>
+      <button
+        className={styles.button}
+        id="connection"
+        onClick={() => handleRedirectConnection()}
+      >
         Se connecter
       </button>
-      <br/>
-      <br/>
-      
+      <br />
+      <br />
     </div>
   );
 }

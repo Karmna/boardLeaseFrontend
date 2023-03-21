@@ -1,16 +1,8 @@
-import * as React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "../styles/Rent.module.css";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Image from "next/image";
-import {
-  DatePicker,
-  Space,
-  Select,
-  message,
-  Divider,
-} from "antd";
+import { DatePicker, Space, Select, message, Divider } from "antd";
 import { useRouter } from "next/router";
 
 // Import de la fonction dynamique de Next.js permettant de charger un composant de manière asynchrone
@@ -20,11 +12,9 @@ const UploadWidget = dynamic(() => import("./UploadWidget"), {
   ssr: false, // Empêche le rendu côté serveur (server-side rendering)
 });
 
-
 function Rent() {
   const user = useSelector((state) => state.user.value);
   // utilisation de useMediaQuery pour détecter les correspondances d'écran
-  const matches = useMediaQuery("(min-width:768px)");
 
   const [titlePost, setTitlePost] = useState("");
   const [destination, setDestination] = useState("");
@@ -36,8 +26,7 @@ function Rent() {
   const [imageFileList, setImageFileList] = useState("");
   const router = useRouter();
 
-
-// fonction qui gére la selection des dates début / fin et set l'état.
+  // fonction qui gére la selection des dates début / fin et set l'état.
   const handleStartDate = (date, dateString) => {
     setSearchStartDate(dateString);
   };
@@ -45,21 +34,20 @@ function Rent() {
     setSearchEndDate(dateString);
   };
 
-
-/* fonction qui gère une fois qu'on clique sur "je publie mon annonce" 
-le geo coding pour recup long et lat en fonction de la location*/ 
+  /* fonction qui gère une fois qu'on clique sur "je publie mon annonce" 
+le geo coding pour recup long et lat en fonction de la location*/
   const handleRent = () => {
-//Si pas de location renseignée on affiche msg error
+    //Si pas de location renseignée on affiche msg error
     if (!destination) {
       message.error("Oups ! Veuillez renseigner une location svp.");
-      return
+      return;
     }
     fetch(`https://api-adresse.data.gouv.fr/search/?q=${destination}`)
       .then((response) => response.json())
       .then((data) => {
-      const firstCity = data.features[0];
+        const firstCity = data.features[0];
 
-/*et ensuite créé le surf en BDD*/
+        /*et ensuite créé le surf en BDD*/
         fetch("https://board-lease-backend.vercel.app/surfs/surfs", {
           method: "POST",
           headers: {
@@ -108,9 +96,8 @@ le geo coding pour recup long et lat en fonction de la location*/
 
   const handleUploadImage = (imageUrl) => {
     setImageFileList(imageUrl);
-  }
-console.log("Image URl", imageFileList);
-
+  };
+  console.log("Image URl", imageFileList);
 
   return (
     <div className={styles.content}>
@@ -270,7 +257,7 @@ console.log("Image URl", imageFileList);
 
       <div className={styles.containerUpload}>
         Une image représentant votre board :
-      <UploadWidget handleUploadImage={handleUploadImage}/>
+        <UploadWidget handleUploadImage={handleUploadImage} />
       </div>
 
       {/*Bouton pour envoyer le formulaire*/}

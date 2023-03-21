@@ -1,6 +1,5 @@
 import styles from "../styles/Profile.module.css";
-import { Button, Input, Divider, Space, Card, DatePicker } from "antd";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import { Button, Input, Divider, Space } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { updateUserProfile } from "../reducers/user";
@@ -13,9 +12,6 @@ function Profile() {
   const [newEmail, setNewEmail] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [successMsg, setSuccessMsg] = useState("");
-  const [bookings, setBookings] = useState([]);
-
-  const matches = useMediaQuery("(min-width:768px)");
 
   const user = useSelector((state) => state.user.value);
   const dispatch = useDispatch();
@@ -60,9 +56,7 @@ function Profile() {
           setNewFirstname("");
           setNewLastname("");
         } else {
-          // TODO afficher erreur dans le DOM avec un état
           console.log(data.error);
-          //definir error, error existe pas
         }
       });
   };
@@ -136,7 +130,7 @@ function Profile() {
             })
           }
         >
-        Mes annonces
+          Mes annonces
         </button>
       </div>
     </div>

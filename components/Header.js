@@ -13,7 +13,7 @@ import Link from "next/link";
 import jwt_decode from "jwt-decode";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Layout } from "antd";
-const { Header, Content, Footer } = Layout;
+const { Header } = Layout;
 import Image from "next/image";
 import Logo from "../public/Logo.svg";
 
@@ -182,7 +182,6 @@ function HeaderF() {
         if (data.result === false) {
           console.log(data); // TODO display error
           setErrorMsg(data.error);
-          // errorMsg = data.error;
         } else if (data.jwtToken) {
           try {
             console.log(data);
@@ -203,30 +202,15 @@ function HeaderF() {
               );
 
               // Reset on success uniquement (pour ne pas devoir tout retaper en cas d'échec)
-              // setIsModalVisibleInscription(false);
-              // setSignUpUsername("");
-              // setSignUpPassword("");
-              // setSignUpMail("");
-              // setSignUpFirstname("");
-              // setSignUpLastname("");
               handleCloseModal();
             } else {
               setErrorMsg("Problem with JWT : email not found.");
-
-              // console.error("Problem with JWT : email not found.");
             }
           } catch (error) {
             setErrorMsg(error);
-
-            console.error(error); // TODO display error
           }
         }
       });
-
-    //   else {
-    //     console.error(data.error);
-    //   }
-    // });
   };
 
   const handleSignin = (authMethod, googleCredentialResponse) => {
@@ -274,9 +258,6 @@ function HeaderF() {
               );
 
               // Reset on success uniquement (pour ne pas devoir tout retaper en cas d'échec)
-              // setIsModalVisibleConnection(false);
-              // setSignInUserEmail("");
-              // setSignInPassword("");
               handleCloseModal();
             } else {
               setErrorMsg("Problem with JWT : email not found.");
@@ -284,7 +265,6 @@ function HeaderF() {
             }
           } catch (error) {
             setErrorMsg(error);
-            console.error(error); // TODO display error
           }
         }
       });
@@ -453,10 +433,7 @@ function HeaderF() {
                   closable={false}
                   footer={null}
                 >
-                  <FontAwesomeIcon
-                    icon={faXmark}
-                    onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
-                  />
+                  <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
                   <div>{modalContentInscription}</div>
                 </Modal>
                 <Modal
@@ -506,10 +483,7 @@ function HeaderF() {
                 closable={false}
                 footer={null}
               >
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  onClick={handleCloseModal} // TODO : add onCloseModal (errorclear, form reset, modal not visible)
-                />
+                <FontAwesomeIcon icon={faXmark} onClick={handleCloseModal} />
                 <div>{modalContentInscription}</div>
               </Modal>
               <Modal

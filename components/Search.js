@@ -3,16 +3,12 @@ import { useEffect } from "react";
 import styles from "../styles/Search.module.css";
 import Surf from "./Surf";
 import Filter from "./Filter";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { addSurfs } from "../reducers/surfs";
 
 function Search() {
   const dispatch = useDispatch();
   const filter = useSelector((state) => state.filter.value);
   const surfs = useSelector((state) => state.surfs.value);
-
-  // utilisation de useMediaQuery pour détecter les correspondances d'écran
-  const matches = useMediaQuery("(min-width:768px)");
 
   // utilisation de useEffect pour requeter au serveur une recherche de surfs selon les critères sélectionnés au changement d'état de filter
   useEffect(() => {

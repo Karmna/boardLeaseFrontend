@@ -2,21 +2,8 @@ import { Marker, Popup } from "react-leaflet";
 import { useRouter } from "next/router";
 
 function Markers({ markerData }) {
-  const {
-    availabilities,
-    dayPrice,
-    deposit,
-    latitude,
-    level,
-    longitude,
-    name,
-    owner,
-    pictures,
-    placeName,
-    rating,
-    type,
-    _id,
-  } = markerData;
+  const { dayPrice, latitude, longitude, name, placeName, type, _id } =
+    markerData;
   const position = latitude && longitude ? [latitude, longitude] : null;
   const router = useRouter();
 
@@ -66,4 +53,3 @@ function Markers({ markerData }) {
 }
 
 export default Markers;
-

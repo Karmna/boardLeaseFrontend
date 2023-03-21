@@ -1,6 +1,5 @@
 import styles from "../styles/Listings.module.css";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Surf from "./Surf";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
@@ -8,8 +7,6 @@ import { message } from "antd";
 
 function Listings() {
   // utilisation de useMediaQuery pour détecter les correspondances d'écran
-  const dispatch = useDispatch();
-  const matches = useMediaQuery("(min-width:768px)");
   const user = useSelector((state) => state.user.value);
   //const listings = useSelector((state) => state.listings.value);
   const [listingDisplay, setListingDisplay] = useState();

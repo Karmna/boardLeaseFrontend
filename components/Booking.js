@@ -1,8 +1,7 @@
 import { useState } from "react";
 import styles from "../styles/Booking.module.css";
-import { Button, Image, DatePicker, Space, Divider } from "antd";
+import { DatePicker, Space, Divider } from "antd";
 import { useSelector } from "react-redux";
-import { storeFulfilledBooking } from "../reducers/booking";
 import Link from "next/link";
 import { calculateNumberOfDays } from "../lib/leaseLibraryFront";
 import { useRouter } from "next/router";
@@ -11,26 +10,10 @@ function Booking() {
   const [searchStartDate, setSearchStartDate] = useState();
   const [searchEndDate, setSearchEndDate] = useState();
 
-  const user = useSelector((state) => state.user.value);
   const booking = useSelector((state) => state.booking.value);
   console.log(booking);
   const router = useRouter();
 
-  // props ou infos à retirer de l'état redux
-  // const dayPrice = 25;
-  // const name = "Rip Curls Short";
-  // const booking.surfType = "Shortboard";
-
-  // const calculateNumberOfDays = () => {
-  //   if (!booking.startDate || !booking.endDate) return;
-  //   const DAY_IN_MS = 1000 * 60 * 60 * 24;
-
-  //   return Math.ceil(
-  //     (new Date(booking.endDate).getTime() -
-  //       new Date(booking.startDate).getTime()) /
-  //       DAY_IN_MS
-  //   );
-  // };
   const recapNumberOfDays = calculateNumberOfDays(
     booking.startDate,
     booking.endDate
@@ -60,8 +43,6 @@ function Booking() {
                   ? new Date(booking.startDate).toISOString().split("T")[0]
                   : "Date de début"
               }
-              // startDate: new Date(searchStartDate).toISOString().split("T")[0],
-              // endDate: new Date(searchEndDate).toISOString().split("T")[0],
             />
           </Space>
           <Space direction="vertical">

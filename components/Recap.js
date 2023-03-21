@@ -1,9 +1,7 @@
 import styles from "../styles/Recap.module.css";
 import { useState } from "react";
-
-import { Card, Image, DatePicker, Space, Divider } from "antd";
-import { useSelector, useDispatch } from "react-redux";
-import { storeFulfilledBooking } from "../reducers/booking";
+import { Card, DatePicker, Space, Divider } from "antd";
+import { useSelector } from "react-redux";
 
 function Recap() {
   const [searchStartDate, setSearchStartDate] = useState();

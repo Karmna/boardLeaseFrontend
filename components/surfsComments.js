@@ -1,10 +1,9 @@
 import styles from "../styles/SurfsComments.module.css";
 import * as ratings from "../data/ratingData";
-import { useSelector } from "react-redux";
 import { Rate } from "antd";
 
 function SurfsComments() {
-  const i = Math.floor(Math.random() * 18+1);
+  const i = Math.floor(Math.random() * 18 + 1);
 
   console.log(i);
 
@@ -13,9 +12,11 @@ function SurfsComments() {
       {ratings[`surfRating${i}`].map((props, i) => {
         return (
           <div key={i} className={styles.card}>
-            <strong><p>{props.name}</p></strong>
+            <strong>
+              <p>{props.name}</p>
+            </strong>
             <p>{props.text}</p>
-            <Rate value={props.rating} />            
+            <Rate value={props.rating} />
           </div>
         );
       })}

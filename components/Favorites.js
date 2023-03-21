@@ -1,17 +1,14 @@
 import styles from "../styles/Favorites.module.css";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Surf from "./Surf";
 import FavoritesManagement from "./FavoritesManagement";
 
 function Favorites() {
-  // utilisation de useMediaQuery pour détecter les correspondances d'écran
-  const matches = useMediaQuery("(min-width:768px)");
   const user = useSelector((state) => state.user.value);
   const favorites = useSelector((state) => state.favorites.value);
   const [favoriteDisplay, setFavoriteDisplay] = useState();
-console.log("favorites",favorites)
+  console.log("favorites", favorites);
   useEffect(() => {
     fetch(`https://board-lease-backend.vercel.app/surfs/favorites`, {
       method: "GET",
@@ -31,11 +28,10 @@ console.log("favorites",favorites)
   const displayFavorites = (favoriteDisplay =
     favoriteDisplay && favoriteDisplay.length > 0 ? (
       favoriteDisplay.map((data, i) => {
-     
         return (
           <div className={styles.card}>
-            <Surf key={i} {...data}  />
-            <FavoritesManagement surf_Id={data._id}/>
+            <Surf key={i} {...data} />
+            <FavoritesManagement surf_Id={data._id} />
           </div>
         );
       })
