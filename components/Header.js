@@ -71,7 +71,6 @@ function HeaderF() {
     },
   ];
 
-  // TODO : vérifier si googleConnect ne doit pas être déconnecté d'une façon spécifique
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -97,7 +96,7 @@ function HeaderF() {
   const menuBar = [
     {
       key: "1",
-      label: <Link href="/">Menu</Link>,
+      label: <Link href="/">Accueil</Link>,
     },
     {
       key: "2",
@@ -124,16 +123,10 @@ function HeaderF() {
   ];
   const menuPropsBar = {
     items: menuBar,
-    onClick: handleMenuClick,
-  };
-
-  const handleMenuClick = (e) => {
-    console.log("click", e);
   };
 
   const menuProps = {
     items: user.token ? menuPropsConnected : menuPropsNotConnected,
-    onClick: handleMenuClick,
   };
 
   const resetForms = () => {
@@ -148,7 +141,6 @@ function HeaderF() {
   };
 
   const handleCloseModal = () => {
-    // TODO : add onCloseModal (errorclear, form reset, modal not visible)
     resetForms();
     setErrorMsg("");
     setIsModalVisibleInscription(false);
