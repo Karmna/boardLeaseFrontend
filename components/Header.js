@@ -11,7 +11,7 @@ import { Button, Dropdown, Input, Space } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import jwt_decode from "jwt-decode";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import useMediaQuery from "@mui/material/useMediaQuery"; // version desktop
 import { Layout } from "antd";
 const { Header } = Layout;
 import Image from "next/image";
@@ -32,7 +32,7 @@ function HeaderF() {
   const [signUpMail, setSignUpMail] = useState("");
 
   const clientId = process.env.CLIENT_ID;
-  const matches = useMediaQuery("(min-width:768px)");
+  const matches = useMediaQuery("(min-width:768px)"); // version desktop
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -444,7 +444,9 @@ function HeaderF() {
         </Dropdown>
       </Header>
     </div>
-  ) : (
+  ) : 
+  // version desktop 
+  (
     <Header className={styles.headerStyleDesktop}>
       <Dropdown
         className={styles.dropDown}
