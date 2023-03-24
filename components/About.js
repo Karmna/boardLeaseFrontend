@@ -10,6 +10,7 @@ function About() {
         className={styles.images}
         src={aboutImg}
         alt="Sophie is surfing on her new surf rented on board.lease"
+        priority={true}
       />
       <h6 className={styles.h6}>
         "Avec Board Lease, louez une planche en toute simplicité, et profitez
