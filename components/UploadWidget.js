@@ -17,6 +17,8 @@ function UploadWidget(props) {
         function(error, result){
             if (result.event == 'success') {
             message.success("Votre image vient d'être ajoutée.");
+            //fonction invoqué "handleUploadImage" qui est passée en props depuis un composant parent "Rent"
+            //On va pouvoir lui passer comme argument l'URL d'upload de cloudinary
             props.handleUploadImage(result.info.secure_url)
         } else if  (error) {
             message.error("Oups, le format ne convient pas.. Veuillez recommencer svp.");
