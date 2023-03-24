@@ -1,5 +1,5 @@
 // Import des modules nécessaires pour créer la carte Leaflet dans React
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
 import Leaflet from "leaflet";
 import Markers from "./Markers";
@@ -15,7 +15,9 @@ const DEFAULT_CENTER = [46.455, 2.1];
 // Définition de la valeur du zoom par défaut au chargement
 const DEFAULT_ZOOM = 5;
 
-const Map = ({ surfs }) => {
+const Map = () => {
+  const [surfs, setSurfs] = useState(null);
+
   // Utilisation de useEffect pour initialiser la carte et charger les images nécessaires et pour charger les surfs depuis la BDD
   useEffect(() => {
     (async function init() {
@@ -26,8 +28,16 @@ const Map = ({ surfs }) => {
         shadowUrl: "leaflet_images/marker-shadow.png",
       });
     })();
+    // Récupération en BDD de tous les surfs pour les afficher en Markers
+    fetch(`https://board-lease-backend.vercel.app/surfs/`)
+      .then((response) => response.json())
+      .then((data) => {
+        setSurfs(data.surfs);
+        console.log("markersData", data.surfs);
+      });
   }, []);
 
+  console.log("Etat Surfs", surfs);
   return (
     <MapContainer
       style={{ aspectRatio: DEFAULT_WIDTH / DEFAULT_HEIGHT }}

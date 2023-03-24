@@ -32,6 +32,7 @@ function Posts() {
   console.log("surfDetails", surfDetails);
 
   let toggleDisplay = true;
+
   useEffect(() => {
     if (router.query.surfProps) {
       const propsJSON = JSON.parse(router.query.surfProps);
@@ -48,8 +49,6 @@ function Posts() {
           endDate: booking.endDate,
         });
       } else {
-        console.log(availabilities);
-
         setSelectedDates(propsJSON.availabilities[0]);
       }
     } else {
