@@ -11,7 +11,7 @@ import { Button, Dropdown, Input, Space } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import Link from "next/link";
 import jwt_decode from "jwt-decode";
-import useMediaQuery from "@mui/material/useMediaQuery";
+import useMediaQuery from "@mui/material/useMediaQuery"; // version desktop
 import { Layout } from "antd";
 const { Header } = Layout;
 import Image from "next/image";
@@ -32,7 +32,7 @@ function HeaderF() {
   const [signUpMail, setSignUpMail] = useState("");
 
   const clientId = process.env.CLIENT_ID;
-  const matches = useMediaQuery("(min-width:768px)");
+  const matches = useMediaQuery("(min-width:768px)"); // version desktop
   const [signInUserEmail, setSignInUserEmail] = useState("");
   const [signInPassword, setSignInPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
@@ -71,7 +71,6 @@ function HeaderF() {
     },
   ];
 
-  // TODO : vérifier si googleConnect ne doit pas être déconnecté d'une façon spécifique
   const handleLogout = () => {
     dispatch(logout());
   };
@@ -97,7 +96,7 @@ function HeaderF() {
   const menuBar = [
     {
       key: "1",
-      label: <Link href="/">Menu</Link>,
+      label: <Link href="/">Accueil</Link>,
     },
     {
       key: "2",
@@ -124,16 +123,10 @@ function HeaderF() {
   ];
   const menuPropsBar = {
     items: menuBar,
-    onClick: handleMenuClick,
-  };
-
-  const handleMenuClick = (e) => {
-    console.log("click", e);
   };
 
   const menuProps = {
     items: user.token ? menuPropsConnected : menuPropsNotConnected,
-    onClick: handleMenuClick,
   };
 
   const resetForms = () => {
@@ -148,7 +141,6 @@ function HeaderF() {
   };
 
   const handleCloseModal = () => {
-    // TODO : add onCloseModal (errorclear, form reset, modal not visible)
     resetForms();
     setErrorMsg("");
     setIsModalVisibleInscription(false);
@@ -452,7 +444,9 @@ function HeaderF() {
         </Dropdown>
       </Header>
     </div>
-  ) : (
+  ) : 
+  // version desktop 
+  (
     <Header className={styles.headerStyleDesktop}>
       <Dropdown
         className={styles.dropDown}

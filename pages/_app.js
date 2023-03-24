@@ -1,6 +1,7 @@
 import styles from "../styles/globals.css";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Head from "next/head";
+import Script from "next/script";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
 import { Provider } from "react-redux";
@@ -84,7 +85,15 @@ function App({ Component, pageProps }) {
       </div>
     </div>
   );
-  return <div>{appDisplay}</div>;
+  return (
+    <div>
+      <Script
+        src="https://widget.cloudinary.com/v2.0/global/all.js"
+        strategy="beforeInteractive"
+      />
+      {appDisplay}
+    </div>
+  );
 }
 
 export default App;

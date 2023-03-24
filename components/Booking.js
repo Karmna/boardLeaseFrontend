@@ -1,4 +1,3 @@
-import { useState } from "react";
 import styles from "../styles/Booking.module.css";
 import { DatePicker, Space, Divider } from "antd";
 import { useSelector } from "react-redux";
@@ -7,9 +6,6 @@ import { calculateNumberOfDays } from "../lib/leaseLibraryFront";
 import { useRouter } from "next/router";
 
 function Booking() {
-  const [searchStartDate, setSearchStartDate] = useState();
-  const [searchEndDate, setSearchEndDate] = useState();
-
   const booking = useSelector((state) => state.booking.value);
   console.log(booking);
   const router = useRouter();
@@ -37,7 +33,6 @@ function Booking() {
           <Space direction="vertical">
             <DatePicker
               disabled={true}
-              onChange={setSearchStartDate}
               placeholder={
                 booking.startDate
                   ? new Date(booking.startDate).toISOString().split("T")[0]
@@ -48,7 +43,6 @@ function Booking() {
           <Space direction="vertical">
             <DatePicker
               disabled={true}
-              onChange={setSearchEndDate}
               placeholder={
                 booking.startDate
                   ? new Date(booking.endDate).toISOString().split("T")[0]
