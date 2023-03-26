@@ -32,11 +32,19 @@ export const userSlice = createSlice({
       state.value.favorites = action.payload.favorites;
     },
     logout: (state) => {
+      state.value.authMethod = null;
       state.value.token = null;
-      state.value.username = null;
       state.value.firstname = null;
       state.value.lastname = null;
+      state.value.username = null;
       state.value.email = null;
+      state.value.surfId = null;
+      state.value.startDate = null;
+      state.value.endDate = null;
+      state.value.totalPrice = null;
+      state.value.isPaid = null;
+      state.value.transactionId = null;
+      state.value.paymentMode = null;
       state.value.favorites = null;
     },
     updateUserProfile: (state, action) => {
